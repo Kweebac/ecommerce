@@ -121,6 +121,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 - [Email](mailto:06.amarshall@gmail.com)
 - [LinkedIn](https://www.linkedin.com/in/alfie-marshall-045bba268/)
+- [Portfolio](https://alfiemarshall.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

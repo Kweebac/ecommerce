@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useHandleSetUser, useIsNotAuthenticated } from "../Hooks";
+import { useIsNotAuthenticated } from "../Hooks";
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Input from "./Input";
@@ -8,7 +8,6 @@ export default function Login() {
   useIsNotAuthenticated();
 
   const navigate = useNavigate();
-  const handleSetUser = useHandleSetUser();
   const [errors, setErrors] = useState([]);
   const { setUser } = useContext(UserContext);
 
@@ -30,14 +29,24 @@ export default function Login() {
         setErrors(errors);
       } else if (res.ok) {
         try {
-          await handleSetUser(setUser);
+          const res = await fetch("http://localhost:3000/api/user", {
+            credentials: "include",
+          });
+
+          if (res.status === 401) {
+            setUser(null);
+          } else if (res.ok) {
+            const user = await res.json();
+            setUser(user);
+          }
+
           navigate("/");
         } catch (error) {
           console.error(error);
         }
       }
     },
-    [handleSetUser, navigate, setUser],
+    [navigate, setUser],
   );
 
   return (

@@ -4,7 +4,7 @@ import Register from "./components/Auth/Register";
 import Logout from "./components/Auth/Logout";
 import Home from "./components/Home";
 import Header from "./components/Header";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import { useHandleSetUser } from "./components/Hooks";
 
 export const UserContext = createContext<{
@@ -16,26 +16,18 @@ export const UserContext = createContext<{
 });
 
 export default function App() {
-  const handleSetUser = useHandleSetUser();
-  const [user, setUser] = useState<object | null>(null);
-  const [run, setRun] = useState(false);
+  const { user, setUser } = useHandleSetUser();
 
-  useEffect(() => {
-    handleSetUser(setUser);
-    setRun(true);
-  }, [setRun]);
-
-  if (run)
-    return (
-      <UserContext.Provider value={{ user, setUser }}>
-        <Routes>
-          <Route path="/" element={<Header />}>
-            <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-          </Route>
-        </Routes>
-      </UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
+        </Route>
+      </Routes>
+    </UserContext.Provider>
+  );
 }

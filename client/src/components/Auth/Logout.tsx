@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useHandleSetUser, useIsAuthenticated } from "../Hooks";
+import { useIsAuthenticated } from "../Hooks";
 import { useCallback, useContext } from "react";
 import { UserContext } from "../../App";
 
@@ -7,7 +7,6 @@ export default function Logout() {
   useIsAuthenticated();
 
   const navigate = useNavigate();
-  const handleSetUser = useHandleSetUser();
   const { setUser } = useContext(UserContext);
 
   const handleLogout = useCallback(async () => {
@@ -17,10 +16,24 @@ export default function Logout() {
     });
 
     if (res.status === 401 || res.ok) {
-      await handleSetUser(setUser);
-      navigate("/login");
+      try {
+        const res = await fetch("http://localhost:3000/api/user", {
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          setUser(null);
+        } else if (res.ok) {
+          const user = await res.json();
+          setUser(user);
+        }
+
+        navigate("/login");
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, [handleSetUser, navigate, setUser]);
+  }, [navigate, setUser]);
 
   return <button onClick={handleLogout}>Logout</button>;
 }
