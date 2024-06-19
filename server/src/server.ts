@@ -11,8 +11,8 @@ import userRouter from "./routes/user";
 
 const app = express();
 
-require("./mongooseConfig");
-require("./passportConfig");
+require("./mongooseSetup");
+require("./passportSetup");
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));

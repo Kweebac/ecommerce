@@ -5,23 +5,26 @@ export async function useIsAuthenticated() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const abortController = new AbortController();
+    (async () => {
+      const abortController = new AbortController();
 
-    fetch("http://localhost:3000/api/auth/status", {
-      credentials: "include",
-      signal: abortController.signal,
-    })
-      .then((res) => res.json())
-      .then((authenticated) => {
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/status", {
+          credentials: "include",
+          signal: abortController.signal,
+        });
+
+        const authenticated = await res.json();
+
         if (!authenticated) navigate("/login");
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
 
-    return () => {
-      abortController.abort();
-    };
+      return () => {
+        abortController.abort();
+      };
+    })();
   }, [navigate]);
 }
 
@@ -29,23 +32,26 @@ export async function useIsNotAuthenticated() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const abortController = new AbortController();
+    (async () => {
+      const abortController = new AbortController();
 
-    fetch("http://localhost:3000/api/auth/status", {
-      credentials: "include",
-      signal: abortController.signal,
-    })
-      .then((res) => res.json())
-      .then((authenticated) => {
+      try {
+        const res = await fetch("http://localhost:3000/api/auth/status", {
+          credentials: "include",
+          signal: abortController.signal,
+        });
+
+        const authenticated = await res.json();
+
         if (authenticated) navigate(-1);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
 
-    return () => {
-      abortController.abort();
-    };
+      return () => {
+        abortController.abort();
+      };
+    })();
   }, [navigate]);
 }
 
@@ -53,30 +59,29 @@ export function useHandleSetUser() {
   const [user, setUser] = useState<object | null>(null);
 
   useEffect(() => {
-    const abortController = new AbortController();
+    (async () => {
+      const abortController = new AbortController();
 
-    fetch("http://localhost:3000/api/user", {
-      credentials: "include",
-      signal: abortController.signal,
-    })
-      .then((res) => {
+      try {
+        const res = await fetch("http://localhost:3000/api/user", {
+          credentials: "include",
+          signal: abortController.signal,
+        });
+
         if (res.status === 401) {
-          setUser(null);
-          return Promise.reject();
+          return setUser(null);
         } else if (res.ok) {
-          return res.json();
+          const user = await res.json();
+          setUser(user);
         }
-      })
-      .then((user) => {
-        setUser(user);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
 
-    return () => {
-      abortController.abort();
-    };
+      return () => {
+        abortController.abort();
+      };
+    })();
   }, []);
 
   return { user, setUser };
