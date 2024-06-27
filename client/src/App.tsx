@@ -4,8 +4,8 @@ import Register from "./components/Auth/Register";
 import Logout from "./components/Auth/Logout";
 import Home from "./components/Home";
 import Header from "./components/Header";
-import { createContext } from "react";
-import { useHandleSetUser } from "./components/Hooks";
+import { createContext, useEffect, useState } from "react";
+import { handleSetUser } from "./utils";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -16,7 +16,23 @@ export const UserContext = createContext<{
 });
 
 export default function App() {
-  const { user, setUser } = useHandleSetUser();
+  const [user, setUser] = useState<object | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const abortController = new AbortController();
+
+      try {
+        handleSetUser(setUser, abortController);
+      } catch (error) {
+        console.error(error);
+      }
+
+      return () => {
+        abortController.abort();
+      };
+    })();
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

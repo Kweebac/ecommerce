@@ -5,3 +5,7 @@
 :root {
   @apply bg-[#fffcf9] font-fraunces text-[#171516];
 }
+
+.focus-within:focus-within {
+  @apply outline outline-2 outline-[#40644C];
+}

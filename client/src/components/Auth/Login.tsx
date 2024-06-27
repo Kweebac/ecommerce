@@ -3,6 +3,7 @@ import { useIsNotAuthenticated } from "../Hooks";
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Input from "./Input";
+import { handleSetUser } from "../../utils";
 
 export default function Login() {
   useIsNotAuthenticated();
@@ -29,16 +30,7 @@ export default function Login() {
         setErrors(errors);
       } else if (res.ok) {
         try {
-          const res = await fetch("http://localhost:3000/api/user", {
-            credentials: "include",
-          });
-
-          if (res.status === 401) {
-            setUser(null);
-          } else if (res.ok) {
-            const user = await res.json();
-            setUser(user);
-          }
+          handleSetUser(setUser);
 
           navigate("/");
         } catch (error) {

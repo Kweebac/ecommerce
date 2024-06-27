@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from "../Hooks";
 import { useCallback, useContext } from "react";
 import { UserContext } from "../../App";
+import { handleSetUser } from "../../utils";
 
 export default function Logout() {
   useIsAuthenticated();
@@ -17,16 +18,7 @@ export default function Logout() {
 
     if (res.status === 401 || res.ok) {
       try {
-        const res = await fetch("http://localhost:3000/api/user", {
-          credentials: "include",
-        });
-
-        if (res.status === 401) {
-          setUser(null);
-        } else if (res.ok) {
-          const user = await res.json();
-          setUser(user);
-        }
+        handleSetUser(setUser);
 
         navigate("/login");
       } catch (error) {
