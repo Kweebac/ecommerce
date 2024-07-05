@@ -71,10 +71,6 @@ const loginFailure: RequestHandler = (req, res) => {
   throw new AuthError([{ msg, path }]);
 };
 
-const getAuthStatus: RequestHandler = (req, res) => {
-  res.json(req.isAuthenticated());
-};
-
 const isAuth: RequestHandler = (req, res, next) => {
   req.isAuthenticated() ? next() : res.sendStatus(401);
 };
@@ -83,13 +79,4 @@ const isNotAuth: RequestHandler = (req, res, next) => {
   req.isAuthenticated() ? res.sendStatus(403) : next();
 };
 
-export {
-  register,
-  login,
-  logout,
-  loginSuccess,
-  loginFailure,
-  getAuthStatus,
-  isAuth,
-  isNotAuth,
-};
+export { register, login, logout, loginSuccess, loginFailure, isAuth, isNotAuth };

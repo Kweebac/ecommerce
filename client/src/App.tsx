@@ -17,6 +17,7 @@ export const UserContext = createContext<{
 
 export default function App() {
   const [user, setUser] = useState<object | null>(null);
+  const isLoggedIn = user !== null;
 
   useEffect(() => {
     (async () => {
@@ -39,9 +40,14 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/logout" element={<Logout />} />
+          {isLoggedIn ? (
+            <Route path="/logout" element={<Logout />} />
+          ) : (
+            <>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </>
+          )}
         </Route>
       </Routes>
     </UserContext.Provider>

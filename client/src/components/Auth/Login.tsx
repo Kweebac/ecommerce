@@ -1,13 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useIsNotAuthenticated } from "../Hooks";
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../App";
 import Input from "./Input";
 import { handleSetUser } from "../../utils";
 
 export default function Login() {
-  useIsNotAuthenticated();
-
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const { setUser } = useContext(UserContext);

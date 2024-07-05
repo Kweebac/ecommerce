@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useIsAuthenticated } from "../Hooks";
 import { useCallback, useContext } from "react";
 import { UserContext } from "../../App";
 import { handleSetUser } from "../../utils";
 
 export default function Logout() {
-  useIsAuthenticated();
-
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
