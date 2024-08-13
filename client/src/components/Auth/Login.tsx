@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../../App";
-import Input from "./Input";
 import { handleSetUser } from "../../utils";
+import Input from "./Input";
 
 export default function Login() {
   const navigate = useNavigate();

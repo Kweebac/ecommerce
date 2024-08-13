@@ -1,11 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useIsNotAuthenticated } from "../Hooks";
 import { useCallback, useState } from "react";
 import Input from "./Input";
 
 export default function Register() {
-  useIsNotAuthenticated();
-
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
 
