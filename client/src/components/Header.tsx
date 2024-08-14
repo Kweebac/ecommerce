@@ -15,10 +15,10 @@ export default function Header() {
 
         <nav className="justify-self-center">
           <ul className="flex gap-8">
-            <Link to="/">Build your own</Link>
-            <Link to="/">Prebuilt</Link>
-            <Link to="/">Components</Link>
-            <Link to="/">Accessories</Link>
+            <Link to="/build">Build your own</Link>
+            <Link to="/prebuilt">Prebuilt</Link>
+            <Link to="/components">Components</Link>
+            <Link to="/accessories">Accessories</Link>
           </ul>
         </nav>
 
