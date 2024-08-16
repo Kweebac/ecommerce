@@ -1,7 +1,7 @@
 import logo from "../assets/logo.png";
 
-const svgClass = "h-40 w-40";
-const pathClass = "fill-black";
+const svgClass = "h-16 w-16 block";
+const pathClass = "fill-green-3";
 
 export function Logo() {
   return (

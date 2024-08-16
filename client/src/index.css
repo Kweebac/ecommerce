@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 :root {
-  @apply bg-[#fffcf9] font-fraunces text-[#171516];
+  @apply box-border bg-[#fffcf9] font-fraunces text-[#171516];
 }
 
 .focus-within:focus-within {
   @apply outline outline-2 outline-[#40644C];
+}
+
+a.active p {
+  @apply rounded-lg bg-green-3 text-white-1;
 }

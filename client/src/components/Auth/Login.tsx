@@ -39,20 +39,22 @@ export default function Login() {
   );
 
   return (
-    <form onSubmit={(e) => handleLogin(e)} className="grid gap-4">
-      <h1 className="text-3xl font-semibold">Login</h1>
+    <main className="p-8">
+      <form onSubmit={(e) => handleLogin(e)} className="grid gap-4">
+        <h1 className="text-3xl font-semibold">Login</h1>
 
-      <Link to="/register" className="text-green-3">
-        Don't have an account? Register here.
-      </Link>
+        <Link to="/register" className="text-green-3">
+          Don't have an account? Register here.
+        </Link>
 
-      <Input type="email" name="email" errors={errors} />
+        <Input type="email" name="email" errors={errors} />
 
-      <Input type="password" name="password" errors={errors} />
+        <Input type="password" name="password" errors={errors} />
 
-      <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1">
-        Login
-      </button>
-    </form>
+        <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1">
+          Login
+        </button>
+      </form>
+    </main>
   );
 }

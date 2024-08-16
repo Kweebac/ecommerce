@@ -24,5 +24,9 @@ export default function Logout() {
     }
   }, [navigate, setUser]);
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    <main className="p-8">
+      <button onClick={handleLogout}>Logout</button>
+    </main>
+  );
 }

@@ -48,6 +48,7 @@ export default function App() {
             <Route index element={<Navigate to="gpu" />} />
             <Route path="gpu" element={<GPU />} />
             <Route path="cpu" element={<CPU />} />
+            <Route path="*" element={<URLError link="/components" />} />
           </Route>
 
           {isLoggedIn ? (
