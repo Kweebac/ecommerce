@@ -5,8 +5,8 @@ import { UserContext } from "../App";
 
 export default function Header() {
   const { user } = useContext(UserContext);
-  const header = useRef<HTMLHeadingElement>();
-  const div = useRef<HTMLDivElement>();
+  const header = useRef<HTMLHeadingElement>(null);
+  const div = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleScroll() {
@@ -31,11 +31,8 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr] content-start justify-items-center">
-      <header
-        ref={header}
-        className="sticky top-0 grid w-full justify-items-center"
-      >
+    <div className="grid h-screen grid-rows-[auto_1fr]">
+      <header ref={header} className="sticky top-0 grid justify-items-center">
         <div
           ref={div}
           className="grid w-4/5 grid-cols-[1fr_auto_1fr] items-center border border-x-0 border-b-[#e8e3da] bg-[#fffcf9] text-lg"
@@ -70,7 +67,9 @@ export default function Header() {
         </div>
       </header>
 
-      <Outlet />
+      <div className="grid w-[--page-margin] justify-self-center">
+        <Outlet />
+      </div>
     </div>
   );
 }

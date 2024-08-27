@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --page-margin: 90vw;
+
   @apply box-border bg-[#fffcf9] font-fraunces text-[#171516];
 }
 

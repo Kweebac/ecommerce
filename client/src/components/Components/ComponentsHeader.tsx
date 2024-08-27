@@ -36,8 +36,8 @@ function ListItem({ icon, name }: ListItemProps) {
 
 export default function ComponentsHeader() {
   return (
-    <div className="grid grid-rows-[auto_1fr]">
-      <header className="m-4">
+    <div className="grid grid-rows-[auto_1fr] ">
+      <header className="m-4 justify-self-center">
         <ul className="grid grid-flow-col gap-4 text-center">
           <ListItem icon={<GPUIcon />} name="GPU"></ListItem>
           <ListItem icon={<CPUIcon />} name="CPU"></ListItem>

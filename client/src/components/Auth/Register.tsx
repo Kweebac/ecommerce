@@ -29,7 +29,7 @@ export default function Register() {
   );
 
   return (
-    <main className="p-8">
+    <main className="w-max justify-self-center p-8">
       <form onSubmit={(e) => handleRegister(e)} className="grid gap-4">
         <h1 className="text-3xl font-semibold">Register</h1>
 
