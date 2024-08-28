@@ -1,5 +1,4 @@
 import express from "express";
-
 import { isAuth } from "../controllers/auth";
 import { getUser } from "../controllers/user";
 
