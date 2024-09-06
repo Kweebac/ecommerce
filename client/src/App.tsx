@@ -5,8 +5,7 @@ import Logout from "./components/Auth/Logout";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import ComponentsHeader from "./components/Components/ComponentsHeader";
-import CPU from "./components/Components/CPU";
-import GPU from "./components/Components/GPU";
+import GPU from "./components/Components/GPU/GPU";
 import { createContext, useEffect, useState } from "react";
 import { handleSetUser } from "./utils";
 import URLError from "./components/URLError";
@@ -47,7 +46,6 @@ export default function App() {
           <Route path="components" element={<ComponentsHeader />}>
             <Route index element={<Navigate to="gpu" />} />
             <Route path="gpu" element={<GPU />} />
-            <Route path="cpu" element={<CPU />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 

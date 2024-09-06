@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
-import { Logo, Cart } from "./Icons";
+import { Logo, CartIcon } from "./Icons";
 import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "../App";
 
@@ -56,7 +56,7 @@ export default function Header() {
                 <>
                   <Link to="/logout">Logout</Link>
                   <Link to="/">
-                    <Cart items={0} />
+                    <CartIcon items={0} />
                   </Link>
                 </>
               ) : (
