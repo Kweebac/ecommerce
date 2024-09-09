@@ -76,12 +76,7 @@ const columns = [
 
 export default function GPU() {
   const [gpuList, setGPUList] = useState([]);
-  const [columnFilters, setColumnFilters] = useState([
-    {
-      id: "price",
-      value: [1000, 1100],
-    },
-  ]);
+  const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data: gpuList,
     columns,

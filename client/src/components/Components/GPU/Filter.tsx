@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { SearchIcon } from "../../Icons";
+import { Slider } from "../shadcn";
 
 type CheckboxInputProps = {
   id: string;
@@ -41,6 +43,62 @@ function CheckboxInput({ id, value, setColumnFilters }: CheckboxInputProps) {
   );
 }
 
+function RangeInput({
+  min,
+  max,
+  defaultValue = [min, max],
+  step = 50,
+  minStepsBetweenThumbs = 0,
+  id,
+  name = id.toUpperCase(),
+  setColumnFilters,
+}) {
+  const [values, setValues] = useState(defaultValue);
+
+  const sliderValues =
+    values[0] === values[1]
+      ? id === "price"
+        ? `£${values[0]}`
+        : `${values[0]}`
+      : id === "price"
+        ? `£${values[0]} - £${values[1]}`
+        : `${values[0]} - ${values[1]}`;
+
+  function handleSliderChange(id, value) {
+    setValues(value);
+
+    setColumnFilters((prev) =>
+      prev
+        .filter((filter) => filter.id !== id)
+        .concat({
+          id,
+          value,
+        }),
+    );
+  }
+
+  return (
+    <div className="grid justify-start">
+      <div className="flex items-center gap-1 text-sm">
+        <h3 className="font-bold text-green-3">{name}</h3>
+        {id === "memory" && <div>({sliderValues} GB)</div>}
+        {id === "coreClock" && <div>({sliderValues} MHz)</div>}
+        {id === "boostClock" && <div>({sliderValues} MHz)</div>}
+        {id === "price" && <div>({sliderValues})</div>}
+      </div>
+      <Slider
+        min={min}
+        max={max}
+        defaultValue={defaultValue}
+        step={step}
+        minStepsBetweenThumbs={minStepsBetweenThumbs}
+        onValueChange={(value) => handleSliderChange(id, value)}
+        id={id}
+      />
+    </div>
+  );
+}
+
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
@@ -65,28 +123,26 @@ export default function Filter({
 }: FilterProps) {
   const value = columnFilters.find((item) => item.id === "name")?.value;
 
-  function handleCheckboxChange(id, value) {
+  function handleSearchChange(id, value) {
     setColumnFilters((prev) =>
       prev.filter((filter) => filter.id !== id).concat({ id, value }),
     );
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="grid w-[--filter-width] gap-4">
       <div className="flex gap-1">
         <SearchIcon styles="h-6 w-6" />
         <input
           type="text"
           value={value}
-          onChange={(e) => handleCheckboxChange("name", e.target.value)}
-          className="mb-2 rounded-md border border-gray-300 px-1.5 outline-none focus:border-green-3"
+          onChange={(e) => handleSearchChange("name", e.target.value)}
+          className="mb-2 w-full rounded-md border border-gray-300 px-1.5 outline-none focus:border-green-3"
         />
       </div>
 
       <div className="grid justify-start">
-        <h3 className="text-sm font-bold tracking-wide text-green-3">
-          CHIPSET
-        </h3>
+        <h3 className="text-sm font-bold text-green-3">CHIPSET</h3>
         {chipsetFilters.map((filter, index) => (
           <CheckboxInput
             key={index}
@@ -97,26 +153,40 @@ export default function Filter({
         ))}
       </div>
 
-      <div className="grid justify-start">
-        <h3 className="text-sm font-bold tracking-wide text-green-3">MEMORY</h3>
-      </div>
+      <RangeInput
+        id={"memory"}
+        name={"MEMORY"}
+        min={8}
+        max={16}
+        step={4}
+        setColumnFilters={setColumnFilters}
+      />
 
-      <div className="grid justify-start">
-        <h3 className="text-sm font-bold tracking-wide text-green-3">
-          CORE CLOCK
-        </h3>
-      </div>
+      <RangeInput
+        id={"coreClock"}
+        name={"CORE CLOCK"}
+        min={1700}
+        max={2550}
+        setColumnFilters={setColumnFilters}
+        minStepsBetweenThumbs={2}
+      />
 
-      <div className="grid justify-start">
-        <h3 className="text-sm font-bold tracking-wide text-green-3">
-          BOOST CLOCK
-        </h3>
-      </div>
+      <RangeInput
+        id={"boostClock"}
+        name={"BOOST CLOCK"}
+        min={2430}
+        max={2830}
+        setColumnFilters={setColumnFilters}
+        minStepsBetweenThumbs={2}
+      />
 
-      <div className="grid justify-start">
-        <h3 className="text-sm font-bold tracking-wide text-green-3">PRICE</h3>
-        <input type="range" min={259.98} max={2452.1} />
-      </div>
+      <RangeInput
+        id={"price"}
+        min={250}
+        max={2500}
+        setColumnFilters={setColumnFilters}
+        minStepsBetweenThumbs={1}
+      />
     </div>
   );
 }

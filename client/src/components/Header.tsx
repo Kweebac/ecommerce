@@ -32,10 +32,13 @@ export default function Header() {
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr]">
-      <header ref={header} className="sticky top-0 grid justify-items-center">
+      <header
+        ref={header}
+        className="sticky top-0 z-10 grid justify-items-center bg-white-1"
+      >
         <div
           ref={div}
-          className="grid w-4/5 grid-cols-[1fr_auto_1fr] items-center border border-x-0 border-b-[#e8e3da] bg-[#fffcf9] text-lg"
+          className="grid w-4/5 grid-cols-[1fr_auto_1fr] items-center border border-x-0 border-b-[#e8e3da] text-lg"
         >
           <Link to="/" className="justify-self-start">
             <Logo />
