@@ -1,11 +1,13 @@
 type CheckboxFilterProps = {
   id: string;
-  options: string[];
+  name?: string;
+  options: string;
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
 };
 
 export default function CheckboxFilter({
   id,
+  name = id.toUpperCase(),
   options,
   setColumnFilters,
 }: CheckboxFilterProps) {
@@ -33,9 +35,12 @@ export default function CheckboxFilter({
 
   return (
     <div className="grid justify-start">
-      <h3 className="text-sm font-bold text-green-3">CHIPSET</h3>
+      <h3 className="text-sm font-bold text-green-3">{name}</h3>
       {options.map((filter, index) => (
-        <label key={index} className="flex cursor-pointer items-center gap-1.5">
+        <label
+          key={index}
+          className="flex w-max cursor-pointer items-center gap-1.5"
+        >
           <input
             type="checkbox"
             onClick={(e) => handleClick(e.target.checked, filter)}

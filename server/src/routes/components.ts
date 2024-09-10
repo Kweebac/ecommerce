@@ -1,8 +1,9 @@
 import express from "express";
-import { getGPUList } from "../controllers/components";
+import { getCpuList, getGpuList } from "../controllers/components";
 
 const router = express.Router();
 
-router.get("/gpu", getGPUList);
+router.get("/gpu", getGpuList);
+router.get("/cpu", getCpuList);
 
 export default router;

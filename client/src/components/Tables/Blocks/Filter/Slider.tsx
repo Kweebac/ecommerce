@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Slider } from "../Components/shadcn";
+import { Slider } from "../../../shadcn";
 
 type SliderFilterProps = {
   min: number;
@@ -8,6 +8,7 @@ type SliderFilterProps = {
   step?: number;
   minStepsBetweenThumbs?: number;
   id: string;
+  units?: string;
   name?: string;
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
 };
@@ -17,9 +18,10 @@ export default function SliderFilter({
   max,
   defaultValue = [min, max],
   step = 50,
-  minStepsBetweenThumbs = 0,
+  minStepsBetweenThumbs = 1,
   id,
   name = id.toUpperCase(),
+  units,
   setColumnFilters,
 }: SliderFilterProps) {
   const [values, setValues] = useState(defaultValue);
@@ -50,12 +52,14 @@ export default function SliderFilter({
     <div className="grid justify-start">
       <div className="flex items-center gap-1 text-sm">
         <h3 className="font-bold text-green-3">{name}</h3>
-        {id === "memory" && <div>({sliderValues} GB)</div>}
-        {id === "coreClock" && <div>({sliderValues} MHz)</div>}
-        {id === "boostClock" && <div>({sliderValues} MHz)</div>}
-        {id === "price" && <div>({sliderValues})</div>}
-        {id === "length" && <div>({sliderValues} mm)</div>}
-        {id === "tdp" && <div>({sliderValues} W)</div>}
+        {units === "£" ? (
+          <div>({sliderValues})</div>
+        ) : (
+          <div>
+            ({sliderValues}
+            {`${units ? ` ${units}` : ""}`})
+          </div>
+        )}
       </div>
       <Slider
         min={min}

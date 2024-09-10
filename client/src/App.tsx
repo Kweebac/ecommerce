@@ -4,11 +4,12 @@ import Register from "./components/Auth/Register";
 import Logout from "./components/Auth/Logout";
 import Home from "./components/Home";
 import Header from "./components/Header";
-import ComponentsHeader from "./components/Components/ComponentsHeader";
-import GPU from "./components/Components/GPU/GPU";
+import ComponentsHeader from "./components/ComponentsHeader";
 import { createContext, useEffect, useState } from "react";
 import { handleSetUser } from "./utils";
 import URLError from "./components/URLError";
+import CPU from "./components/Tables/CPU";
+import GPU from "./components/Tables/GPU";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="components" element={<ComponentsHeader />}>
             <Route index element={<Navigate to="gpu" />} />
             <Route path="gpu" element={<GPU />} />
+            <Route path="cpu" element={<CPU />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 

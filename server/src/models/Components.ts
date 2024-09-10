@@ -4,6 +4,7 @@ const GPU = mongoose.model(
   "GPU",
   new Schema({
     url: { type: String, required: true },
+    price: { type: Number, required: true },
 
     name: { type: String, required: true },
     chipset: { type: String, required: true },
@@ -13,9 +14,23 @@ const GPU = mongoose.model(
     color: { type: String, required: true },
     length: { type: Number, required: true },
     tdp: { type: Number, required: true },
-
-    price: { type: Number, required: true },
   })
 );
 
-export { GPU };
+const CPU = mongoose.model(
+  "CPU",
+  new Schema({
+    url: { type: String, required: true },
+    price: { type: Number, required: true },
+
+    name: { type: String, required: true },
+    series: { type: String, required: true },
+    cores: { type: Number, required: true },
+    pCoreClock: { type: Number, required: true },
+    pBoostClock: { type: Number, required: true },
+    integratedGraphics: { type: String, required: true },
+    tdp: { type: Number, required: true },
+  })
+);
+
+export { GPU, CPU };

@@ -1,5 +1,4 @@
 import {
-  flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
@@ -8,9 +7,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Filter";
-import Sort from "./Sort";
-import { LeftArrowIcon, RightArrowIcon } from "../../Icons";
+import Filter from "./Blocks/Filter/GPU";
+import Pages from "./Blocks/Pages";
+import Rows from "./Blocks/Rows";
+import Headers from "./Blocks/Headers";
 
 const columns = [
   {
@@ -80,17 +80,19 @@ const columns = [
   },
 ];
 
-const chipsetFilters = [
-  "GeForce RTX 4090",
-  "GeForce RTX 4080",
-  "GeForce RTX 4070 Ti",
-  "GeForce RTX 4070",
-  "GeForce RTX 4060 Ti",
-  "GeForce RTX 4060",
-  "Radeon RX 7900 XT",
-  "Radeon RX 7800 XT",
-  "Radeon RX 7700 XT",
-  "Radeon RX 7600 XT",
+const checkboxOptions = [
+  [
+    "GeForce RTX 4090",
+    "GeForce RTX 4080",
+    "GeForce RTX 4070 Ti",
+    "GeForce RTX 4070",
+    "GeForce RTX 4060 Ti",
+    "GeForce RTX 4060",
+    "Radeon RX 7900 XT",
+    "Radeon RX 7800 XT",
+    "Radeon RX 7700 XT",
+    "Radeon RX 7600 XT",
+  ],
 ];
 
 export default function GPU() {
@@ -127,73 +129,13 @@ export default function GPU() {
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
-        checkboxOptions={chipsetFilters}
+        checkboxOptions={checkboxOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <div
-            key={headerGroup.id}
-            className="grid grid-flow-col justify-start py-2 font-semibold text-green-3"
-          >
-            {headerGroup.headers.map((header) => {
-              const headerName = header.column.columnDef.header;
-
-              return (
-                <div
-                  key={header.id}
-                  style={{ width: header.getSize() }}
-                  className="grid justify-start"
-                >
-                  {header.column.getCanSort() ? (
-                    <Sort header={header}>{headerName}</Sort>
-                  ) : (
-                    <div>{headerName}</div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        ))}
-
-        {table.getRowModel().rows.map((row) => (
-          <div
-            key={row.id}
-            className="grid grid-flow-col items-center justify-start border-t border-t-gray-300"
-          >
-            {row.getVisibleCells().map((cell) => (
-              <div key={cell.id} style={{ width: cell.column.getSize() }}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </div>
-            ))}
-          </div>
-        ))}
-
-        {table.getPageCount() > 1 && (
-          <>
-            <br />
-            <div className="grid justify-items-center gap-1">
-              <div className="text-lg">
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => table.previousPage()}
-                  disabled={!table.getCanPreviousPage()}
-                >
-                  <LeftArrowIcon styles="h-8 w-8 bg-white-2 rounded-full" />
-                </button>
-                <button
-                  onClick={() => table.nextPage()}
-                  disabled={!table.getCanNextPage()}
-                >
-                  <RightArrowIcon styles="h-8 w-8 bg-white-2 rounded-full" />
-                </button>
-              </div>
-            </div>
-          </>
-        )}
+        <Headers table={table} />
+        <Rows table={table} />
+        <Pages table={table} />
       </section>
     </main>
   );

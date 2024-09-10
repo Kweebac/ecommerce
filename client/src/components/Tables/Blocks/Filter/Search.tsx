@@ -1,4 +1,4 @@
-import { SearchIcon } from "../Icons";
+import { SearchIcon } from "../../../Icons";
 
 type SearchFilterProps = {
   columnFilters: [{ id: string; value: string }];

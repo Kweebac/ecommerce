@@ -1,6 +1,7 @@
-import CheckboxFilter from "../../Filter/Checkbox";
-import SearchFilter from "../../Filter/Search";
-import SliderFilter from "../../Filter/Slider";
+import CheckboxFilter from "./Checkbox";
+import RadioFilter from "./Radio";
+import SearchFilter from "./Search";
+import SliderFilter from "./Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
@@ -21,62 +22,62 @@ export default function Filter({
       />
 
       <CheckboxFilter
-        id="chipset"
-        options={checkboxOptions}
+        id={"series"}
+        options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
         id={"price"}
-        min={250}
-        max={2500}
+        units="£"
+        min={50}
+        max={700}
         setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={1}
       />
 
       <SliderFilter
-        id={"memory"}
-        name={"MEMORY"}
-        min={8}
+        id={"cores"}
+        min={4}
         max={24}
-        step={4}
+        step={2}
         setColumnFilters={setColumnFilters}
+        minStepsBetweenThumbs={0}
       />
 
       <SliderFilter
-        id={"coreClock"}
+        id={"pCoreClock"}
         name={"CORE CLOCK"}
-        min={1700}
-        max={2550}
+        units="GHz"
+        min={3}
+        max={4.7}
+        step={0.1}
         setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={2}
       />
 
       <SliderFilter
-        id={"boostClock"}
+        id={"pBoostClock"}
         name={"BOOST CLOCK"}
-        min={2430}
-        max={2830}
+        units="GHz"
+        min={3.6}
+        max={6}
+        step={0.1}
         setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={2}
-      />
-
-      <SliderFilter
-        id={"length"}
-        min={163}
-        max={358}
-        step={10}
-        setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={1}
       />
 
       <SliderFilter
         id={"tdp"}
-        min={115}
-        max={450}
+        units="W"
+        min={65}
+        max={170}
         step={10}
         setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={2}
+      />
+
+      <RadioFilter
+        id="integratedGraphics"
+        name="INTEGRATED GRAPHICS"
+        options={checkboxOptions[1]}
+        setColumnFilters={setColumnFilters}
       />
     </div>
   );

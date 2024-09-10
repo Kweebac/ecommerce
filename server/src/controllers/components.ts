@@ -1,10 +1,16 @@
 import { RequestHandler } from "express";
-import { GPU } from "../models/Components";
+import { CPU, GPU } from "../models/Components";
 
-const getGPUList: RequestHandler = async (req, res) => {
+const getGpuList: RequestHandler = async (req, res) => {
   const gpuList = await GPU.find();
 
   res.json(gpuList);
 };
 
-export { getGPUList };
+const getCpuList: RequestHandler = async (req, res) => {
+  const cpuList = await CPU.find();
+
+  res.json(cpuList);
+};
+
+export { getGpuList, getCpuList };
