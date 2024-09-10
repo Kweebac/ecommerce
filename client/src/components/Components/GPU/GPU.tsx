@@ -72,6 +72,12 @@ const columns = [
       </div>
     ),
   },
+  {
+    accessorKey: "length",
+  },
+  {
+    accessorKey: "tdp",
+  },
 ];
 
 const chipsetFilters = [
@@ -89,10 +95,17 @@ const chipsetFilters = [
 
 export default function GPU() {
   const [gpuList, setGPUList] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({
+    length: false,
+    tdp: false,
+  });
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data: gpuList,
     columns,
+    initialState: {
+      columnVisibility,
+    },
     state: { columnFilters },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
