@@ -74,6 +74,19 @@ const columns = [
   },
 ];
 
+const chipsetFilters = [
+  "GeForce RTX 4090",
+  "GeForce RTX 4080",
+  "GeForce RTX 4070 Ti",
+  "GeForce RTX 4070",
+  "GeForce RTX 4060 Ti",
+  "GeForce RTX 4060",
+  "Radeon RX 7900 XT",
+  "Radeon RX 7800 XT",
+  "Radeon RX 7700 XT",
+  "Radeon RX 7600 XT",
+];
+
 export default function GPU() {
   const [gpuList, setGPUList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -101,6 +114,7 @@ export default function GPU() {
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
+        checkboxOptions={chipsetFilters}
       />
 
       <section style={{ width: table.getTotalSize() }}>
