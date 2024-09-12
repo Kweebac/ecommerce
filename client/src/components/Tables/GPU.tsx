@@ -25,7 +25,6 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 375,
-    cell: (props) => <p>{props.getValue()}</p>,
   },
   {
     accessorKey: "chipset",
@@ -35,7 +34,6 @@ const columns = [
       return filterValue.includes(value);
     },
     size: 300,
-    cell: (props) => <p>{props.getValue()}</p>,
   },
   {
     accessorKey: "memory",
@@ -76,7 +74,8 @@ const columns = [
     accessorKey: "length",
   },
   {
-    accessorKey: "tdp",
+    accessorKey: "color",
+    filterFn: "arrIncludesSome",
   },
 ];
 
@@ -93,13 +92,14 @@ const checkboxOptions = [
     "Radeon RX 7700 XT",
     "Radeon RX 7600 XT",
   ],
+  ["Black", "White"],
 ];
 
 export default function GPU() {
-  const [gpuList, setGPUList] = useState([]);
+  const [gpuList, setGpuList] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({
     length: false,
-    tdp: false,
+    color: false,
   });
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
@@ -120,12 +120,12 @@ export default function GPU() {
       const res = await fetch("http://localhost:3000/api/components/gpu");
       const data = await res.json();
 
-      setGPUList(data);
+      setGpuList(data);
     })();
   }, []);
 
   return (
-    <main className="mt-12 grid grid-flow-col items-start justify-center gap-20">
+    <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}

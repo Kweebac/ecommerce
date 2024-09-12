@@ -13,10 +13,12 @@ export default function Header() {
       if (header.current && div.current) {
         if (window.scrollY > 0) {
           header.current.classList.add("shadow-md");
+          header.current.classList.add("bg-[#fffcf9]");
           div.current.classList.remove("border-b-[#e8e3da]");
           div.current.classList.add("border-b-[#fffcf9]");
         } else {
           header.current.classList.remove("shadow-md");
+          header.current.classList.remove("bg-[#fffcf9]");
           div.current.classList.remove("border-b-[#fffcf9]");
           div.current.classList.add("border-b-[#e8e3da]");
         }

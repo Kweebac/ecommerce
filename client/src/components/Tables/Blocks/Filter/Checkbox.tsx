@@ -1,7 +1,7 @@
 type CheckboxFilterProps = {
   id: string;
   name?: string;
-  options: string;
+  options: string[];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
 };
 

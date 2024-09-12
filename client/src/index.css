@@ -12,7 +12,7 @@ a.active p {
 
 @layer base {
   :root {
-    @apply box-border bg-[#fffcf9] font-fraunces text-[#171516];
+    @apply box-border font-fraunces text-[#171516];
 
     --page-margin: 90vw;
     --filter-width: 15rem;

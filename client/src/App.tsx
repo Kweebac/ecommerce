@@ -10,6 +10,7 @@ import { handleSetUser } from "./utils";
 import URLError from "./components/URLError";
 import CPU from "./components/Tables/CPU";
 import GPU from "./components/Tables/GPU";
+import Motherboard from "./components/Tables/Motherboard";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -48,6 +49,7 @@ export default function App() {
             <Route index element={<Navigate to="gpu" />} />
             <Route path="gpu" element={<GPU />} />
             <Route path="cpu" element={<CPU />} />
+            <Route path="motherboard" element={<Motherboard />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 

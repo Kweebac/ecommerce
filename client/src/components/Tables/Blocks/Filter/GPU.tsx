@@ -5,13 +5,13 @@ import SliderFilter from "./Slider";
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
-  checkboxOptions: string[];
+  checkboxOptions: string[][];
 };
 
 export default function Filter({
   columnFilters,
   setColumnFilters,
-  checkboxOptions,
+  checkboxOptions = [],
 }: FilterProps) {
   return (
     <div className="grid w-[--filter-width] gap-4">
@@ -20,17 +20,17 @@ export default function Filter({
         setColumnFilters={setColumnFilters}
       />
 
-      <CheckboxFilter
-        id={"chipset"}
-        options={checkboxOptions[0]}
-        setColumnFilters={setColumnFilters}
-      />
-
       <SliderFilter
         id={"price"}
         units={"£"}
         min={250}
         max={2500}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id={"chipset"}
+        options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
@@ -63,20 +63,17 @@ export default function Filter({
         setColumnFilters={setColumnFilters}
       />
 
+      <CheckboxFilter
+        id="color"
+        options={checkboxOptions[1]}
+        setColumnFilters={setColumnFilters}
+      />
+
       <SliderFilter
         id={"length"}
         units="mm"
         min={163}
         max={358}
-        step={10}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <SliderFilter
-        id={"tdp"}
-        units="W"
-        min={115}
-        max={450}
         step={10}
         setColumnFilters={setColumnFilters}
       />

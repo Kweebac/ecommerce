@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/CPU";
+import Filter from "./Blocks/Filter/Motherboard";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
 import Headers from "./Blocks/Headers";
@@ -17,43 +17,57 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="CPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
+    size: 400,
   },
   {
-    accessorKey: "series",
-    header: "Series",
+    accessorKey: "chipset",
+    header: "Chipset",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 300,
+    size: 165,
   },
   {
-    accessorKey: "cores",
-    header: "Cores",
-    filterFn: "inNumberRange",
-    size: 135,
-  },
-  {
-    accessorKey: "pCoreClock",
-    header: "Core clock",
-    filterFn: "inNumberRange",
+    accessorKey: "formFactor",
+    header: "Form factor",
+    filterFn: (row: Row, columnId: string, filterValue: any) => {
+      const value = row.getValue(columnId);
+      return filterValue.includes(value);
+    },
     size: 150,
-    cell: (props) => <p>{props.getValue()} GHz</p>,
   },
   {
-    accessorKey: "pBoostClock",
-    header: "Boost clock",
-    filterFn: "inNumberRange",
+    accessorKey: "cpuSocket",
+    header: "CPU Socket",
+    filterFn: (row: Row, columnId: string, filterValue: any) => {
+      const value = row.getValue(columnId);
+      return filterValue.includes(value);
+    },
     size: 150,
-    cell: (props) => <p>{props.getValue()} GHz</p>,
+  },
+  {
+    accessorKey: "ram.ddr",
+    id: "ramDdr",
+    header: "RAM",
+    filterFn: "arrIncludesSome",
+    size: 100,
+  },
+  {
+    accessorKey: "wifi",
+    header: "Wi-Fi",
+    filterFn: (row: Row, columnId: string, filterValue: any) => {
+      const value = row.getValue(columnId);
+      return filterValue.includes(value);
+    },
+    size: 130,
   },
   {
     accessorKey: "price",
@@ -70,10 +84,7 @@ const columns = [
     ),
   },
   {
-    accessorKey: "integratedGraphics",
-  },
-  {
-    accessorKey: "socket",
+    accessorKey: "color",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
@@ -83,25 +94,31 @@ const columns = [
 
 const checkboxOptions = [
   [
-    "AMD Ryzen 9",
-    "AMD Ryzen 7",
-    "Intel Core i9",
-    "Intel Core i7",
-    "Intel Core i5",
+    "Intel Z790",
+    "Intel Z690",
+    "Intel B760",
+    "Intel B660",
+    "Intel H610",
+    "AMD X670",
+    "AMD B650",
+    "AMD B550",
   ],
+  ["ATX", "Micro ATX", "Mini ITX", "EATX"],
   ["AM5", "AM4", "LGA1700"],
+  ["DDR5", "DDR4"],
+  ["Wi-Fi 7", "Wi-Fi 6E", "Wi-Fi 6", "Wi-Fi 5", "None"],
+  ["Black", "Silver", "Black & Silver", "Colorful"],
 ];
-const radioOptions = [["Yes", "None"]];
 
-export default function CPU() {
-  const [cpuList, setCpuList] = useState([]);
+export default function Motherboard() {
+  const [motherboardList, setMotherboardList] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({
-    integratedGraphics: false,
-    socket: false,
+    color: false,
+    ramSlots: false,
   });
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: cpuList,
+    data: motherboardList,
     columns,
     initialState: {
       columnVisibility,
@@ -115,10 +132,12 @@ export default function CPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/cpu");
+      const res = await fetch(
+        "http://localhost:3000/api/components/motherboard",
+      );
       const data = await res.json();
 
-      setCpuList(data);
+      setMotherboardList(data);
     })();
   }, []);
 
@@ -128,7 +147,6 @@ export default function CPU() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
-        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

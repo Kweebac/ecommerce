@@ -21,6 +21,17 @@ export default function RadioFilter({
   return (
     <div className="grid justify-start">
       <h3 className="text-sm font-bold text-green-3">{name}</h3>
+      <label className="flex w-max cursor-pointer items-center gap-1.5">
+        <input
+          type="radio"
+          defaultChecked
+          name={id}
+          onClick={() => handleClick("All")}
+          className="cursor-pointer"
+        />{" "}
+        All
+      </label>
+
       {options.map((filter, index) => (
         <label
           key={index}
@@ -28,7 +39,6 @@ export default function RadioFilter({
         >
           <input
             type="radio"
-            defaultChecked={filter === "All"}
             name={id}
             onClick={() => handleClick(filter)}
             className="cursor-pointer"
