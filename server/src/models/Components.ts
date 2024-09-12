@@ -102,6 +102,10 @@ const PSU = mongoose.model(
     url: { type: String, required: true },
     price: { type: Number, required: true },
     name: { type: String, required: true },
+
+    rating: { type: String, required: true },
+    wattage: { type: Number, required: true },
+    color: { type: String, required: true },
   })
 );
 

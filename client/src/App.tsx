@@ -13,6 +13,7 @@ import GPU from "./components/Tables/GPU";
 import Motherboard from "./components/Tables/Motherboard";
 import RAM from "./components/Tables/RAM";
 import Storage from "./components/Tables/Storage";
+import PSU from "./components/Tables/PSU";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="motherboard" element={<Motherboard />} />
             <Route path="ram" element={<RAM />} />
             <Route path="storage" element={<Storage />} />
+            <Route path="psu" element={<PSU />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 

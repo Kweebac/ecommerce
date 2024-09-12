@@ -21,40 +21,36 @@ export default function Filter({
       />
 
       <SliderFilter
-        id={"pricePerGb"}
-        name="PRICE / GB"
-        units={"£"}
-        min={0.01}
-        max={0.4}
-        step={0.01}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <SliderFilter
         id={"price"}
         units={"£"}
-        min={20}
-        max={420}
+        min={70}
+        max={580}
         step={10}
         setColumnFilters={setColumnFilters}
       />
 
+      <SliderFilter
+        id={"wattage"}
+        name="WATTAGE"
+        units={"W"}
+        min={550}
+        max={1650}
+        step={50}
+        setColumnFilters={setColumnFilters}
+      />
+
       <CheckboxFilter
-        id="type"
-        name="TYPE"
+        id="rating"
+        name="RATING"
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
-      <SliderFilter
-        id={"capacity"}
-        name="CAPACITY"
-        units={"GB"}
-        min={128}
-        max={8192}
-        step={128}
+      <CheckboxFilter
+        id="color"
+        name="COLOR"
+        options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}
-        minStepsBetweenThumbs={0}
       />
     </div>
   );
