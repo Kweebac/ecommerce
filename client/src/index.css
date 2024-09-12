@@ -10,6 +10,11 @@ a.active p {
   @apply rounded-lg bg-green-3 text-white-1;
 }
 
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #4b654b;
+}
+
 @layer base {
   :root {
     @apply box-border font-fraunces text-[#171516];

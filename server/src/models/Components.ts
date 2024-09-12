@@ -71,9 +71,15 @@ const RAM = mongoose.model(
   new Schema({
     url: { type: String, required: true },
     price: { type: Number, required: true },
+    pricePerGb: { type: Number, required: true },
     name: { type: String, required: true },
 
-    
+    ddr: { type: String, required: true },
+    ddrSpeed: { type: Number, required: true },
+    modules: { type: String, required: true },
+    fwl: { type: Number, required: true },
+    cl: { type: Number, required: true },
+    color: { type: String, required: true },
   })
 );
 
@@ -82,7 +88,11 @@ const Storage = mongoose.model(
   new Schema({
     url: { type: String, required: true },
     price: { type: Number, required: true },
+    pricePerGb: { type: Number, required: true },
     name: { type: String, required: true },
+
+    type: { type: String, required: true },
+    capacity: { type: Number, required: true },
   })
 );
 

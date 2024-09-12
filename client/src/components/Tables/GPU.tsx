@@ -6,7 +6,7 @@ import {
   Row,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Filter from "./Blocks/Filter/GPU";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
@@ -46,14 +46,12 @@ const columns = [
     accessorKey: "coreClock",
     header: "Core clock",
     filterFn: "inNumberRange",
-    size: 150,
-    cell: (props) => <p>{props.getValue()} MHz</p>,
+    cell: (props): ReactNode => <p>{props.getValue()} MHz</p>,
   },
   {
     accessorKey: "boostClock",
     header: "Boost clock",
     filterFn: "inNumberRange",
-    size: 150,
     cell: (props) => <p>{props.getValue()} MHz</p>,
   },
   {
@@ -97,16 +95,15 @@ const checkboxOptions = [
 
 export default function GPU() {
   const [gpuList, setGpuList] = useState([]);
-  const [columnVisibility, setColumnVisibility] = useState({
-    length: false,
-    color: false,
-  });
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data: gpuList,
     columns,
     initialState: {
-      columnVisibility,
+      columnVisibility: {
+        length: false,
+        color: false,
+      },
     },
     state: { columnFilters },
     getCoreRowModel: getCoreRowModel(),

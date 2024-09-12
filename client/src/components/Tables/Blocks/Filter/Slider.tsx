@@ -28,10 +28,10 @@ export default function SliderFilter({
 
   const sliderValues =
     values[0] === values[1]
-      ? id === "price"
+      ? id === "price" || id === "pricePerGb"
         ? `£${values[0]}`
         : `${values[0]}`
-      : id === "price"
+      : id === "price" || id === "pricePerGb"
         ? `£${values[0]} - £${values[1]}`
         : `${values[0]} - ${values[1]}`;
 

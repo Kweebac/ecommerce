@@ -42,7 +42,6 @@ const columns = [
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 150,
   },
   {
     accessorKey: "cpuSocket",
@@ -51,7 +50,6 @@ const columns = [
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 150,
   },
   {
     accessorKey: "ram.ddr",
@@ -73,7 +71,7 @@ const columns = [
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 130,
+    size: 120,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -112,16 +110,15 @@ const checkboxOptions = [
 
 export default function Motherboard() {
   const [motherboardList, setMotherboardList] = useState([]);
-  const [columnVisibility, setColumnVisibility] = useState({
-    color: false,
-    ramSlots: false,
-  });
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
     data: motherboardList,
     columns,
     initialState: {
-      columnVisibility,
+      columnVisibility: {
+        color: false,
+        ramSlots: false,
+      },
     },
     state: { columnFilters },
     getCoreRowModel: getCoreRowModel(),

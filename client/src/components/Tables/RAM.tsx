@@ -3,11 +3,10 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/CPU";
+import Filter from "./Blocks/Filter/RAM";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
 import Headers from "./Blocks/Headers";
@@ -17,47 +16,59 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="CPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
+    size: 425,
   },
   {
-    accessorKey: "series",
-    header: "Series",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 300,
+    accessorKey: "modules",
+    header: "Modules",
+    filterFn: "arrIncludesSome",
+    size: 130,
+    cell: (props) => <p>{props.getValue()} GB</p>,
   },
   {
-    accessorKey: "cores",
-    header: "Cores",
+    accessorKey: "ddr",
+    header: "Type",
+    filterFn: "arrIncludesSome",
+    size: 110,
+  },
+  {
+    accessorKey: "ddrSpeed",
+    header: "Speed",
     filterFn: "inNumberRange",
-    size: 135,
+    size: 110,
   },
   {
-    accessorKey: "pCoreClock",
-    header: "Core clock",
+    accessorKey: "fwl",
+    header: "FWL",
     filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} GHz</p>,
+    size: 100,
+    cell: (props) => <p>{props.getValue()} ns</p>,
   },
   {
-    accessorKey: "pBoostClock",
-    header: "Boost clock",
+    accessorKey: "cl",
+    header: "CL",
     filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} GHz</p>,
+    size: 85,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 110,
+    cell: (props) => <p>£{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "pricePerGb",
+    header: "Price / GB",
+    filterFn: "inNumberRange",
+    size: 115,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -68,10 +79,7 @@ const columns = [
     ),
   },
   {
-    accessorKey: "integratedGraphics",
-  },
-  {
-    accessorKey: "socket",
+    accessorKey: "color",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
@@ -80,27 +88,20 @@ const columns = [
 ];
 
 const checkboxOptions = [
-  [
-    "AMD Ryzen 9",
-    "AMD Ryzen 7",
-    "Intel Core i9",
-    "Intel Core i7",
-    "Intel Core i5",
-  ],
-  ["AM5", "AM4", "LGA1700"],
+  ["2 x 8", "2 x 16", "2 x 32"],
+  ["DDR4", "DDR5"],
+  ["Black", "White", "Black & White", "Colorful"],
 ];
-const radioOptions = [["Yes", "None"]];
 
-export default function CPU() {
-  const [cpuList, setCpuList] = useState([]);
+export default function RAM() {
+  const [ramList, setRamList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: cpuList,
+    data: ramList,
     columns,
     initialState: {
       columnVisibility: {
-        integratedGraphics: false,
-        socket: false,
+        color: false,
       },
     },
     state: { columnFilters },
@@ -112,10 +113,10 @@ export default function CPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/cpu");
+      const res = await fetch("http://localhost:3000/api/components/ram");
       const data = await res.json();
 
-      setCpuList(data);
+      setRamList(data);
     })();
   }, []);
 
@@ -125,7 +126,6 @@ export default function CPU() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
-        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>
