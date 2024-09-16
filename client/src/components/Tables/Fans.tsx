@@ -3,11 +3,10 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/CPUCooler";
+import Filter from "./Blocks/Filter/Fans";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
 import Headers from "./Blocks/Headers";
@@ -24,24 +23,31 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 475,
+    size: 400,
+  },
+  {
+    accessorKey: "size",
+    header: "Size",
+    size: 120,
+    cell: (props) => <p>{props.getValue()} mm</p>,
   },
   {
     accessorKey: "rpm",
     header: "RPM",
-    size: 200,
+    size: 190,
     cell: (props) => <p>{props.getValue()} RPM</p>,
+  },
+  {
+    accessorKey: "airflow",
+    header: "Airflow",
+    size: 190,
+    cell: (props) => <p>{props.getValue()} CFM</p>,
   },
   {
     accessorKey: "noise",
     header: "Noise",
-    size: 175,
+    size: 150,
     cell: (props) => <p>{props.getValue()} dB</p>,
-  },
-  {
-    accessorKey: "waterCooled",
-    header: "Water cooled",
-    size: 190,
   },
   {
     accessorKey: "price",
@@ -58,11 +64,8 @@ const columns = [
     ),
   },
   {
-    accessorKey: "cpuSockets",
-    filterFn: "arrIncludesSome",
-  },
-  {
-    accessorKey: "height",
+    accessorKey: "quantity",
+    filterFn: "inNumberRange",
   },
   {
     accessorKey: "color",
@@ -70,23 +73,19 @@ const columns = [
   },
 ];
 
-const checkboxOptions = [
-  ["AM5", "AM4", "LGA1700"],
-  ["Black", "White"],
-];
+const checkboxOptions = [["Black", "White"]];
 
 const radioOptions = [["Yes", "None"]];
 
-export default function CPUCooler() {
-  const [cpuCoolerList, setCpuCoolerList] = useState([]);
+export default function Fans() {
+  const [fansList, setFansList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: cpuCoolerList,
+    data: fansList,
     columns,
     initialState: {
       columnVisibility: {
-        height: false,
-        cpuSockets: false,
+        quantity: false,
         color: false,
       },
     },
@@ -99,12 +98,10 @@ export default function CPUCooler() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/cpu-cooler",
-      );
+      const res = await fetch("http://localhost:3000/api/components/fans");
       const data = await res.json();
 
-      setCpuCoolerList(data);
+      setFansList(data);
     })();
   }, []);
 

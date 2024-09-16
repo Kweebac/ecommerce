@@ -54,7 +54,6 @@ export default function Filter({
 
       <SliderFilter
         id={"height"}
-        name="HEIGHT"
         units="mm"
         min={45}
         max={170}

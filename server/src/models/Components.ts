@@ -136,6 +136,7 @@ const CPUCooler = mongoose.model(
     cpuSockets: { type: [String], required: true },
     waterCooled: { type: String, enum: ["Yes", "None"], required: true },
     height: { type: Number, required: true },
+    quantity: { type: Number, required: true },
     color: { type: String, enum: ["Black", "White"], required: true },
   })
 );
