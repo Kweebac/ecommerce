@@ -130,6 +130,13 @@ const CPUCooler = mongoose.model(
     url: { type: String, required: true },
     price: { type: Number, required: true },
     name: { type: String, required: true },
+
+    rpm: { type: String, required: true },
+    noise: { type: String, required: true },
+    cpuSockets: { type: [String], required: true },
+    waterCooled: { type: String, enum: ["Yes", "None"], required: true },
+    height: { type: Number, required: true },
+    color: { type: String, enum: ["Black", "White"], required: true },
   })
 );
 
@@ -139,6 +146,12 @@ const Fans = mongoose.model(
     url: { type: String, required: true },
     price: { type: Number, required: true },
     name: { type: String, required: true },
+
+    size: { type: Number, required: true },
+    rpm: { type: String, required: true },
+    airflow: { type: String, required: true },
+    noise: { type: String, required: true },
+    color: { type: String, enum: ["Black", "White"], required: true },
   })
 );
 

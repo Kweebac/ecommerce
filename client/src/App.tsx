@@ -16,6 +16,7 @@ import Storage from "./components/Tables/Storage";
 import PSU from "./components/Tables/PSU";
 import OS from "./components/Tables/OS";
 import Case from "./components/Tables/Case";
+import CPUCooler from "./components/Tables/CPUCooler";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -60,6 +61,7 @@ export default function App() {
             <Route path="psu" element={<PSU />} />
             <Route path="os" element={<OS />} />
             <Route path="case" element={<Case />} />
+            <Route path="cpu-cooler" element={<CPUCooler />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 
