@@ -115,6 +115,12 @@ const Case = mongoose.model(
     url: { type: String, required: true },
     price: { type: Number, required: true },
     name: { type: String, required: true },
+
+    type: { type: String, required: true },
+    motherboardFormFactors: { type: [String], required: true },
+    maxGpuLength: { type: Number, required: true },
+    dimensions: { type: String, required: true },
+    color: { type: String, enum: ["Black", "White"], required: true },
   })
 );
 

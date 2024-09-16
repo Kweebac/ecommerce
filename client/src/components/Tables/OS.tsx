@@ -3,11 +3,10 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/GPU";
+import Filter from "./Blocks/Filter/OS";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
 import Headers from "./Blocks/Headers";
@@ -24,41 +23,13 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
-  },
-  {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 300,
-  },
-  {
-    accessorKey: "memory",
-    header: "Memory",
-    filterFn: "inNumberRange",
-    size: 135,
-    cell: (props) => <p>{props.getValue()} GB</p>,
-  },
-  {
-    accessorKey: "coreClock",
-    header: "Core clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
-  },
-  {
-    accessorKey: "boostClock",
-    header: "Boost clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
+    size: 275,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 130,
+    size: 125,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -68,40 +39,16 @@ const columns = [
       </div>
     ),
   },
-  {
-    accessorKey: "length",
-  },
-  {
-    accessorKey: "color",
-    filterFn: "arrIncludesSome",
-  },
 ];
 
-const checkboxOptions = [
-  [
-    "GeForce RTX 4090",
-    "GeForce RTX 4080",
-    "GeForce RTX 4070 Ti",
-    "GeForce RTX 4070",
-    "GeForce RTX 4060 Ti",
-    "GeForce RTX 4060",
-    "Radeon RX 7900 XT",
-    "Radeon RX 7800 XT",
-    "Radeon RX 7700 XT",
-    "Radeon RX 7600 XT",
-  ],
-  ["Black", "White"],
-];
-
-export default function GPU() {
-  const [gpuList, setGpuList] = useState([]);
+export default function OS() {
+  const [osList, setOsList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: gpuList,
+    data: osList,
     columns,
     initialState: {
       columnVisibility: {
-        length: false,
         color: false,
       },
     },
@@ -114,10 +61,10 @@ export default function GPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/gpu");
+      const res = await fetch("http://localhost:3000/api/components/os");
       const data = await res.json();
 
-      setGpuList(data);
+      setOsList(data);
     })();
   }, []);
 
@@ -126,7 +73,6 @@ export default function GPU() {
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
-        checkboxOptions={checkboxOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

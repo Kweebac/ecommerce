@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/GPU";
+import Filter from "./Blocks/Filter/Case";
 import Pages from "./Blocks/Pages";
 import Rows from "./Blocks/Rows";
 import Headers from "./Blocks/Headers";
@@ -24,41 +24,22 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
+    size: 400,
   },
   {
-    accessorKey: "chipset",
-    header: "Chipset",
+    accessorKey: "type",
+    header: "Type",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 300,
-  },
-  {
-    accessorKey: "memory",
-    header: "Memory",
-    filterFn: "inNumberRange",
-    size: 135,
-    cell: (props) => <p>{props.getValue()} GB</p>,
-  },
-  {
-    accessorKey: "coreClock",
-    header: "Core clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
-  },
-  {
-    accessorKey: "boostClock",
-    header: "Boost clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
+    size: 250,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 130,
+    size: 120,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -69,7 +50,11 @@ const columns = [
     ),
   },
   {
-    accessorKey: "length",
+    accessorKey: "motherboardFormFactors",
+    filterFn: "arrIncludesSome",
+  },
+  {
+    accessorKey: "maxGpuLength",
   },
   {
     accessorKey: "color",
@@ -79,29 +64,25 @@ const columns = [
 
 const checkboxOptions = [
   [
-    "GeForce RTX 4090",
-    "GeForce RTX 4080",
-    "GeForce RTX 4070 Ti",
-    "GeForce RTX 4070",
-    "GeForce RTX 4060 Ti",
-    "GeForce RTX 4060",
-    "Radeon RX 7900 XT",
-    "Radeon RX 7800 XT",
-    "Radeon RX 7700 XT",
-    "Radeon RX 7600 XT",
+    "ATX Full Tower",
+    "ATX Mid Tower",
+    "MicroATX Mid Tower",
+    "MicroATX Mini Tower",
   ],
+  ["ATX", "Micro ATX", "Mini ITX", "EATX"],
   ["Black", "White"],
 ];
 
-export default function GPU() {
-  const [gpuList, setGpuList] = useState([]);
+export default function Case() {
+  const [caseList, setCaseList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: gpuList,
+    data: caseList,
     columns,
     initialState: {
       columnVisibility: {
-        length: false,
+        maxGpuLength: false,
+        motherboardFormFactors: false,
         color: false,
       },
     },
@@ -114,10 +95,10 @@ export default function GPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/gpu");
+      const res = await fetch("http://localhost:3000/api/components/case");
       const data = await res.json();
 
-      setGpuList(data);
+      setCaseList(data);
     })();
   }, []);
 
