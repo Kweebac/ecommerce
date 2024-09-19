@@ -2,26 +2,27 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import URLError from "../../URLError";
 
-type GPUItem = {
+type CPUCoolerItem = {
   name: string;
-  chipset: string;
-  memory: number;
-  coreClock: number;
-  boostClock: number;
+  rpm: number;
+  noise: number;
+  cpuSockets: string[];
   color: string;
-  length: number;
-  tdp: number;
+  waterCooled: string;
+  height: number;
   price: number;
   url: string;
 };
 
-export default function GPUItem() {
-  const [item, setItem] = useState<GPUItem | null>();
+export default function CPUCoolerItem() {
+  const [item, setItem] = useState<CPUCoolerItem | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`http://localhost:3000/api/components/gpu/${id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/components/cpu-cooler/${id}`,
+      );
 
       if (res.status === 404) setItem(null);
       else {
@@ -43,22 +44,20 @@ export default function GPUItem() {
           <div>
             <div className="grid grid-flow-col gap-6">
               <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Memory</div>
-                <div>Core Clock</div>
-                <div>Boost Clock</div>
+                <div>RPM</div>
+                <div>Noise</div>
+                <div>CPU Socket</div>
                 <div>Color</div>
-                <div>Length</div>
-                <div>TDP</div>
+                <div>Water cooled</div>
+                <div>Height</div>
               </div>
               <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.memory} GB</div>
-                <div>{item.coreClock} MHz</div>
-                <div>{item.boostClock} MHz</div>
+                <div>{item.rpm} RPM</div>
+                <div>{item.noise} dB</div>
+                <div>{item.cpuSockets.join(", ")}</div>
                 <div>{item.color}</div>
-                <div>{item.length} mm</div>
-                <div>{item.tdp} W</div>
+                <div>{item.waterCooled}</div>
+                <div>{item.height} mm</div>
               </div>
             </div>
           </div>

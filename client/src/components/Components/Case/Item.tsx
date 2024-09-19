@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import URLError from "../../URLError";
 
-type GPUItem = {
+type CaseItem = {
   name: string;
-  chipset: string;
-  memory: number;
-  coreClock: number;
-  boostClock: number;
+  type: string;
+  motherboardFormFactors: string[];
   color: string;
-  length: number;
-  tdp: number;
+  maxGpuLength: number;
+  dimensions: string;
   price: number;
   url: string;
 };
 
-export default function GPUItem() {
-  const [item, setItem] = useState<GPUItem | null>();
+export default function CaseItem() {
+  const [item, setItem] = useState<CaseItem | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`http://localhost:3000/api/components/gpu/${id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/components/case/${id}`,
+      );
 
       if (res.status === 404) setItem(null);
       else {
@@ -43,22 +43,18 @@ export default function GPUItem() {
           <div>
             <div className="grid grid-flow-col gap-6">
               <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Memory</div>
-                <div>Core Clock</div>
-                <div>Boost Clock</div>
+                <div>Type</div>
+                <div>Motherboard form factor</div>
                 <div>Color</div>
-                <div>Length</div>
-                <div>TDP</div>
+                <div>Max GPU length</div>
+                <div>Dimensions</div>
               </div>
               <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.memory} GB</div>
-                <div>{item.coreClock} MHz</div>
-                <div>{item.boostClock} MHz</div>
+                <div>{item.type}</div>
+                <div>{item.motherboardFormFactors.join(", ")}</div>
                 <div>{item.color}</div>
-                <div>{item.length} mm</div>
-                <div>{item.tdp} W</div>
+                <div>{item.maxGpuLength} mm</div>
+                <div>{item.dimensions}</div>
               </div>
             </div>
           </div>

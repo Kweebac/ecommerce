@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import URLError from "../../URLError";
 
-type GPUItem = {
+type CPUItem = {
   name: string;
-  chipset: string;
-  memory: number;
-  coreClock: number;
-  boostClock: number;
-  color: string;
-  length: number;
+  series: string;
+  cores: number;
+  pCoreClock: number;
+  pBoostClock: number;
+  integratedGraphics: string;
+  socket: string;
   tdp: number;
   price: number;
   url: string;
 };
 
-export default function GPUItem() {
-  const [item, setItem] = useState<GPUItem | null>();
+export default function CPUItem() {
+  const [item, setItem] = useState<CPUItem | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`http://localhost:3000/api/components/gpu/${id}`);
+      const res = await fetch(`http://localhost:3000/api/components/cpu/${id}`);
 
       if (res.status === 404) setItem(null);
       else {
@@ -43,21 +43,21 @@ export default function GPUItem() {
           <div>
             <div className="grid grid-flow-col gap-6">
               <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Memory</div>
-                <div>Core Clock</div>
+                <div>Series</div>
+                <div>Cores</div>
+                <div>Core clock</div>
                 <div>Boost Clock</div>
-                <div>Color</div>
-                <div>Length</div>
+                <div>Integrated graphics</div>
+                <div>Socket</div>
                 <div>TDP</div>
               </div>
               <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.memory} GB</div>
-                <div>{item.coreClock} MHz</div>
-                <div>{item.boostClock} MHz</div>
-                <div>{item.color}</div>
-                <div>{item.length} mm</div>
+                <div>{item.series}</div>
+                <div>{item.cores} GB</div>
+                <div>{item.pCoreClock} MHz</div>
+                <div>{item.pBoostClock} MHz</div>
+                <div>{item.integratedGraphics}</div>
+                <div>{item.socket}</div>
                 <div>{item.tdp} W</div>
               </div>
             </div>

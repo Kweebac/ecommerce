@@ -2,26 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import URLError from "../../URLError";
 
-type GPUItem = {
+type StorageItem = {
   name: string;
-  chipset: string;
-  memory: number;
-  coreClock: number;
-  boostClock: number;
-  color: string;
-  length: number;
-  tdp: number;
+  type: string;
+  capacity: number;
   price: number;
+  pricePerGb: number;
   url: string;
 };
 
-export default function GPUItem() {
-  const [item, setItem] = useState<GPUItem | null>();
+export default function StorageItem() {
+  const [item, setItem] = useState<StorageItem | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`http://localhost:3000/api/components/gpu/${id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/components/storage/${id}`,
+      );
 
       if (res.status === 404) setItem(null);
       else {
@@ -43,28 +41,21 @@ export default function GPUItem() {
           <div>
             <div className="grid grid-flow-col gap-6">
               <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Memory</div>
-                <div>Core Clock</div>
-                <div>Boost Clock</div>
-                <div>Color</div>
-                <div>Length</div>
-                <div>TDP</div>
+                <div>Type</div>
+                <div>Capacity</div>
               </div>
               <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.memory} GB</div>
-                <div>{item.coreClock} MHz</div>
-                <div>{item.boostClock} MHz</div>
-                <div>{item.color}</div>
-                <div>{item.length} mm</div>
-                <div>{item.tdp} W</div>
+                <div>{item.type}</div>
+                <div>{item.capacity} GB</div>
               </div>
             </div>
           </div>
         </div>
-        <div className="grid w-[12rem] justify-items-center gap-2">
-          <div className="text-3xl">£{item.price}</div>
+        <div className="grid w-[16rem] justify-items-center gap-2">
+          <div className="flex items-center gap-2">
+            <div className="text-3xl">£{item.price}</div>
+            <div className="text-lg">(£{item.pricePerGb} / GB)</div>
+          </div>
           <button className="w-full rounded-md bg-green-3 py-3 text-xl text-white-1">
             Add to Cart
           </button>

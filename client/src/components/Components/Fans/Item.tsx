@@ -2,26 +2,27 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import URLError from "../../URLError";
 
-type GPUItem = {
+type FanItem = {
   name: string;
-  chipset: string;
-  memory: number;
-  coreClock: number;
-  boostClock: number;
+  quantity: number;
+  size: number;
+  rpm: number;
+  airflow: number;
+  noise: number;
   color: string;
-  length: number;
-  tdp: number;
   price: number;
   url: string;
 };
 
-export default function GPUItem() {
-  const [item, setItem] = useState<GPUItem | null>();
+export default function FanItem() {
+  const [item, setItem] = useState<FanItem | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`http://localhost:3000/api/components/gpu/${id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/components/fans/${id}`,
+      );
 
       if (res.status === 404) setItem(null);
       else {
@@ -43,22 +44,20 @@ export default function GPUItem() {
           <div>
             <div className="grid grid-flow-col gap-6">
               <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Memory</div>
-                <div>Core Clock</div>
-                <div>Boost Clock</div>
+                <div>Quantity</div>
+                <div>Size</div>
+                <div>RPM</div>
+                <div>Airflow</div>
+                <div>Noise</div>
                 <div>Color</div>
-                <div>Length</div>
-                <div>TDP</div>
               </div>
               <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.memory} GB</div>
-                <div>{item.coreClock} MHz</div>
-                <div>{item.boostClock} MHz</div>
+                <div>{item.quantity}</div>
+                <div>{item.size} mm</div>
+                <div>{item.rpm} RPM</div>
+                <div>{item.airflow} CFM</div>
+                <div>{item.noise} dB</div>
                 <div>{item.color}</div>
-                <div>{item.length} mm</div>
-                <div>{item.tdp} W</div>
               </div>
             </div>
           </div>
