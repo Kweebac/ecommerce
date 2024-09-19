@@ -6,40 +6,31 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/PSU";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 475,
+    size: 275,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
-  },
-  {
-    accessorKey: "wattage",
-    header: "Wattage",
-    filterFn: "inNumberRange",
-    size: 130,
-    cell: (props) => <p>{props.getValue()} W</p>,
-  },
-  {
-    accessorKey: "rating",
-    header: "Rating",
-    filterFn: "arrIncludesSome",
-    size: 175,
   },
   {
     accessorKey: "price",
@@ -56,31 +47,18 @@ const columns = [
     ),
   },
   {
-    accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
     accessorKey: "_id",
   },
 ];
 
-const checkboxOptions = [
-  ["80+ Titanium", "80+ Platinum", "80+ Gold", "80+ Bronze"],
-  ["Black", "White", "Black & White"],
-];
-
-export default function PSU() {
-  const [psuList, setPsuList] = useState([]);
+export default function OS() {
+  const [osList, setOsList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: psuList,
+    data: osList,
     columns,
     initialState: {
       columnVisibility: {
-        color: false,
         _id: false,
       },
     },
@@ -93,10 +71,10 @@ export default function PSU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/psu");
+      const res = await fetch("http://localhost:3000/api/components/os");
       const data = await res.json();
 
-      setPsuList(data);
+      setOsList(data);
     })();
   }, []);
 
@@ -105,7 +83,6 @@ export default function PSU() {
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
-        checkboxOptions={checkboxOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

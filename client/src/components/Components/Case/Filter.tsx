@@ -1,6 +1,6 @@
-import CheckboxFilter from "./Checkbox";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
@@ -22,49 +22,39 @@ export default function Filter({
 
       <SliderFilter
         id={"price"}
-        min={50}
-        max={710}
-        step={25}
+        units={"£"}
+        min={30}
+        max={370}
+        step={10}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"chipset"}
+        id={"type"}
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"formFactor"}
-        name="FORM FACTOR"
+        id={"motherboardFormFactors"}
+        name="MOTHERBOARD FORM FACTOR"
         options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"cpuSocket"}
-        name="CPU SOCKET"
+        id="color"
         options={checkboxOptions[2]}
         setColumnFilters={setColumnFilters}
       />
 
-      <CheckboxFilter
-        id={"ramDdr"}
-        name="RAM"
-        options={checkboxOptions[3]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
-        id={"wifi"}
-        name="WI-FI"
-        options={checkboxOptions[4]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
-        id={"color"}
-        options={checkboxOptions[5]}
+      <SliderFilter
+        id={"maxGpuLength"}
+        name="MAX GPU LENGTH"
+        units="mm"
+        min={280}
+        max={460}
+        step={10}
         setColumnFilters={setColumnFilters}
       />
     </div>

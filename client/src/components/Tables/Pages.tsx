@@ -1,4 +1,4 @@
-import { LeftArrowIcon, RightArrowIcon } from "../../Icons";
+import { LeftArrowIcon, RightArrowIcon } from "../Icons";
 
 export default function Pages({ table }: { table: any }) {
   if (table.getPageCount() > 1)

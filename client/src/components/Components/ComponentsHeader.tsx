@@ -10,7 +10,7 @@ import {
   PSUIcon,
   RAMIcon,
   StorageIcon,
-} from "./Icons";
+} from "../Icons";
 
 type ListItemProps = {
   icon: JSX.Element;

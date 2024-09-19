@@ -6,17 +6,21 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/RAM";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
@@ -29,36 +33,17 @@ const columns = [
     ),
   },
   {
-    accessorKey: "modules",
-    header: "Modules",
-    filterFn: "arrIncludesSome",
-    size: 130,
-    cell: (props) => <p>{props.getValue()} GB</p>,
-  },
-  {
-    accessorKey: "ddr",
+    accessorKey: "type",
     header: "Type",
     filterFn: "arrIncludesSome",
-    size: 110,
+    size: 175,
   },
   {
-    accessorKey: "ddrSpeed",
-    header: "Speed",
+    accessorKey: "capacity",
+    header: "Capacity",
     filterFn: "inNumberRange",
-    size: 110,
-  },
-  {
-    accessorKey: "fwl",
-    header: "FWL",
-    filterFn: "inNumberRange",
-    size: 100,
-    cell: (props) => <p>{props.getValue()} ns</p>,
-  },
-  {
-    accessorKey: "cl",
-    header: "CL",
-    filterFn: "inNumberRange",
-    size: 85,
+    size: 130,
+    cell: (props) => <p>{props.getValue()} GB</p>,
   },
   {
     accessorKey: "price",
@@ -82,32 +67,20 @@ const columns = [
     ),
   },
   {
-    accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
     accessorKey: "_id",
   },
 ];
 
-const checkboxOptions = [
-  ["2 x 8", "2 x 16", "2 x 32"],
-  ["DDR4", "DDR5"],
-  ["Black", "White", "Black & White", "Colorful"],
-];
+const checkboxOptions = [["SSD", "HDD 7200 RPM", "HDD 5400 RPM"]];
 
-export default function RAM() {
-  const [ramList, setRamList] = useState([]);
+export default function Storage() {
+  const [storageList, setStorageList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: ramList,
+    data: storageList,
     columns,
     initialState: {
       columnVisibility: {
-        color: false,
         _id: false,
       },
     },
@@ -120,10 +93,10 @@ export default function RAM() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/ram");
+      const res = await fetch("http://localhost:3000/api/components/storage");
       const data = await res.json();
 
-      setRamList(data);
+      setStorageList(data);
     })();
   }, []);
 

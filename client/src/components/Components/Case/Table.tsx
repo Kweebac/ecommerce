@@ -7,17 +7,21 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/Motherboard";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
@@ -30,45 +34,13 @@ const columns = [
     ),
   },
   {
-    accessorKey: "chipset",
-    header: "Chipset",
+    accessorKey: "type",
+    header: "Type",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 165,
-  },
-  {
-    accessorKey: "formFactor",
-    header: "Form factor",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "cpuSocket",
-    header: "CPU Socket",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "ram.ddr",
-    id: "ramDdr",
-    header: "RAM",
-    filterFn: "arrIncludesSome",
-    size: 100,
-  },
-  {
-    accessorKey: "wifi",
-    header: "Wi-Fi",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 130,
+    size: 250,
   },
   {
     accessorKey: "price",
@@ -85,11 +57,15 @@ const columns = [
     ),
   },
   {
+    accessorKey: "motherboardFormFactors",
+    filterFn: "arrIncludesSome",
+  },
+  {
+    accessorKey: "maxGpuLength",
+  },
+  {
     accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "_id",
@@ -98,31 +74,26 @@ const columns = [
 
 const checkboxOptions = [
   [
-    "Intel Z790",
-    "Intel Z690",
-    "Intel B760",
-    "Intel B660",
-    "AMD X670",
-    "AMD B650",
-    "AMD B550",
+    "ATX Full Tower",
+    "ATX Mid Tower",
+    "MicroATX Mid Tower",
+    "MicroATX Mini Tower",
   ],
   ["ATX", "Micro ATX", "Mini ITX", "EATX"],
-  ["AM5", "AM4", "LGA1700"],
-  ["DDR5", "DDR4"],
-  ["Wi-Fi 7", "Wi-Fi 6E", "Wi-Fi 6", "Wi-Fi 5", "None"],
-  ["Black", "Silver", "Black & Silver", "Colorful"],
+  ["Black", "White"],
 ];
 
-export default function Motherboard() {
-  const [motherboardList, setMotherboardList] = useState([]);
+export default function Case() {
+  const [caseList, setCaseList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: motherboardList,
+    data: caseList,
     columns,
     initialState: {
       columnVisibility: {
+        maxGpuLength: false,
+        motherboardFormFactors: false,
         color: false,
-        ramSlots: false,
         _id: false,
       },
     },
@@ -135,12 +106,10 @@ export default function Motherboard() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
-      );
+      const res = await fetch("http://localhost:3000/api/components/case");
       const data = await res.json();
 
-      setMotherboardList(data);
+      setCaseList(data);
     })();
   }, []);
 

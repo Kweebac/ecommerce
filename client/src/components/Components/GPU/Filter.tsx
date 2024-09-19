@@ -1,19 +1,16 @@
-import CheckboxFilter from "./Checkbox";
-import RadioFilter from "./Radio";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
-  radioOptions: string[][];
   checkboxOptions: string[][];
 };
 
 export default function Filter({
   columnFilters,
   setColumnFilters,
-  radioOptions = [],
   checkboxOptions = [],
 }: FilterProps) {
   return (
@@ -25,58 +22,59 @@ export default function Filter({
 
       <SliderFilter
         id={"price"}
-        units="£"
-        min={50}
-        max={700}
+        units={"£"}
+        min={250}
+        max={2500}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"series"}
+        id={"chipset"}
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
-        id={"cores"}
-        min={4}
+        id={"memory"}
+        name={"MEMORY"}
+        units="GB"
+        min={8}
         max={24}
-        step={2}
+        step={4}
         setColumnFilters={setColumnFilters}
         minStepsBetweenThumbs={0}
       />
 
       <SliderFilter
-        id={"pCoreClock"}
+        id={"coreClock"}
         name={"CORE CLOCK"}
-        units="GHz"
-        min={3}
-        max={4.7}
-        step={0.1}
+        units="MHz"
+        min={1700}
+        max={2550}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
-        id={"pBoostClock"}
+        id={"boostClock"}
         name={"BOOST CLOCK"}
-        units="GHz"
-        min={3.6}
-        max={6}
-        step={0.1}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <RadioFilter
-        id="integratedGraphics"
-        name="INTEGRATED GRAPHICS"
-        options={radioOptions[0]}
+        units="MHz"
+        min={2430}
+        max={2830}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id="socket"
-        name="SOCKET"
+        id="color"
         options={checkboxOptions[1]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <SliderFilter
+        id={"length"}
+        units="mm"
+        min={163}
+        max={358}
+        step={10}
         setColumnFilters={setColumnFilters}
       />
     </div>

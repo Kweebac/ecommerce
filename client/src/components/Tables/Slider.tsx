@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Slider } from "../../../shadcn";
+import { Slider } from "../shadcn";
 
 type SliderFilterProps = {
   min: number;

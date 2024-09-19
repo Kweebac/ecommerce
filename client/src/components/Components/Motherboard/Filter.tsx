@@ -1,20 +1,17 @@
-import CheckboxFilter from "./Checkbox";
-import RadioFilter from "./Radio";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
   checkboxOptions: string[][];
-  radioOptions: string[][];
 };
 
 export default function Filter({
   columnFilters,
   setColumnFilters,
   checkboxOptions = [],
-  radioOptions = [],
 }: FilterProps) {
   return (
     <div className="grid w-[--filter-width] gap-4">
@@ -25,39 +22,49 @@ export default function Filter({
 
       <SliderFilter
         id={"price"}
-        units={"£"}
-        min={10}
-        max={340}
-        step={10}
+        min={50}
+        max={710}
+        step={25}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"cpuSockets"}
-        name="CPU SOCKET"
+        id={"chipset"}
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id="color"
+        id={"formFactor"}
+        name="FORM FACTOR"
         options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}
       />
 
-      <RadioFilter
-        id="waterCooled"
-        name="WATER COOLED"
-        options={radioOptions[0]}
+      <CheckboxFilter
+        id={"cpuSocket"}
+        name="CPU SOCKET"
+        options={checkboxOptions[2]}
         setColumnFilters={setColumnFilters}
       />
 
-      <SliderFilter
-        id={"height"}
-        units="mm"
-        min={45}
-        max={170}
-        step={5}
+      <CheckboxFilter
+        id={"ramDdr"}
+        name="RAM"
+        options={checkboxOptions[3]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id={"wifi"}
+        name="WI-FI"
+        options={checkboxOptions[4]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id={"color"}
+        options={checkboxOptions[5]}
         setColumnFilters={setColumnFilters}
       />
     </div>

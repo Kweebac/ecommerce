@@ -1,4 +1,4 @@
-import { DownArrowIcon, DefaultSortIcon, UpArrowIcon } from "../../Icons";
+import { DownArrowIcon, DefaultSortIcon, UpArrowIcon } from "../Icons";
 
 type SortProps = {
   header: {

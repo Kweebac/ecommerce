@@ -6,50 +6,76 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/CPUCooler";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 475,
+    size: 425,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
   },
   {
-    accessorKey: "rpm",
-    header: "RPM",
-    size: 200,
-    cell: (props) => <p>{props.getValue()} RPM</p>,
+    accessorKey: "modules",
+    header: "Modules",
+    filterFn: "arrIncludesSome",
+    size: 130,
+    cell: (props) => <p>{props.getValue()} GB</p>,
   },
   {
-    accessorKey: "noise",
-    header: "Noise",
-    size: 175,
-    cell: (props) => <p>{props.getValue()} dB</p>,
+    accessorKey: "ddr",
+    header: "Type",
+    filterFn: "arrIncludesSome",
+    size: 110,
   },
   {
-    accessorKey: "waterCooled",
-    header: "Water cooled",
-    size: 190,
+    accessorKey: "ddrSpeed",
+    header: "Speed",
+    filterFn: "inNumberRange",
+    size: 110,
+  },
+  {
+    accessorKey: "fwl",
+    header: "FWL",
+    filterFn: "inNumberRange",
+    size: 100,
+    cell: (props) => <p>{props.getValue()} ns</p>,
+  },
+  {
+    accessorKey: "cl",
+    header: "CL",
+    filterFn: "inNumberRange",
+    size: 85,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 110,
+    cell: (props) => <p>£{props.getValue()}</p>,
+  },
+  {
+    accessorKey: "pricePerGb",
+    header: "Price / GB",
+    filterFn: "inNumberRange",
+    size: 115,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -60,15 +86,11 @@ const columns = [
     ),
   },
   {
-    accessorKey: "cpuSockets",
-    filterFn: "arrIncludesSome",
-  },
-  {
-    accessorKey: "height",
-  },
-  {
     accessorKey: "color",
-    filterFn: "arrIncludesSome",
+    filterFn: (row: Row, columnId: string, filterValue: any) => {
+      const value = row.getValue(columnId);
+      return filterValue.includes(value);
+    },
   },
   {
     accessorKey: "_id",
@@ -76,22 +98,19 @@ const columns = [
 ];
 
 const checkboxOptions = [
-  ["AM5", "AM4", "LGA1700"],
-  ["Black", "White"],
+  ["2 x 8", "2 x 16", "2 x 32"],
+  ["DDR4", "DDR5"],
+  ["Black", "White", "Black & White", "Colorful"],
 ];
 
-const radioOptions = [["Yes", "None"]];
-
-export default function CPUCooler() {
-  const [cpuCoolerList, setCpuCoolerList] = useState([]);
+export default function RAM() {
+  const [ramList, setRamList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: cpuCoolerList,
+    data: ramList,
     columns,
     initialState: {
       columnVisibility: {
-        height: false,
-        cpuSockets: false,
         color: false,
         _id: false,
       },
@@ -105,12 +124,10 @@ export default function CPUCooler() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/cpu-cooler",
-      );
+      const res = await fetch("http://localhost:3000/api/components/ram");
       const data = await res.json();
 
-      setCpuCoolerList(data);
+      setRamList(data);
     })();
   }, []);
 
@@ -120,7 +137,6 @@ export default function CPUCooler() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
-        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

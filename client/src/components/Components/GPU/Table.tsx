@@ -3,36 +3,69 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/OS";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 275,
+    size: 375,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
   },
   {
+    accessorKey: "chipset",
+    header: "Chipset",
+    filterFn: (row: Row, columnId: string, filterValue: any) => {
+      const value = row.getValue(columnId);
+      return filterValue.includes(value);
+    },
+    size: 300,
+  },
+  {
+    accessorKey: "memory",
+    header: "Memory",
+    filterFn: "inNumberRange",
+    size: 135,
+    cell: (props) => <p>{props.getValue()} GB</p>,
+  },
+  {
+    accessorKey: "coreClock",
+    header: "Core clock",
+    filterFn: "inNumberRange",
+    cell: (props) => <p>{props.getValue()} MHz</p>,
+  },
+  {
+    accessorKey: "boostClock",
+    header: "Boost clock",
+    filterFn: "inNumberRange",
+    cell: (props) => <p>{props.getValue()} MHz</p>,
+  },
+  {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 125,
+    size: 130,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -43,18 +76,43 @@ const columns = [
     ),
   },
   {
+    accessorKey: "length",
+  },
+  {
+    accessorKey: "color",
+    filterFn: "arrIncludesSome",
+  },
+  {
     accessorKey: "_id",
   },
 ];
 
-export default function OS() {
-  const [osList, setOsList] = useState([]);
+const checkboxOptions = [
+  [
+    "GeForce RTX 4090",
+    "GeForce RTX 4080",
+    "GeForce RTX 4070 Ti",
+    "GeForce RTX 4070",
+    "GeForce RTX 4060 Ti",
+    "GeForce RTX 4060",
+    "Radeon RX 7900 XT",
+    "Radeon RX 7800 XT",
+    "Radeon RX 7700 XT",
+    "Radeon RX 7600 XT",
+  ],
+  ["Black", "White"],
+];
+
+export default function GPU() {
+  const [gpuList, setGpuList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: osList,
+    data: gpuList,
     columns,
     initialState: {
       columnVisibility: {
+        length: false,
+        color: false,
         _id: false,
       },
     },
@@ -67,10 +125,10 @@ export default function OS() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/os");
+      const res = await fetch("http://localhost:3000/api/components/gpu");
       const data = await res.json();
 
-      setOsList(data);
+      setGpuList(data);
     })();
   }, []);
 
@@ -79,6 +137,7 @@ export default function OS() {
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
+        checkboxOptions={checkboxOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

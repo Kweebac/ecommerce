@@ -1,6 +1,6 @@
-import CheckboxFilter from "./Checkbox";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];

@@ -1,6 +1,6 @@
-import CheckboxFilter from "./Checkbox";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
@@ -21,40 +21,36 @@ export default function Filter({
       />
 
       <SliderFilter
-        id={"pricePerGb"}
-        name="PRICE / GB"
-        units={"£"}
-        min={0.01}
-        max={0.4}
-        step={0.01}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <SliderFilter
         id={"price"}
         units={"£"}
-        min={20}
-        max={420}
+        min={0}
+        max={170}
         step={10}
         setColumnFilters={setColumnFilters}
       />
 
-      <CheckboxFilter
-        id="type"
-        name="TYPE"
-        options={checkboxOptions[0]}
+      <SliderFilter
+        id={"size"}
+        units="mm"
+        min={80}
+        max={140}
+        step={2}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
-        id={"capacity"}
-        name="CAPACITY"
-        units={"GB"}
-        min={128}
-        max={8192}
-        step={128}
+        id={"quantity"}
+        min={1}
+        max={3}
+        step={1}
         setColumnFilters={setColumnFilters}
         minStepsBetweenThumbs={0}
+      />
+
+      <CheckboxFilter
+        id="color"
+        options={checkboxOptions[0]}
+        setColumnFilters={setColumnFilters}
       />
     </div>
   );

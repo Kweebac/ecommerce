@@ -3,64 +3,53 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
-import Filter from "./Blocks/Filter/CPU";
-import Pages from "./Blocks/Pages";
-import Rows from "./Blocks/Rows";
-import Headers from "./Blocks/Headers";
+import Filter from "./Filter";
+import Pages from "../../Tables/Pages";
+import Rows from "../../Tables/Rows";
+import Headers from "../../Tables/Headers";
 
 const columns = [
   {
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="CPU" className="h-12 w-12 cursor-pointer" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
+    size: 475,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
   },
   {
-    accessorKey: "series",
-    header: "Series",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 300,
+    accessorKey: "wattage",
+    header: "Wattage",
+    filterFn: "inNumberRange",
+    size: 130,
+    cell: (props) => <p>{props.getValue()} W</p>,
   },
   {
-    accessorKey: "cores",
-    header: "Cores",
-    filterFn: "inNumberRange",
-    size: 135,
-  },
-  {
-    accessorKey: "pCoreClock",
-    header: "Core clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} GHz</p>,
-  },
-  {
-    accessorKey: "pBoostClock",
-    header: "Boost clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} GHz</p>,
+    accessorKey: "rating",
+    header: "Rating",
+    filterFn: "arrIncludesSome",
+    size: 175,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 125,
     cell: (props) => (
       <div className="flex items-center justify-between gap-3">
         <p>£{props.getValue()}</p>
@@ -71,10 +60,7 @@ const columns = [
     ),
   },
   {
-    accessorKey: "integratedGraphics",
-  },
-  {
-    accessorKey: "socket",
+    accessorKey: "color",
     filterFn: (row: Row, columnId: string, filterValue: any) => {
       const value = row.getValue(columnId);
       return filterValue.includes(value);
@@ -86,27 +72,19 @@ const columns = [
 ];
 
 const checkboxOptions = [
-  [
-    "AMD Ryzen 9",
-    "AMD Ryzen 7",
-    "Intel Core i9",
-    "Intel Core i7",
-    "Intel Core i5",
-  ],
-  ["AM5", "AM4", "LGA1700"],
+  ["80+ Titanium", "80+ Platinum", "80+ Gold", "80+ Bronze"],
+  ["Black", "White", "Black & White"],
 ];
-const radioOptions = [["Yes", "None"]];
 
-export default function CPU() {
-  const [cpuList, setCpuList] = useState([]);
+export default function PSU() {
+  const [psuList, setPsuList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: cpuList,
+    data: psuList,
     columns,
     initialState: {
       columnVisibility: {
-        integratedGraphics: false,
-        socket: false,
+        color: false,
         _id: false,
       },
     },
@@ -119,10 +97,10 @@ export default function CPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/cpu");
+      const res = await fetch("http://localhost:3000/api/components/psu");
       const data = await res.json();
 
-      setCpuList(data);
+      setPsuList(data);
     })();
   }, []);
 
@@ -132,7 +110,6 @@ export default function CPU() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
-        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

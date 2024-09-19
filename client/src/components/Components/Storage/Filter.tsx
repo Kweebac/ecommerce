@@ -1,6 +1,6 @@
-import CheckboxFilter from "./Checkbox";
-import SearchFilter from "./Search";
-import SliderFilter from "./Slider";
+import CheckboxFilter from "../../Tables/Checkbox";
+import SearchFilter from "../../Tables/Search";
+import SliderFilter from "../../Tables/Slider";
 
 type FilterProps = {
   columnFilters: [{ id: string; value: string }];
@@ -21,41 +21,40 @@ export default function Filter({
       />
 
       <SliderFilter
-        id={"price"}
+        id={"pricePerGb"}
+        name="PRICE / GB"
         units={"£"}
-        min={30}
-        max={370}
-        step={10}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
-        id={"type"}
-        options={checkboxOptions[0]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
-        id={"motherboardFormFactors"}
-        name="MOTHERBOARD FORM FACTOR"
-        options={checkboxOptions[1]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
-        id="color"
-        options={checkboxOptions[2]}
+        min={0.01}
+        max={0.4}
+        step={0.01}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
-        id={"maxGpuLength"}
-        name="MAX GPU LENGTH"
-        units="mm"
-        min={280}
-        max={460}
+        id={"price"}
+        units={"£"}
+        min={20}
+        max={420}
         step={10}
         setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id="type"
+        name="TYPE"
+        options={checkboxOptions[0]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <SliderFilter
+        id={"capacity"}
+        name="CAPACITY"
+        units={"GB"}
+        min={128}
+        max={8192}
+        step={128}
+        setColumnFilters={setColumnFilters}
+        minStepsBetweenThumbs={0}
       />
     </div>
   );
