@@ -18,6 +18,7 @@ import OS from "./components/Tables/OS";
 import Case from "./components/Tables/Case";
 import CPUCooler from "./components/Tables/CPUCooler";
 import Fans from "./components/Tables/Fans";
+import Item from "./components/Tables/Blocks/Item";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="case" element={<Case />} />
             <Route path="cpu-cooler" element={<CPUCooler />} />
             <Route path="fans" element={<Fans />} />
+            <Route path=":name/:id" element={<Item />} />
             <Route path="*" element={<URLError link="/components" />} />
           </Route>
 

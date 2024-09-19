@@ -16,7 +16,11 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
+      <img
+        src={props.getValue()}
+        alt="GPU"
+        className="h-12 w-12 cursor-pointer"
+      />
     ),
     enableSorting: false,
   },
@@ -24,6 +28,9 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 425,
+    cell: (props) => (
+      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
+    ),
   },
   {
     accessorKey: "type",
@@ -59,6 +66,9 @@ const columns = [
       </div>
     ),
   },
+  {
+    accessorKey: "_id",
+  },
 ];
 
 const checkboxOptions = [["SSD", "HDD 7200 RPM", "HDD 5400 RPM"]];
@@ -69,6 +79,11 @@ export default function Storage() {
   const table = useReactTable({
     data: storageList,
     columns,
+    initialState: {
+      columnVisibility: {
+        _id: false,
+      },
+    },
     state: { columnFilters },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

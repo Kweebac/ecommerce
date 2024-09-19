@@ -16,7 +16,7 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
     ),
     enableSorting: false,
   },
@@ -24,6 +24,9 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 275,
+    cell: (props) => (
+      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
+    ),
   },
   {
     accessorKey: "price",
@@ -39,6 +42,9 @@ const columns = [
       </div>
     ),
   },
+  {
+    accessorKey: "_id",
+  },
 ];
 
 export default function OS() {
@@ -49,7 +55,7 @@ export default function OS() {
     columns,
     initialState: {
       columnVisibility: {
-        color: false,
+        _id: false,
       },
     },
     state: { columnFilters },

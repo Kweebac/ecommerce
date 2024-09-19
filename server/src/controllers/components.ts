@@ -1,9 +1,31 @@
 import { RequestHandler } from "express";
-import { CPU, GPU, Motherboard, RAM, Storage, PSU, Case, CPUCooler, Fans, OS } from "../models/Components";
+import {
+  CPU,
+  GPU,
+  Motherboard,
+  RAM,
+  Storage,
+  PSU,
+  Case,
+  CPUCooler,
+  Fans,
+  OS,
+} from "../models/Components";
+import mongoose from "mongoose";
 
 const getGpuList: RequestHandler = async (req, res) => {
   const gpuList = await GPU.find();
   res.json(gpuList);
+};
+
+const getGpuItem: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.isValidObjectId(id)) res.sendStatus(404);
+  else {
+    const gpuItem = await GPU.findById(id);
+    res.json(gpuItem);
+  }
 };
 
 const getCpuList: RequestHandler = async (req, res) => {
@@ -51,4 +73,16 @@ const getOsList: RequestHandler = async (req, res) => {
   res.json(osList);
 };
 
-export { getGpuList, getCpuList, getMotherboardList, getRamList, getStorageList, getPsuList, getCaseList, getCpuCoolerList, getFansList, getOsList };
+export {
+  getGpuList,
+  getGpuItem,
+  getCpuList,
+  getMotherboardList,
+  getRamList,
+  getStorageList,
+  getPsuList,
+  getCaseList,
+  getCpuCoolerList,
+  getFansList,
+  getOsList,
+};

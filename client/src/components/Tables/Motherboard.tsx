@@ -17,7 +17,7 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
     ),
     enableSorting: false,
   },
@@ -25,6 +25,9 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 400,
+    cell: (props) => (
+      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
+    ),
   },
   {
     accessorKey: "chipset",
@@ -88,6 +91,9 @@ const columns = [
       return filterValue.includes(value);
     },
   },
+  {
+    accessorKey: "_id",
+  },
 ];
 
 const checkboxOptions = [
@@ -96,7 +102,6 @@ const checkboxOptions = [
     "Intel Z690",
     "Intel B760",
     "Intel B660",
-    "Intel H610",
     "AMD X670",
     "AMD B650",
     "AMD B550",
@@ -118,6 +123,7 @@ export default function Motherboard() {
       columnVisibility: {
         color: false,
         ramSlots: false,
+        _id: false,
       },
     },
     state: { columnFilters },

@@ -16,7 +16,7 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="GPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="GPU" className="h-12 w-12 cursor-pointer" />
     ),
     enableSorting: false,
   },
@@ -24,6 +24,9 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 475,
+    cell: (props) => (
+      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
+    ),
   },
   {
     accessorKey: "rpm",
@@ -67,6 +70,9 @@ const columns = [
     accessorKey: "color",
     filterFn: "arrIncludesSome",
   },
+  {
+    accessorKey: "_id",
+  },
 ];
 
 const checkboxOptions = [
@@ -87,6 +93,7 @@ export default function CPUCooler() {
         height: false,
         cpuSockets: false,
         color: false,
+        _id: false,
       },
     },
     state: { columnFilters },

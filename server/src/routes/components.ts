@@ -10,11 +10,13 @@ import {
   getCpuCoolerList,
   getFansList,
   getOsList,
+  getGpuItem,
 } from "../controllers/components";
 
 const router = express.Router();
 
 router.get("/gpu", getGpuList);
+router.get("/gpu/:id", getGpuItem);
 router.get("/cpu", getCpuList);
 router.get("/motherboard", getMotherboardList);
 router.get("/ram", getRamList);

@@ -17,7 +17,7 @@ const columns = [
     accessorKey: "url",
     size: 60,
     cell: (props) => (
-      <img src={props.getValue()} alt="CPU" className="h-12 w-12" />
+      <img src={props.getValue()} alt="CPU" className="h-12 w-12 cursor-pointer" />
     ),
     enableSorting: false,
   },
@@ -25,6 +25,9 @@ const columns = [
     accessorKey: "name",
     header: "Name",
     size: 375,
+    cell: (props) => (
+      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
+    ),
   },
   {
     accessorKey: "series",
@@ -77,6 +80,9 @@ const columns = [
       return filterValue.includes(value);
     },
   },
+  {
+    accessorKey: "_id",
+  },
 ];
 
 const checkboxOptions = [
@@ -101,6 +107,7 @@ export default function CPU() {
       columnVisibility: {
         integratedGraphics: false,
         socket: false,
+        _id: false,
       },
     },
     state: { columnFilters },
