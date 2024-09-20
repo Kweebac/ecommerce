@@ -28,7 +28,7 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 375,
+    size: 300,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
@@ -40,7 +40,7 @@ const columns = [
       const value = row.getValue(columnId);
       return filterValue.includes(value);
     },
-    size: 300,
+    size: 200,
   },
   {
     accessorKey: "cores",

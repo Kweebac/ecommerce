@@ -1,112 +1,53 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import URLError from "../../URLError";
+import { useGetItem } from "../../../../src/utils";
+import { MotherboardValues } from "@/src/types/Components";
+import Item, { InfoItem } from "../../Tables/Item";
 
-type MotherboardItem = {
+type DDRSpeedsProps = {
   name: string;
-  chipset: string;
-  formFactor: string;
-  cpuSocket: string;
-  ram: {
-    ddr: string;
-    slots: number;
-    ddrSpeeds: number[];
-  };
-  m2Mkey: number;
-  pcie: {
-    x16: number;
-    x8: number;
-    x4: number;
-    x1: number;
-  };
-  wifi: string;
-  color: string;
-  price: number;
-  url: string;
+  value: number[];
+  styles: string;
 };
 
-function DDRSpeeds({ speeds }: { speeds: number[] }) {
-  const middle = Math.ceil(speeds.length / 2);
-  const speedsFirstHalf = speeds.slice(0, middle).join(", ");
-  const speedsSecondHalf = speeds.slice(middle).join(", ");
+export function DDRSpeeds({ name, value, styles }: DDRSpeedsProps) {
+  const middle = Math.ceil(value.length / 2);
+  const speedsFirstHalf = value.slice(0, middle).join(", ");
+  const speedsSecondHalf = value.slice(middle).join(", ");
 
   return (
-    <div>
-      <div>{speedsFirstHalf}</div>
-      <div>{speedsSecondHalf}</div>
+    <div className="flex border-t border-t-gray-300 py-1.5">
+      <span className={styles}>{name}</span>
+      <div>
+        <div>{speedsFirstHalf}</div>
+        <div>{speedsSecondHalf}</div>
+      </div>
     </div>
   );
 }
 
 export default function MotherboardItem() {
-  const [item, setItem] = useState<MotherboardItem | null>();
-  const { id } = useParams();
+  const item: MotherboardValues | null | undefined = useGetItem("motherboard");
+  const styles = "w-48";
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(
-        `http://localhost:3000/api/components/motherboard/${id}`,
-      );
-
-      if (res.status === 404) setItem(null);
-      else {
-        const data = await res.json();
-        setItem(data);
-      }
-    })();
-  }, [id]);
-
-  if (item === null) return <URLError />;
-  else if (item !== undefined)
+  if (item)
     return (
-      <div className="mt-12 grid content-start justify-items-center">
-        <div className="text-4xl">{item.name}</div>
-        <div className="my-8 grid grid-flow-col content-start justify-center gap-12">
-          <div>
-            <img src={item.url} alt="GPU" className="h-[12rem] w-[12rem]" />
-          </div>
-          <div>
-            <div className="grid grid-flow-col gap-6">
-              <div className="grid content-start gap-0.5">
-                <div>Chipset</div>
-                <div>Form factor</div>
-                <div>CPU Socket</div>
-                <div>RAM</div>
-                <div>RAM slots</div>
-                <div>RAM speeds</div>
-                <br></br>
-                <div>M.2 M-key slots</div>
-                <div>PCIe 16x slots</div>
-                <div>PCIe 8x slots</div>
-                <div>PCIe 4x slots</div>
-                <div>PCIe 1x slots</div>
-                <div>Wi-Fi</div>
-                <div>Color</div>
-              </div>
-              <div className="grid content-start gap-0.5">
-                <div>{item.chipset}</div>
-                <div>{item.formFactor}</div>
-                <div>{item.cpuSocket}</div>
-                <div>{item.ram.ddr}</div>
-                <div>{item.ram.slots}</div>
-                <DDRSpeeds speeds={item.ram.ddrSpeeds} />
-                <div>{item.m2Mkey}</div>
-                <div>{item.pcie.x16}</div>
-                <div>{item.pcie.x8}</div>
-                <div>{item.pcie.x4}</div>
-                <div>{item.pcie.x1}</div>
-                <div>{item.wifi}</div>
-                <div>{item.color}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="grid w-[12rem] justify-items-center gap-2">
-          <div className="text-3xl">£{item.price}</div>
-          <button className="w-full rounded-md bg-green-3 py-3 text-xl text-white-1">
-            Add to Cart
-          </button>
-        </div>
-      </div>
+      <Item item={item}>
+        <InfoItem name="Chipset" value={item.chipset} styles={styles} />
+        <InfoItem name="Form factor" value={item.formFactor} styles={styles} />
+        <InfoItem name="CPU socket" value={item.cpuSocket} styles={styles} />
+        <InfoItem name="RAM" value={item.ram.ddr} styles={styles} />
+        <InfoItem name="RAM slots" value={item.ram.slots} styles={styles} />
+        <DDRSpeeds
+          name="RAM speeds"
+          value={item.ram.ddrSpeeds}
+          styles={styles}
+        />
+        <InfoItem name="M.2 M-key slots" value={item.m2Mkey} styles={styles} />
+        <InfoItem name="PCIe 16x slots" value={item.pcie.x16} styles={styles} />
+        <InfoItem name="PCIe 8x slots" value={item.pcie.x8} styles={styles} />
+        <InfoItem name="PCIe 4x slots" value={item.pcie.x4} styles={styles} />
+        <InfoItem name="PCIe 1x slots" value={item.pcie.x1} styles={styles} />
+        <InfoItem name="Wi-Fi" value={item.wifi} styles={styles} />
+        <InfoItem name="Color" value={item.color} styles={styles} />
+      </Item>
     );
 }

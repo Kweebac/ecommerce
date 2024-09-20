@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ComponentValues } from "./types/Components";
+
 export async function handleSetUser(
   setUser: React.Dispatch<React.SetStateAction<object | null>>,
   abortController?: AbortController,
@@ -13,4 +17,25 @@ export async function handleSetUser(
     const user = await res.json();
     setUser(user);
   }
+}
+
+export function useGetItem(componentType: string) {
+  const [item, setItem] = useState<ComponentValues | null>();
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        `http://localhost:3000/api/components/${componentType}/${id}`,
+      );
+
+      if (res.status === 404) setItem(null);
+      else {
+        const data = await res.json();
+        setItem(data);
+      }
+    })();
+  }, [id]);
+
+  return item;
 }
