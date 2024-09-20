@@ -37,8 +37,17 @@ export const UserContext = createContext<{
   setUser: () => {},
 });
 
+export const CartContext = createContext<{
+  cart: Array | null;
+  setCart: React.Dispatch<React.SetStateAction<Array | null>>;
+}>({
+  cart: [],
+  setCart: () => {},
+});
+
 export default function App() {
   const [user, setUser] = useState<object | null>(null);
+  const [cart, setCart] = useState<Array | null>([]);
   const isLoggedIn = user !== null;
 
   useEffect(() => {
@@ -59,57 +68,59 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <Routes>
-        <Route element={<Header />}>
-          <Route index element={<Home />} />
-          <Route path="components" element={<ComponentsHeader />}>
-            <Route index element={<Navigate to="gpu" />} />
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Routes>
+          <Route element={<Header />}>
+            <Route index element={<Home />} />
+            <Route path="components" element={<ComponentsHeader />}>
+              <Route index element={<Navigate to="gpu" />} />
 
-            <Route path="gpu" element={<GPU />} />
-            <Route path="gpu/:id" element={<GPUItem />} />
+              <Route path="gpu" element={<GPU />} />
+              <Route path="gpu/:id" element={<GPUItem />} />
 
-            <Route path="cpu" element={<CPU />} />
-            <Route path="cpu/:id" element={<CPUItem />} />
+              <Route path="cpu" element={<CPU />} />
+              <Route path="cpu/:id" element={<CPUItem />} />
 
-            <Route path="motherboard" element={<Motherboard />} />
-            <Route path="motherboard/:id" element={<MotherboardItem />} />
+              <Route path="motherboard" element={<Motherboard />} />
+              <Route path="motherboard/:id" element={<MotherboardItem />} />
 
-            <Route path="ram" element={<RAM />} />
-            <Route path="ram/:id" element={<RAMItem />} />
+              <Route path="ram" element={<RAM />} />
+              <Route path="ram/:id" element={<RAMItem />} />
 
-            <Route path="storage" element={<Storage />} />
-            <Route path="storage/:id" element={<StorageItem />} />
+              <Route path="storage" element={<Storage />} />
+              <Route path="storage/:id" element={<StorageItem />} />
 
-            <Route path="psu" element={<PSU />} />
-            <Route path="psu/:id" element={<PSUItem />} />
+              <Route path="psu" element={<PSU />} />
+              <Route path="psu/:id" element={<PSUItem />} />
 
-            <Route path="case" element={<Case />} />
-            <Route path="case/:id" element={<CaseItem />} />
+              <Route path="case" element={<Case />} />
+              <Route path="case/:id" element={<CaseItem />} />
 
-            <Route path="cpu-cooler" element={<CPUCooler />} />
-            <Route path="cpu-cooler/:id" element={<CPUCoolerItem />} />
+              <Route path="cpu-cooler" element={<CPUCooler />} />
+              <Route path="cpu-cooler/:id" element={<CPUCoolerItem />} />
 
-            <Route path="fans" element={<Fans />} />
-            <Route path="fans/:id" element={<FanItem />} />
+              <Route path="fans" element={<Fans />} />
+              <Route path="fans/:id" element={<FanItem />} />
 
-            <Route path="os" element={<OS />} />
-            <Route path="os/:id" element={<OSItem />} />
+              <Route path="os" element={<OS />} />
+              <Route path="os/:id" element={<OSItem />} />
 
-            <Route path="*" element={<URLError link="/components" />} />
+              <Route path="*" element={<URLError link="/components" />} />
+            </Route>
+
+            {isLoggedIn ? (
+              <Route path="/logout" element={<Logout />} />
+            ) : (
+              <>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </>
+            )}
+
+            <Route path="*" element={<URLError />} />
           </Route>
-
-          {isLoggedIn ? (
-            <Route path="/logout" element={<Logout />} />
-          ) : (
-            <>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </>
-          )}
-
-          <Route path="*" element={<URLError />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </CartContext.Provider>
     </UserContext.Provider>
   );
 }

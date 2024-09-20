@@ -20,8 +20,7 @@ input[type="radio"] {
     --page-margin: 90vw;
     --filter-width: 16rem;
 
-    @apply box-border  font-fraunces text-[#171516];
-    scrollbar-gutter: stable;
+    @apply box-border font-fraunces text-[#171516];
 
     /* shadcn */
     --background: 0 0% 100%;

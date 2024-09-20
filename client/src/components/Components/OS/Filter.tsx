@@ -1,4 +1,3 @@
-import CheckboxFilter from "../../Tables/Checkbox";
 import SearchFilter from "../../Tables/Search";
 import SliderFilter from "../../Tables/Slider";
 
@@ -11,7 +10,6 @@ type FilterProps = {
 export default function Filter({
   columnFilters,
   setColumnFilters,
-  checkboxOptions = [],
 }: FilterProps) {
   return (
     <div className="grid w-[--filter-width] gap-4">

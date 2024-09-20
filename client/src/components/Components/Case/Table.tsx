@@ -11,6 +11,7 @@ import Filter from "./Filter";
 import Pages from "../../Tables/Pages";
 import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
+import { SmallButton } from "../../Buttons";
 
 const columns = [
   {
@@ -47,14 +48,16 @@ const columns = [
     header: "Price",
     filterFn: "inNumberRange",
     size: 120,
-    cell: (props) => (
-      <div className="flex items-center justify-between gap-3">
-        <p>£{props.getValue()}</p>
-        <button className="rounded-md bg-green-3 px-2 py-1 text-white-1">
-          Add
-        </button>
-      </div>
-    ),
+    cell: (props) => {
+      const cellValues = props.row.getAllCells();
+
+      return (
+        <div className="flex items-center justify-between gap-3">
+          <p>£{props.getValue()}</p>
+          <SmallButton id={cellValues[cellValues.length - 1].getValue()} />
+        </div>
+      );
+    },
   },
   {
     accessorKey: "motherboardFormFactors",

@@ -1,5 +1,6 @@
 import { ComponentValues } from "@/src/types/Components";
 import URLError from "../URLError";
+import Button from "../Buttons";
 
 type InfoItemProps = {
   name: string;
@@ -56,10 +57,8 @@ export default function Item({ item, options, children }: ItemProps) {
               <div>{children}</div>
             </div>
           )}
-          <div className="grid w-64 justify-items-center gap-2">
-            <button className="w-full rounded-md bg-green-3 py-3 text-xl font-medium text-white-1">
-              Add to Cart
-            </button>
+          <div className="grid w-64 justify-items-center gap-3">
+            <Button itemInfo={item} />
             {options?.pricePerGb ? (
               <div className="flex items-center gap-2">
                 <div className="text-3xl">£{item.price}</div>

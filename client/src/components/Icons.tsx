@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import logo from "../assets/logo.png";
+import { CartVisibleContext } from "./Header";
 
 const svgClass = "h-16 w-16";
 const pathClass = "fill-green-3";
@@ -18,8 +20,13 @@ export function Logo() {
 type CartIconProps = { items: number };
 
 export function CartIcon({ items }: CartIconProps) {
+  const { setCartVisible } = useContext(CartVisibleContext);
+
   return (
-    <button className="relative rounded-full p-2 hover:bg-white-2">
+    <button
+      onClick={() => setCartVisible(true)}
+      className="relative rounded-full p-2 hover:bg-white-2"
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -42,6 +49,30 @@ export function CartIcon({ items }: CartIconProps) {
         {items}
       </div>
     </button>
+  );
+}
+
+export function Close() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="800px"
+      height="800px"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-6 w-6"
+    >
+      <g id="Menu / Close_MD">
+        <path
+          id="Vector"
+          d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+          stroke="#000000"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
   );
 }
 
