@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../App";
 import { Close, MinusIcon, PlusIcon } from "./Icons";
 import { CartVisibleContext } from "./Header";
@@ -101,7 +101,7 @@ function CartItem({ info, quantity, category }: CartItemProps) {
           </div>
           <div
             onClick={navigateToItemPage}
-            className="w-[250px] w-max cursor-pointer truncate text-sm"
+            className="w-max max-w-[250px] cursor-pointer truncate text-sm"
           >
             {info.name}
           </div>
@@ -127,6 +127,14 @@ export default function Cart() {
         100,
     ) / 100;
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
   return (
     <div className="fixed z-20 grid h-screen w-screen grid-cols-[1fr_auto]">
       <div
@@ -149,7 +157,7 @@ export default function Cart() {
             Your shopping cart is empty
           </div>
         ) : (
-          <div className="grid h-[673px] content-start gap-4 overflow-y-scroll p-4">
+          <div className="grid h-[673px] content-start gap-4 overflow-y-auto p-4">
             {cart.map((item, index) => (
               <CartItem
                 key={index}

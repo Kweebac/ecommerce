@@ -15,7 +15,7 @@ export const CartVisibleContext = createContext<{
 export default function Header() {
   const { user } = useContext(UserContext);
   const { cart } = useContext(CartContext);
-  const [cartVisible, setCartVisible] = useState(true);
+  const [cartVisible, setCartVisible] = useState(false);
   let cartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   if (cartItems > 99) cartItems = 99;
   const header = useRef<HTMLHeadingElement>(null);

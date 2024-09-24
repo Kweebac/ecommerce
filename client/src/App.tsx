@@ -47,78 +47,7 @@ export const CartContext = createContext<{
 
 export default function App() {
   const [user, setUser] = useState<object | null>(null);
-  const [cart, setCart] = useState<Array | null>([
-    {
-      info: {
-        _id: "66d88eff841490770c75afdb",
-        url: "https://cdna.pcpartpicker.com/static/forever/images/product/772cce097c55469671a0d75ea4aca83a.256p.jpg",
-        name: "Gigabyte WINDFORCE OC",
-        chipset: "GeForce RTX 4070",
-        memory: 12,
-        coreClock: 1920,
-        boostClock: 2490,
-        color: "Black",
-        length: 261,
-        tdp: 200,
-        price: 529.98,
-        __v: 0,
-      },
-      quantity: 3,
-      category: "gpu",
-    },
-    {
-      info: {
-        _id: "66e180471751c512ff93fc4d",
-        url: "https://cdna.pcpartpicker.com/static/forever/images/product/9b4cefb2e43f2c358f3a97a31e1be90b.256p.jpg",
-        name: "AMD Ryzen 7 5800X",
-        cores: 8,
-        pCoreClock: 3.8,
-        pBoostClock: 4.7,
-        tdp: 105,
-        integratedGraphics: "None",
-        price: 139.99,
-        series: "AMD Ryzen 7",
-        socket: "AM4",
-        __v: 0,
-      },
-      quantity: 1,
-      category: "cpu",
-    },
-    {
-      info: {
-        _id: "66e180471751c512ff93fc4c",
-        url: "https://cdna.pcpartpicker.com/static/forever/images/product/4f8b13807b9b9e2ab921ddb6e6e81afb.256p.jpg",
-        name: "AMD Ryzen 9 7950X3D",
-        cores: 16,
-        pCoreClock: 4.2,
-        pBoostClock: 5.7,
-        tdp: 120,
-        integratedGraphics: "Yes",
-        price: 499,
-        series: "AMD Ryzen 9",
-        socket: "AM5",
-        __v: 0,
-      },
-      quantity: 1,
-      category: "cpu",
-    },
-    {
-      info: {
-        _id: "66e829ba9fd9083c3b3ddec1",
-        url: "https://cdna.pcpartpicker.com/static/forever/images/product/84cb77175187296029f50f8bf6ca6960.256p.jpg",
-        name: "NZXT H5 Flow (2022)",
-        type: "ATX Mid Tower",
-        color: "Black",
-        price: 69.95,
-        motherboardFormFactors: ["ATX", "Micro ATX", "Mini ITX", "EATX"],
-        maxGpuLength: 365,
-        dimensions: "446 mm x 227 mm x 464 mm",
-        __v: 0,
-      },
-      quantity: 1,
-      category: "case",
-    },
-  ]);
+  const [cart, setCart] = useState<Array | null>([]);
   const isLoggedIn = user !== null;
 
   useEffect(() => {
