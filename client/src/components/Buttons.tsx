@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CartContext } from "../App";
+import { useLocation } from "react-router-dom";
 
 type ButtonProps = {
   itemInfo: object;
@@ -7,6 +8,7 @@ type ButtonProps = {
 
 export function SmallButton({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
+  const category = useLocation().pathname.split("/")[2];
 
   function handleClick() {
     setCart((prev) =>
@@ -16,7 +18,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1 }],
+        : [...prev, { info: itemInfo, quantity: 1, category }],
     );
   }
 
@@ -32,6 +34,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
 
 export default function Button({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
+  const category = useLocation().pathname.split("/")[2];
 
   function handleClick() {
     setCart((prev) =>
@@ -41,7 +44,7 @@ export default function Button({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1 }],
+        : [...prev, { info: itemInfo, quantity: 1, category }],
     );
   }
 
