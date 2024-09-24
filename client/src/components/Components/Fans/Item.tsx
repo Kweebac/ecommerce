@@ -1,12 +1,14 @@
 import { FanValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";
 import { useGetItem } from "../../../utils";
+import URLError from "../../URLError";
 
 export default function CPUItem() {
   const item: FanValues | null | undefined = useGetItem("fans");
   const styles = "w-36";
 
-  if (item)
+  if (item === null) return <URLError />;
+  else if (item !== undefined)
     return (
       <Item item={item}>
         <InfoItem name="Quantity" value={item.quantity} styles={styles} />

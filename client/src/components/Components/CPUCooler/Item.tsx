@@ -1,12 +1,14 @@
 import { CPUCoolerValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";
 import { useGetItem } from "../../../utils";
+import URLError from "../../URLError";
 
 export default function CPUItem() {
   const item: CPUCoolerValues | null | undefined = useGetItem("cpu-cooler");
   const styles = "w-48";
 
-  if (item)
+  if (item === null) return <URLError />;
+  else if (item !== undefined)
     return (
       <Item item={item}>
         <InfoItem name="RPM" value={`${item.rpm} RPM`} styles={styles} />

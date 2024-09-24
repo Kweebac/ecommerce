@@ -1,6 +1,7 @@
 import { useGetItem } from "../../../../src/utils";
 import { MotherboardValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";
+import URLError from "../../URLError";
 
 type DDRSpeedsProps = {
   name: string;
@@ -28,7 +29,8 @@ export default function MotherboardItem() {
   const item: MotherboardValues | null | undefined = useGetItem("motherboard");
   const styles = "w-48";
 
-  if (item)
+  if (item === null) return <URLError />;
+  else if (item !== undefined)
     return (
       <Item item={item}>
         <InfoItem name="Chipset" value={item.chipset} styles={styles} />

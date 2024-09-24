@@ -1,12 +1,14 @@
 import { CPUValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";
 import { useGetItem } from "../../../utils";
+import URLError from "../../URLError";
 
 export default function CPUItem() {
   const item: CPUValues | null | undefined = useGetItem("cpu");
   const styles = "w-52";
 
-  if (item)
+  if (item === null) return <URLError />;
+  else if (item !== undefined)
     return (
       <Item item={item}>
         <InfoItem name="Series" value={item.series} styles={styles} />

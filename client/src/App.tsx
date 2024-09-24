@@ -106,7 +106,7 @@ export default function App() {
               <Route path="os" element={<OS />} />
               <Route path="os/:id" element={<OSItem />} />
 
-              <Route path="*" element={<URLError link="/components" />} />
+              <Route path="*" element={<URLError />} />
             </Route>
 
             {isLoggedIn ? (
