@@ -67,12 +67,12 @@ const columns = [
     filterFn: "inNumberRange",
     size: 120,
     cell: (props) => {
-      const cellValues = props.row.getAllCells();
+      const rowItem = props.row.original;
 
       return (
         <div className="flex items-center justify-between gap-3">
           <p>£{props.getValue()}</p>
-          <SmallButton id={cellValues[cellValues.length - 1].getValue()} />
+          <SmallButton itemInfo={rowItem} />
         </div>
       );
     },

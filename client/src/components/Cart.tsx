@@ -1,16 +1,78 @@
 import { useContext } from "react";
 import { CartContext } from "../App";
-import { Close } from "./Icons";
+import { Close, MinusIcon, PlusIcon } from "./Icons";
 import { CartVisibleContext } from "./Header";
 import { CheckoutButton } from "./Buttons";
+
+type CartProps = {
+  info: object;
+  quantity: number;
+};
+
+function Quantity({ info, quantity }: CartProps) {
+  const { setCart } = useContext(CartContext);
+
+  const styles = "w-6 h-6 cursor-pointer";
+
+  function changeQuantity(increase) {
+    // Increase or decrease quantity
+    setCart((prev) =>
+      prev.map((item) =>
+        item.info._id === info._id
+          ? {
+              ...item,
+              quantity: increase ? item.quantity + 1 : item.quantity - 1,
+            }
+          : item,
+      ),
+    );
+
+    // Remove items with quantity 0
+    setCart((prev) => prev.filter((item) => item.quantity > 0));
+  }
+
+  return (
+    <div className="flex items-center gap-2 rounded-md border border-gray-300 px-1 text-green-3">
+      <div onClick={() => changeQuantity(false)}>
+        <MinusIcon styles={styles} />
+      </div>
+      <div>{quantity}</div>
+      <div onClick={() => changeQuantity(true)}>
+        <PlusIcon styles={styles} />
+      </div>
+    </div>
+  );
+}
+
+function CartItem({ info, quantity }: CartProps) {
+  return (
+    <div className="grid grid-cols-[auto_1fr] gap-4">
+      <img src={info.url} alt={info.name} className="h-20 w-20 rounded-lg" />
+      <div className="grid content-between">
+        <div>
+          <div className="font-semibold">Motherboard</div>
+          <div className="w-[250px] truncate text-sm">{info.name}</div>
+        </div>
+        <div className="flex justify-between gap-3">
+          <Quantity info={info} quantity={quantity} />
+          <div className="font-semibold">
+            £{Math.round(info.price * quantity * 100) / 100}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Cart() {
   const { cart, setCart } = useContext(CartContext);
   const { setCartVisible } = useContext(CartVisibleContext);
   const cartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   const total =
-    Math.round(cart.reduce((acc, item) => acc + item.info.price, 0) * 100) /
-    100;
+    Math.round(
+      cart.reduce((acc, item) => acc + item.info.price * item.quantity, 0) *
+        100,
+    ) / 100;
 
   return (
     <div className="fixed z-20 grid h-screen w-screen grid-cols-[1fr_auto]">
@@ -34,7 +96,11 @@ export default function Cart() {
             Your shopping cart is empty
           </div>
         ) : (
-          <div className="p-4"></div>
+          <div className="grid h-[673px] content-start gap-4 overflow-y-scroll p-4">
+            {cart.map((item) => (
+              <CartItem info={item.info} quantity={item.quantity} />
+            ))}
+          </div>
         )}
 
         <div className="p-4">

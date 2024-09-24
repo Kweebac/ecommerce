@@ -47,7 +47,81 @@ export const CartContext = createContext<{
 
 export default function App() {
   const [user, setUser] = useState<object | null>(null);
-  const [cart, setCart] = useState<Array | null>([]);
+  const [cart, setCart] = useState<Array | null>([
+    {
+      info: {
+        _id: "66e343d17913c9969b7d5910",
+        url: "https://cdna.pcpartpicker.com/static/forever/images/product/32b6fc00152158658990b62c8ab1e0d8.256p.jpg",
+        name: "Microsoft Windows 11 Home",
+        price: 104.26,
+        __v: 0,
+      },
+      quantity: 1,
+    },
+    {
+      info: {
+        _id: "66d88eff841490770c75afe2",
+        url: "https://cdna.pcpartpicker.com/static/forever/images/product/704d58fa45fdd33c35495cbc1dcbac18.256p.jpg",
+        name: "Asus DUAL OC",
+        chipset: "GeForce RTX 4070",
+        memory: 12,
+        coreClock: 2520,
+        boostClock: 2550,
+        color: "White",
+        length: 267,
+        tdp: 200,
+        price: 539.99,
+        __v: 0,
+      },
+      quantity: 1,
+    },
+    {
+      info: {
+        _id: "66e310546bc0275cb132a5de",
+        url: "https://cdna.pcpartpicker.com/static/forever/images/product/09a31f32abb3daaf5ed9b849bd60e675.256p.jpg",
+        name: "Samsung 970 Evo",
+        capacity: 1024,
+        type: "SSD",
+        pricePerGb: 0.13,
+        price: 130,
+        __v: 0,
+      },
+      quantity: 3,
+    },
+    {
+      info: {
+        _id: "66e2f2e86bc0275cb132a3eb",
+        url: "https://m.media-amazon.com/images/I/41Q6UMps9NL.jpg",
+        name: "TEAMGROUP T-Create Expert 32 GB",
+        ddr: "DDR5",
+        ddrSpeed: 6000,
+        modules: "2 x 16",
+        fwl: 10,
+        cl: 30,
+        color: "Black",
+        price: 99.55,
+        pricePerGb: 3.111,
+        __v: 0,
+      },
+      quantity: 1,
+    },
+    {
+      info: {
+        _id: "66e8378c9fd9083c3b3ddf5b",
+        url: "https://m.media-amazon.com/images/I/51kgqhkUNuL.jpg",
+        name: "Noctua NH-D15 chromax.black",
+        rpm: "300 - 1500",
+        noise: "19.2 - 24.6",
+        price: 109.95,
+        color: "Black",
+        waterCooled: "None",
+        height: 165,
+        cpuSockets: ["AM5", "AM4", "LGA1700"],
+        __v: 0,
+      },
+      quantity: 2,
+    },
+  ]);
   const isLoggedIn = user !== null;
 
   useEffect(() => {

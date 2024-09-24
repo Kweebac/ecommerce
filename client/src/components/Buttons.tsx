@@ -10,9 +10,9 @@ export function SmallButton({ itemInfo }: ButtonProps) {
 
   function handleClick() {
     setCart((prev) =>
-      prev?.find((item) => item.id === itemInfo._id)
+      prev?.find((item) => item.info._id === itemInfo._id)
         ? prev.map((item) =>
-            item.id === itemInfo._id
+            item.info._id === itemInfo._id
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
@@ -35,9 +35,9 @@ export default function Button({ itemInfo }: ButtonProps) {
 
   function handleClick() {
     setCart((prev) =>
-      prev?.find((item) => item.id === itemInfo._id)
+      prev?.find((item) => item.info._id === itemInfo._id)
         ? prev.map((item) =>
-            item.id === itemInfo._id
+            item.info._id === itemInfo._id
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
