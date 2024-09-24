@@ -28,6 +28,7 @@ import CaseItem from "./components/Components/Case/Item";
 import CPUCoolerItem from "./components/Components/CPUCooler/Item";
 import FanItem from "./components/Components/Fans/Item";
 import OSItem from "./components/Components/OS/Item";
+import Footer from "./components/Footer";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -120,6 +121,8 @@ export default function App() {
             <Route path="*" element={<URLError />} />
           </Route>
         </Routes>
+
+        <Footer />
       </CartContext.Provider>
     </UserContext.Provider>
   );
