@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== "production") dotenv.config();
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import componentsRouter from "./routes/components";
+import accessoriesRouter from "./routes/accessories";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(passport.session());
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/components", componentsRouter);
+app.use("/api/accessories", accessoriesRouter);
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.name === "AuthError") res.status(400).json(err.json);
