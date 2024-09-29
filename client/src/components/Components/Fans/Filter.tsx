@@ -31,7 +31,7 @@ export default function Filter({
 
       <SliderFilter
         id={"size"}
-        units="mm"
+        units=" mm"
         min={80}
         max={140}
         step={2}

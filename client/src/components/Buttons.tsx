@@ -8,6 +8,7 @@ type ButtonProps = {
 
 export function SmallButton({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
+  const mainCategory = useLocation().pathname.split("/")[1];
   const category = useLocation().pathname.split("/")[2];
 
   function handleClick() {
@@ -18,7 +19,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1, category }],
+        : [...prev, { info: itemInfo, quantity: 1, mainCategory, category }],
     );
   }
 
@@ -34,6 +35,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
 
 export default function Button({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
+  const mainCategory = useLocation().pathname.split("/")[1];
   const category = useLocation().pathname.split("/")[2];
 
   function handleClick() {
@@ -44,7 +46,7 @@ export default function Button({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1, category }],
+        : [...prev, { info: itemInfo, quantity: 1, mainCategory, category }],
     );
   }
 

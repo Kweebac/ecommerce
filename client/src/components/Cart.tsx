@@ -11,6 +11,7 @@ type QuantityProps = {
 };
 
 type CartItemProps = QuantityProps & {
+  mainCategory: string;
   category: string;
 };
 
@@ -71,15 +72,27 @@ function changeName(name: string) {
       return "Fans";
     case "os":
       return "OS";
+    case "monitors":
+      return "Monitor";
+    case "keyboards":
+      return "Keyboard";
+    case "mice":
+      return "Mouse";
+    case "headphones":
+      return "Headphones";
+    case "webcams":
+      return "Webcam";
+    case "speakers":
+      return "Speakers";
   }
 }
 
-function CartItem({ info, quantity, category }: CartItemProps) {
+function CartItem({ info, quantity, mainCategory, category }: CartItemProps) {
   const navigate = useNavigate();
   const { setCartVisible } = useContext(CartVisibleContext);
 
   function navigateToItemPage() {
-    navigate(`/components/${category}/${info._id}`);
+    navigate(`/${mainCategory}/${category}/${info._id}`);
     setCartVisible(false);
   }
 
@@ -129,7 +142,7 @@ export default function Cart() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    
+
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -163,6 +176,7 @@ export default function Cart() {
                 key={index}
                 info={item.info}
                 quantity={item.quantity}
+                mainCategory={item.mainCategory}
                 category={item.category}
               />
             ))}

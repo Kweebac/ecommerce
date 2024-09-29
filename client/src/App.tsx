@@ -29,6 +29,19 @@ import CPUCoolerItem from "./components/Components/CPUCooler/Item";
 import FanItem from "./components/Components/Fans/Item";
 import OSItem from "./components/Components/OS/Item";
 import Footer from "./components/Footer";
+import AccessoriesHeader from "./components/Accessories/AccessoriesHeader";
+import Monitors from "./components/Accessories/Monitors/Table";
+import MonitorItem from "./components/Accessories/Monitors/Item";
+import Keyboards from "./components/Accessories/Keyboards/Table";
+import KeyboardItem from "./components/Accessories/Keyboards/Item";
+import Headphones from "./components/Accessories/Headphones/Table";
+import HeadphonesItem from "./components/Accessories/Headphones/Item";
+import Webcams from "./components/Accessories/Webcams/Table";
+import WebcamItem from "./components/Accessories/Webcams/Item";
+import Speakers from "./components/Accessories/Speakers/Table";
+import SpeakersItem from "./components/Accessories/Speakers/Item";
+import Mice from "./components/Accessories/Mice/Table";
+import MiceItem from "./components/Accessories/Mice/Item";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -105,6 +118,27 @@ export default function App() {
 
               <Route path="os" element={<OS />} />
               <Route path="os/:id" element={<OSItem />} />
+
+              <Route path="*" element={<URLError />} />
+            </Route>
+            <Route path="accessories" element={<AccessoriesHeader />}>
+              <Route path="monitors" element={<Monitors />} />
+              <Route path="monitors/:id" element={<MonitorItem />} />
+
+              <Route path="keyboards" element={<Keyboards />} />
+              <Route path="keyboards/:id" element={<KeyboardItem />} />
+
+              <Route path="mice" element={<Mice />} />
+              <Route path="mice/:id" element={<MiceItem />} />
+
+              <Route path="headphones" element={<Headphones />} />
+              <Route path="headphones/:id" element={<HeadphonesItem />} />
+
+              <Route path="webcams" element={<Webcams />} />
+              <Route path="webcams/:id" element={<WebcamItem />} />
+
+              <Route path="speakers" element={<Speakers />} />
+              <Route path="speakers/:id" element={<SpeakersItem />} />
 
               <Route path="*" element={<URLError />} />
             </Route>

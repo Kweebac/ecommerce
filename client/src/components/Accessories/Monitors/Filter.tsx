@@ -26,38 +26,80 @@ export default function Filter({
       <SliderFilter
         id={"price"}
         units={"£"}
-        min={10}
-        max={340}
+        min={100}
+        max={1150}
         step={10}
         setColumnFilters={setColumnFilters}
       />
 
+      <SliderFilter
+        id="screenSize"
+        name="SCREEN SIZE"
+        units='"'
+        min={21.5}
+        max={55}
+        step={1}
+        setColumnFilters={setColumnFilters}
+      />
+
       <CheckboxFilter
-        id={"cpuSockets"}
-        name="CPU SOCKET"
+        id="resolution"
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
-      <CheckboxFilter
-        id="color"
-        options={checkboxOptions[1]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <RadioFilter
-        id="waterCooled"
-        name="WATER COOLED"
-        options={radioOptions[0]}
+      <SliderFilter
+        id="refreshRate"
+        name="REFRESH RATE"
+        units=" Hz"
+        min={60}
+        max={540}
+        step={15}
         setColumnFilters={setColumnFilters}
       />
 
       <SliderFilter
-        id={"height"}
-        units=" mm"
-        min={45}
-        max={170}
-        step={5}
+        id="responseTime"
+        name="RESPONSE TIME"
+        units=" ms"
+        min={0.2}
+        max={5}
+        step={1}
+        minStepsBetweenThumbs={0}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id="panelType"
+        name="PANEL"
+        options={checkboxOptions[1]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <CheckboxFilter
+        id="frameSync"
+        name="FRAME SYNC"
+        options={checkboxOptions[2]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <SliderFilter
+        id="brightness"
+        units=" cd/m²"
+        min={250}
+        max={1000}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <RadioFilter
+        id="speakers"
+        options={radioOptions[0]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <RadioFilter
+        id="curved"
+        options={radioOptions[1]}
         setColumnFilters={setColumnFilters}
       />
     </div>

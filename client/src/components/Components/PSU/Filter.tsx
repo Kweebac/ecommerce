@@ -32,7 +32,7 @@ export default function Filter({
       <SliderFilter
         id={"wattage"}
         name="WATTAGE"
-        units={"W"}
+        units={" W"}
         min={550}
         max={1650}
         step={50}

@@ -49,7 +49,7 @@ export default function Filter({
       <SliderFilter
         id={"capacity"}
         name="CAPACITY"
-        units={"GB"}
+        units={" GB"}
         min={128}
         max={8192}
         step={128}

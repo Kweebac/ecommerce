@@ -8,7 +8,13 @@ export type ComponentValues =
   | PSUValues
   | CaseValues
   | CPUCoolerValues
-  | FanValues;
+  | FanValues
+  | MonitorValues
+  | KeyboardValues
+  | MiceValues
+  | HeadphonesValues
+  | WebcamValues
+  | SpeakerValues;
 
 export type SharedValues = {
   name: string;
@@ -102,5 +108,52 @@ export type FanValues = {
   rpm: number;
   airflow: number;
   noise: number;
+  color: string;
+};
+
+export type MonitorValues = {
+  screenSize: number;
+  resolution: string;
+  refreshRate: number;
+  responseTime: number;
+  panelType: string;
+  brightness: number;
+  frameSync: string[];
+  speakers: string;
+  curved: string;
+};
+
+export type KeyboardValues = {
+  style: string;
+  mechanical: string;
+  rgb: string;
+  tenkeyless: string;
+  connectionTypes: string[];
+  color: string;
+};
+
+export type MiceValues = {
+  connectionTypes: string[];
+  maxDpi: number;
+  color: string;
+};
+
+export type HeadphonesValues = {
+  microphone: string;
+  wireless: string;
+  frequencyResponse: string;
+  color: string;
+};
+
+export type WebcamValues = {
+  resolutions: string[];
+  focusType: string;
+};
+
+export type SpeakerValues = {
+  configuration: number;
+  frequencyResponse: string;
+  wattage: number;
+  power: number;
   color: string;
 };

@@ -19,14 +19,17 @@ export async function handleSetUser(
   }
 }
 
-export function useGetItem(componentType: string) {
+export function useGetItem(
+  subCategory: string,
+  mainCategory: string = "components",
+) {
   const [item, setItem] = useState<ComponentValues | null>();
   const { id } = useParams();
 
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        `http://localhost:3000/api/components/${componentType}/${id}`,
+        `http://localhost:3000/api/${mainCategory}/${subCategory}/${id}`,
       );
 
       if (res.status === 404) setItem(null);

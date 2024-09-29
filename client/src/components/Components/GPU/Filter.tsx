@@ -37,7 +37,7 @@ export default function Filter({
       <SliderFilter
         id={"memory"}
         name={"MEMORY"}
-        units="GB"
+        units=" GB"
         min={8}
         max={24}
         step={4}
@@ -48,7 +48,7 @@ export default function Filter({
       <SliderFilter
         id={"coreClock"}
         name={"CORE CLOCK"}
-        units="MHz"
+        units=" MHz"
         min={1700}
         max={2550}
         setColumnFilters={setColumnFilters}
@@ -57,7 +57,7 @@ export default function Filter({
       <SliderFilter
         id={"boostClock"}
         name={"BOOST CLOCK"}
-        units="MHz"
+        units=" MHz"
         min={2430}
         max={2830}
         setColumnFilters={setColumnFilters}
@@ -71,7 +71,7 @@ export default function Filter({
 
       <SliderFilter
         id={"length"}
-        units="mm"
+        units=" mm"
         min={163}
         max={358}
         step={10}

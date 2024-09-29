@@ -51,7 +51,7 @@ export default function Filter({
       <SliderFilter
         id={"maxGpuLength"}
         name="MAX GPU LENGTH"
-        units="mm"
+        units=" mm"
         min={280}
         max={460}
         step={10}

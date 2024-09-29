@@ -3,7 +3,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
@@ -35,51 +34,28 @@ const columns = [
     ),
   },
   {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 165,
-  },
-  {
-    accessorKey: "formFactor",
-    header: "Form factor",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "cpuSocket",
-    header: "CPU socket",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "ram.ddr",
-    id: "ramDdr",
-    header: "RAM",
+    accessorKey: "wireless",
+    header: "Wireless",
     filterFn: "arrIncludesSome",
-    size: 100,
+    size: 130,
+    cell: (props) => {
+      let value = props.getValue().join(", ");
+      if (value === "No, Yes") value = "Both";
+
+      return <p>{value}</p>;
+    },
   },
   {
-    accessorKey: "wifi",
-    header: "Wi-Fi",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    accessorKey: "maxDpi",
+    header: "Max DPI",
+    filterFn: "inNumberRange",
     size: 130,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 130,
     cell: (props) => {
       const rowItem = props.row.original;
 
@@ -93,10 +69,7 @@ const columns = [
   },
   {
     accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "_id",
@@ -104,32 +77,19 @@ const columns = [
 ];
 
 const checkboxOptions = [
-  [
-    "Intel Z790",
-    "Intel Z690",
-    "Intel B760",
-    "Intel B660",
-    "AMD X670",
-    "AMD B650",
-    "AMD B550",
-  ],
-  ["ATX", "Micro ATX", "Mini ITX", "EATX"],
-  ["AM5", "AM4", "LGA1700"],
-  ["DDR5", "DDR4"],
-  ["Wi-Fi 7", "Wi-Fi 6E", "Wi-Fi 6", "Wi-Fi 5", "None"],
-  ["Black", "Silver", "Black & Silver", "Colorful"],
+  ["Yes", "No"],
+  ["Black", "White"],
 ];
 
-export default function Motherboard() {
-  const [motherboardList, setMotherboardList] = useState([]);
+export default function Mice() {
+  const [miceList, setMiceList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: motherboardList,
+    data: miceList,
     columns,
     initialState: {
       columnVisibility: {
         color: false,
-        ramSlots: false,
         _id: false,
       },
     },
@@ -142,12 +102,10 @@ export default function Motherboard() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
-      );
+      const res = await fetch("http://localhost:3000/api/accessories/mice");
       const data = await res.json();
 
-      setMotherboardList(data);
+      setMiceList(data);
     })();
   }, []);
 

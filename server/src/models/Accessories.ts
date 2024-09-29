@@ -42,7 +42,7 @@ const Mice = mongoose.model(
     price: { type: Number, required: true },
     name: { type: String, required: true },
 
-    connectionTypes: { type: [String], required: true },
+    wireless: { type: [String], required: true },
     maxDpi: { type: Number, required: true },
     color: { type: String, required: true },
   })

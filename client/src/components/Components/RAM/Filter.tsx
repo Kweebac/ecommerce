@@ -64,6 +64,7 @@ export default function Filter({
       <SliderFilter
         id={"fwl"}
         name="FWL"
+        units=" ns"
         min={8.5}
         max={10}
         step={0.1}

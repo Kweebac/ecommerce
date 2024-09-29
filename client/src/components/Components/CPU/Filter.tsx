@@ -49,7 +49,7 @@ export default function Filter({
       <SliderFilter
         id={"pCoreClock"}
         name={"CORE CLOCK"}
-        units="GHz"
+        units=" GHz"
         min={3}
         max={4.7}
         step={0.1}
@@ -59,7 +59,7 @@ export default function Filter({
       <SliderFilter
         id={"pBoostClock"}
         name={"BOOST CLOCK"}
-        units="GHz"
+        units=" GHz"
         min={3.6}
         max={6}
         step={0.1}
@@ -75,7 +75,6 @@ export default function Filter({
 
       <CheckboxFilter
         id="socket"
-        name="SOCKET"
         options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}
       />

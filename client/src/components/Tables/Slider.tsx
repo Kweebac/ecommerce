@@ -57,7 +57,7 @@ export default function SliderFilter({
         ) : (
           <div>
             ({sliderValues}
-            {`${units ? ` ${units}` : ""}`})
+            {`${units ? units : ""}`})
           </div>
         )}
       </div>

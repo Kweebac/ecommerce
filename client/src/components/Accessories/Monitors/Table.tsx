@@ -3,7 +3,6 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  Row,
   useReactTable,
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
@@ -29,57 +28,41 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 400,
+    size: 325,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
   },
   {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 165,
+    accessorKey: "screenSize",
+    header: "Screen size",
+    cell: (props) => <p>{props.getValue()}"</p>,
   },
   {
-    accessorKey: "formFactor",
-    header: "Form factor",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    accessorKey: "resolution",
+    header: "Resolution",
   },
   {
-    accessorKey: "cpuSocket",
-    header: "CPU socket",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    accessorKey: "refreshRate",
+    header: "Refresh rate",
+    cell: (props) => <p>{props.getValue()} Hz</p>,
   },
   {
-    accessorKey: "ram.ddr",
-    id: "ramDdr",
-    header: "RAM",
-    filterFn: "arrIncludesSome",
-    size: 100,
+    accessorKey: "responseTime",
+    header: "Response time",
+    size: 170,
+    cell: (props) => <p>{props.getValue()} ms</p>,
   },
   {
-    accessorKey: "wifi",
-    header: "Wi-Fi",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 130,
+    accessorKey: "panelType",
+    header: "Panel",
+    size: 110,
   },
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 130,
     cell: (props) => {
       const rowItem = props.row.original;
 
@@ -92,11 +75,17 @@ const columns = [
     },
   },
   {
-    accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    accessorKey: "frameSync",
+    filterFn: "arrIncludesSome",
+  },
+  {
+    accessorKey: "brightness",
+  },
+  {
+    accessorKey: "speakers",
+  },
+  {
+    accessorKey: "curved",
   },
   {
     accessorKey: "_id",
@@ -104,32 +93,34 @@ const columns = [
 ];
 
 const checkboxOptions = [
+  ["1920 x 1080", "2560 x 1440", "3840 x 2160"],
+  ["IPS", "VA", "TN"],
   [
-    "Intel Z790",
-    "Intel Z690",
-    "Intel B760",
-    "Intel B660",
-    "AMD X670",
-    "AMD B650",
-    "AMD B550",
+    "FreeSync",
+    "FreeSync Premium",
+    "FreeSync Premium Pro",
+    "G-Sync",
+    "G-Sync Compatible",
   ],
-  ["ATX", "Micro ATX", "Mini ITX", "EATX"],
-  ["AM5", "AM4", "LGA1700"],
-  ["DDR5", "DDR4"],
-  ["Wi-Fi 7", "Wi-Fi 6E", "Wi-Fi 6", "Wi-Fi 5", "None"],
-  ["Black", "Silver", "Black & Silver", "Colorful"],
 ];
 
-export default function Motherboard() {
-  const [motherboardList, setMotherboardList] = useState([]);
+const radioOptions = [
+  ["Yes", "No"],
+  ["Yes", "No"],
+];
+
+export default function Monitors() {
+  const [monitorList, setMonitorList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: motherboardList,
+    data: monitorList,
     columns,
     initialState: {
       columnVisibility: {
-        color: false,
-        ramSlots: false,
+        frameSync: false,
+        brightness: false,
+        speakers: false,
+        curved: false,
         _id: false,
       },
     },
@@ -142,12 +133,10 @@ export default function Motherboard() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
-      );
+      const res = await fetch("http://localhost:3000/api/accessories/monitors");
       const data = await res.json();
 
-      setMotherboardList(data);
+      setMonitorList(data);
     })();
   }, []);
 
@@ -157,6 +146,7 @@ export default function Motherboard() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
+        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

@@ -29,57 +29,28 @@ const columns = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 400,
+    size: 440,
     cell: (props) => (
       <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
     ),
   },
   {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 165,
+    accessorKey: "frequencyResponse",
+    header: "Frequency response",
+    size: 225,
   },
   {
-    accessorKey: "formFactor",
-    header: "Form factor",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "cpuSocket",
-    header: "CPU socket",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "ram.ddr",
-    id: "ramDdr",
-    header: "RAM",
+    accessorKey: "wireless",
+    header: "Wireless",
     filterFn: "arrIncludesSome",
-    size: 100,
-  },
-  {
-    accessorKey: "wifi",
-    header: "Wi-Fi",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
     size: 130,
   },
+
   {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 130,
     cell: (props) => {
       const rowItem = props.row.original;
 
@@ -92,11 +63,11 @@ const columns = [
     },
   },
   {
+    accessorKey: "microphone",
+  },
+  {
     accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
+    filterFn: "arrIncludesSome",
   },
   {
     accessorKey: "_id",
@@ -104,32 +75,22 @@ const columns = [
 ];
 
 const checkboxOptions = [
-  [
-    "Intel Z790",
-    "Intel Z690",
-    "Intel B760",
-    "Intel B660",
-    "AMD X670",
-    "AMD B650",
-    "AMD B550",
-  ],
-  ["ATX", "Micro ATX", "Mini ITX", "EATX"],
-  ["AM5", "AM4", "LGA1700"],
-  ["DDR5", "DDR4"],
-  ["Wi-Fi 7", "Wi-Fi 6E", "Wi-Fi 6", "Wi-Fi 5", "None"],
-  ["Black", "Silver", "Black & Silver", "Colorful"],
+  ["Yes", "No"],
+  ["Black", "White", "Gray"],
 ];
 
-export default function Motherboard() {
-  const [motherboardList, setMotherboardList] = useState([]);
+const radioOptions = [["Yes", "No"]];
+
+export default function Headphones() {
+  const [headphonesList, setHeadphonesList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const table = useReactTable({
-    data: motherboardList,
+    data: headphonesList,
     columns,
     initialState: {
       columnVisibility: {
+        microphone: false,
         color: false,
-        ramSlots: false,
         _id: false,
       },
     },
@@ -143,11 +104,11 @@ export default function Motherboard() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
+        "http://localhost:3000/api/accessories/headphones",
       );
       const data = await res.json();
 
-      setMotherboardList(data);
+      setHeadphonesList(data);
     })();
   }, []);
 
@@ -157,6 +118,7 @@ export default function Motherboard() {
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
         checkboxOptions={checkboxOptions}
+        radioOptions={radioOptions}
       />
 
       <section style={{ width: table.getTotalSize() }}>

@@ -26,38 +26,45 @@ export default function Filter({
       <SliderFilter
         id={"price"}
         units={"£"}
-        min={10}
-        max={340}
+        min={0}
+        max={600}
         step={10}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
-        id={"cpuSockets"}
-        name="CPU SOCKET"
+        id={"style"}
         options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
 
+      <RadioFilter
+        id={"mechanical"}
+        options={radioOptions[0]}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <RadioFilter
+        id={"tenkeyless"}
+        options={radioOptions[1]}
+        setColumnFilters={setColumnFilters}
+      />
+
       <CheckboxFilter
-        id="color"
+        id={"wireless"}
         options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}
       />
 
       <RadioFilter
-        id="waterCooled"
-        name="WATER COOLED"
-        options={radioOptions[0]}
+        id={"rgb"}
+        options={radioOptions[2]}
         setColumnFilters={setColumnFilters}
       />
 
-      <SliderFilter
-        id={"height"}
-        units=" mm"
-        min={45}
-        max={170}
-        step={5}
+      <CheckboxFilter
+        id={"color"}
+        options={checkboxOptions[2]}
         setColumnFilters={setColumnFilters}
       />
     </div>

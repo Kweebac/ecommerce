@@ -1,5 +1,4 @@
 import CheckboxFilter from "../../Tables/Checkbox";
-import RadioFilter from "../../Tables/Radio";
 import SearchFilter from "../../Tables/Search";
 import SliderFilter from "../../Tables/Slider";
 
@@ -7,14 +6,12 @@ type FilterProps = {
   columnFilters: [{ id: string; value: string }];
   setColumnFilters: (value: React.SetStateAction<never[]>) => void;
   checkboxOptions: string[][];
-  radioOptions: string[][];
 };
 
 export default function Filter({
   columnFilters,
   setColumnFilters,
   checkboxOptions = [],
-  radioOptions = [],
 }: FilterProps) {
   return (
     <div className="grid w-[--filter-width] gap-4">
@@ -27,37 +24,32 @@ export default function Filter({
         id={"price"}
         units={"£"}
         min={10}
-        max={340}
-        step={10}
+        max={720}
+        step={20}
         setColumnFilters={setColumnFilters}
       />
 
-      <CheckboxFilter
-        id={"cpuSockets"}
-        name="CPU SOCKET"
-        options={checkboxOptions[0]}
+      <SliderFilter
+        id={"wattage"}
+        units={" W"}
+        min={0}
+        max={260}
+        step={5}
+        setColumnFilters={setColumnFilters}
+      />
+
+      <SliderFilter
+        id={"power"}
+        units={" W"}
+        min={0}
+        max={130}
+        step={5}
         setColumnFilters={setColumnFilters}
       />
 
       <CheckboxFilter
         id="color"
-        options={checkboxOptions[1]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <RadioFilter
-        id="waterCooled"
-        name="WATER COOLED"
-        options={radioOptions[0]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <SliderFilter
-        id={"height"}
-        units=" mm"
-        min={45}
-        max={170}
-        step={5}
+        options={checkboxOptions[0]}
         setColumnFilters={setColumnFilters}
       />
     </div>
