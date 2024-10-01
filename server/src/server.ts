@@ -10,6 +10,7 @@ import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import componentsRouter from "./routes/components";
 import accessoriesRouter from "./routes/accessories";
+import prebuiltRouter from "./routes/prebuilt";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/components", componentsRouter);
 app.use("/api/accessories", accessoriesRouter);
+app.use("/api/prebuilt", prebuiltRouter);
 
 const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.name === "AuthError") res.status(400).json(err.json);

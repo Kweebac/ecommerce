@@ -42,6 +42,7 @@ import Speakers from "./components/Accessories/Speakers/Table";
 import SpeakersItem from "./components/Accessories/Speakers/Item";
 import Mice from "./components/Accessories/Mice/Table";
 import MiceItem from "./components/Accessories/Mice/Item";
+import Prebuilt from "./components/Prebuilt/Main";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -121,7 +122,10 @@ export default function App() {
 
               <Route path="*" element={<URLError />} />
             </Route>
+
             <Route path="accessories" element={<AccessoriesHeader />}>
+              <Route index element={<Navigate to="monitors" />} />
+
               <Route path="monitors" element={<Monitors />} />
               <Route path="monitors/:id" element={<MonitorItem />} />
 
@@ -142,6 +146,8 @@ export default function App() {
 
               <Route path="*" element={<URLError />} />
             </Route>
+
+            <Route path="prebuilt" element={<Prebuilt />} />
 
             {isLoggedIn ? (
               <Route path="/logout" element={<Logout />} />

@@ -76,10 +76,10 @@ export function Close() {
   );
 }
 
-export function CaseIcon() {
+export function CaseIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -96,10 +96,10 @@ export function CaseIcon() {
   );
 }
 
-export function CPUIcon() {
+export function CPUIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -116,10 +116,10 @@ export function CPUIcon() {
   );
 }
 
-export function CPUCoolerIcon() {
+export function CPUCoolerIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -136,10 +136,10 @@ export function CPUCoolerIcon() {
   );
 }
 
-export function FanIcon() {
+export function FanIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -156,10 +156,10 @@ export function FanIcon() {
   );
 }
 
-export function GPUIcon() {
+export function GPUIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -176,10 +176,10 @@ export function GPUIcon() {
   );
 }
 
-export function MotherboardIcon() {
+export function MotherboardIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -196,10 +196,10 @@ export function MotherboardIcon() {
   );
 }
 
-export function OSIcon() {
+export function OSIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -216,10 +216,10 @@ export function OSIcon() {
   );
 }
 
-export function PSUIcon() {
+export function PSUIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -236,10 +236,10 @@ export function PSUIcon() {
   );
 }
 
-export function RAMIcon() {
+export function RAMIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"
@@ -256,10 +256,10 @@ export function RAMIcon() {
   );
 }
 
-export function StorageIcon() {
+export function StorageIcon({ styles }: { styles?: string }) {
   return (
     <svg
-      className={svgClass}
+      className={styles || svgClass}
       xmlns="http://www.w3.org/2000/svg"
       width="512"
       height="512"

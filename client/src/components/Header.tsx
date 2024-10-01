@@ -27,13 +27,11 @@ export default function Header() {
         if (window.scrollY > 0) {
           header.current.classList.add("shadow-md");
           header.current.classList.add("bg-[#fffcf9]");
-          div.current.classList.remove("border-b-[#e8e3da]");
-          div.current.classList.add("border-b-[#fffcf9]");
+          div.current.classList.remove("border-b");
         } else {
           header.current.classList.remove("shadow-md");
           header.current.classList.remove("bg-[#fffcf9]");
-          div.current.classList.remove("border-b-[#fffcf9]");
-          div.current.classList.add("border-b-[#e8e3da]");
+          div.current.classList.add("border-b");
         }
       }
     }
@@ -52,11 +50,11 @@ export default function Header() {
 
         <header
           ref={header}
-          className="sticky top-0 z-10 grid justify-items-center bg-white-1"
+          className="sticky top-0 z-10 grid justify-items-center"
         >
           <div
             ref={div}
-            className="grid w-4/5 grid-cols-[1fr_auto_1fr] items-center border border-x-0 border-b-[#e8e3da] text-lg"
+            className="grid w-4/5 grid-cols-[1fr_auto_1fr] items-center border-b border-b-gray-300 text-lg"
           >
             <Link to="/" className="justify-self-start">
               <Logo />

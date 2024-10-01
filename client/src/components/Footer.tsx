@@ -22,7 +22,7 @@ function Newsletter() {
 
 export default function Footer() {
   return (
-    <footer className="flex justify-center bg-green-2">
+    <footer className="flex justify-center bg-green-2 shadow-inner">
       <div className="grid w-[--page-margin] justify-center p-8">
         <div className="flex gap-36">
           <div>

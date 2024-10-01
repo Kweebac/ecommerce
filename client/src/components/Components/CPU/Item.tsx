@@ -28,7 +28,7 @@ export default function CPUItem() {
           value={item.integratedGraphics}
           styles={styles}
         />
-        <InfoItem name="Socket" value={`${item.socket} mm`} styles={styles} />
+        <InfoItem name="Socket" value={`${item.socket}`} styles={styles} />
         <InfoItem name="TDP" value={`${item.tdp} W`} styles={styles} />
       </Item>
     );

@@ -15,6 +15,14 @@ input[type="radio"] {
   accent-color: #4b654b;
 }
 
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+}
+
+.card:hover > div:last-child > div:first-child {
+  @apply text-blue-500;
+}
+
 @layer base {
   :root {
     --page-margin: 90vw;

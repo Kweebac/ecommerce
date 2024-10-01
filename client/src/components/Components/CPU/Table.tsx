@@ -96,6 +96,7 @@ const checkboxOptions = [
   [
     "AMD Ryzen 9",
     "AMD Ryzen 7",
+    "AMD Ryzen 5",
     "Intel Core i9",
     "Intel Core i7",
     "Intel Core i5",

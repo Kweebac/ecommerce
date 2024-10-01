@@ -58,6 +58,7 @@ export default function Filter({
         min={3200}
         max={8000}
         step={200}
+        minStepsBetweenThumbs={0}
         setColumnFilters={setColumnFilters}
       />
 
