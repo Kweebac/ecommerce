@@ -19,8 +19,8 @@ const columns = [
     cell: (props) => (
       <img
         src={props.getValue()}
-        alt="GPU"
-        className="h-12 w-12 cursor-pointer"
+        alt="CPU Cooler"
+        className="ml-1 h-12 w-12 cursor-pointer p-0.5"
       />
     ),
     enableSorting: false,
@@ -46,25 +46,23 @@ const columns = [
     cell: (props) => <p>{props.getValue()} dB</p>,
   },
   {
-    accessorKey: "waterCooled",
-    header: "Water cooled",
-    size: 190,
-  },
-  {
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 120,
+    size: 130,
     cell: (props) => {
       const rowItem = props.row.original;
 
       return (
-        <div className="flex items-center justify-between gap-3">
+        <div className="mr-2 flex items-center justify-between gap-3">
           <p>£{props.getValue()}</p>
           <SmallButton itemInfo={rowItem} />
         </div>
       );
     },
+  },
+  {
+    accessorKey: "waterCooled",
   },
   {
     accessorKey: "cpuSockets",
@@ -97,6 +95,7 @@ export default function CPUCooler() {
     columns,
     initialState: {
       columnVisibility: {
+        waterCooled: false,
         height: false,
         cpuSockets: false,
         color: false,

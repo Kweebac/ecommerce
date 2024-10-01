@@ -19,6 +19,7 @@ input[type="radio"] {
   :root {
     --page-margin: 90vw;
     --filter-width: 16rem;
+    --background-color: #f4f4f3;
 
     @apply box-border font-fraunces text-[#171516];
 

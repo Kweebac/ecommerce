@@ -19,8 +19,8 @@ const columns = [
     cell: (props) => (
       <img
         src={props.getValue()}
-        alt="GPU"
-        className="h-12 w-12 cursor-pointer"
+        alt="Storage"
+        className="ml-1 h-12 w-12 cursor-pointer p-0.5"
       />
     ),
     enableSorting: false,
@@ -57,12 +57,12 @@ const columns = [
     accessorKey: "pricePerGb",
     header: "Price / GB",
     filterFn: "inNumberRange",
-    size: 115,
+    size: 125,
     cell: (props) => {
       const rowItem = props.row.original;
 
       return (
-        <div className="flex items-center justify-between gap-3">
+        <div className="mr-2 flex items-center justify-between gap-3">
           <p>£{props.getValue()}</p>
           <SmallButton itemInfo={rowItem} />
         </div>

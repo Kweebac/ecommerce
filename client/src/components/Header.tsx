@@ -47,7 +47,7 @@ export default function Header() {
 
   return (
     <CartVisibleContext.Provider value={{ cartVisible, setCartVisible }}>
-      <div className="grid min-h-[calc(100vh-323px)] grid-rows-[auto_1fr]">
+      <div className="grid min-h-[calc(100vh-323px)] grid-rows-[auto_1fr] bg-[--background-color]">
         {cartVisible && <Cart />}
 
         <header

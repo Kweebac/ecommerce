@@ -15,13 +15,13 @@ export default function Pages({ table }: { table: any }) {
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <LeftArrowIcon styles="h-8 w-8 bg-white-2 rounded-full" />
+              <LeftArrowIcon styles="h-8 w-8 bg-white-1 rounded-full" />
             </button>
             <button
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <RightArrowIcon styles="h-8 w-8 bg-white-2 rounded-full" />
+              <RightArrowIcon styles="h-8 w-8 bg-white-1 rounded-full" />
             </button>
           </div>
         </div>

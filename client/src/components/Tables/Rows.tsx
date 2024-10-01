@@ -7,7 +7,7 @@ export default function Rows({ table }) {
       {table.getRowModel().rows.map((row) => (
         <div
           key={row.id}
-          className="grid grid-flow-col items-center justify-start border-t border-t-gray-300"
+          className="grid grid-flow-col items-center justify-start rounded-xl border-t-4 border-t-[--background-color] bg-white-1"
         >
           {row.getVisibleCells().map((cell) => {
             const cells = cell.row.getAllCells();
