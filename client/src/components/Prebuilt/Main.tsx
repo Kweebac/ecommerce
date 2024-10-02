@@ -33,42 +33,17 @@ function ComponentList({ item }: { item: object }) {
 }
 
 function Card({ item }: { item: object }) {
-  let price = 0;
-  for (const component in item.components) {
-    if (typeof item.components[component] === "object")
-      price += item.components[component].price;
-  }
-  price = Math.round(price * 100) / 100;
-
   return (
     <Link to={item._id}>
       <div className="card cursor-pointer rounded-xl bg-white-1 p-3 hover:shadow-lg">
-        <div className="mb-2 flex rounded-xl">
-          <img
-            src={item.components.case.url}
-            alt="Case"
-            className="h-[148px] w-[148px] rounded-xl"
-          />
-          <div className="grid content-around">
-            <img
-              src={item.components.gpu.url}
-              alt="GPU"
-              className="rounded-xl"
-            />
-            <img
-              src={item.components.cpu.url}
-              alt="CPU"
-              className="rounded-xl"
-            />
-          </div>
-        </div>
+        <img src={item.url} alt="Prebuilt PC" />
         <div className="grid rounded-b-xl p-3">
           <div className="grid h-12 content-center text-center font-[650]">
             {item.name}
           </div>
           <ComponentList item={item} />
           <div className="mt-2 flex items-center justify-end gap-2 border-t border-t-[--background-color] pt-3">
-            <div className="font-semibold">£{price}</div>
+            <div className="font-semibold">£{item.price}</div>
           </div>
         </div>
       </div>

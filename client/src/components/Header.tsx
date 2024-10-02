@@ -50,7 +50,7 @@ export default function Header() {
 
         <header
           ref={header}
-          className="sticky top-0 z-10 grid justify-items-center"
+          className="sticky top-0 z-20 grid justify-items-center"
         >
           <div
             ref={div}

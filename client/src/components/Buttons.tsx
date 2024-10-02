@@ -10,7 +10,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
 
   let paths = useLocation().pathname.split("/");
-  paths = paths.slice(1, paths.length - 1);
+  paths = paths.slice(1);
   const url = paths.join("/");
 
   function handleClick() {

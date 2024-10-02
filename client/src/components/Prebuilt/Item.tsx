@@ -32,13 +32,15 @@ function ComponentInfo({ icon, link, alt, component, children }) {
       </div>
       {icon}
       <Link to={`/components/${link}`}>
-        <div className="flex items-center gap-10 rounded-xl bg-white-1 pl-2 pr-4 hover:shadow-md">
+        <div className="flex items-center gap-2 rounded-xl bg-white-1 pl-2 pr-4 hover:shadow-md">
           <div className="h-16 w-16 place-content-center p-1">
             <img src={url} alt={alt} className="object-contain" />
           </div>
 
-          <ComponentInfoItem name="Name" value={name} />
-          {children}
+          <div className="flex gap-10">
+            <ComponentInfoItem name="Name" value={name} />
+            {children}
+          </div>
         </div>
       </Link>
     </div>
@@ -52,15 +54,6 @@ export default function PrebuiltItem() {
     ? prebuilt.components
     : {};
   const caseItem = prebuilt ? prebuilt.components.case : {};
-
-  let price = 0;
-  if (prebuilt) {
-    for (const component in prebuilt.components) {
-      if (typeof prebuilt.components[component] === "object")
-        price += prebuilt.components[component].price;
-    }
-    price = Math.round(price * 100) / 100;
-  }
 
   useEffect(() => {
     (async () => {
@@ -211,7 +204,7 @@ export default function PrebuiltItem() {
             )}
           </div>
           <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-4">
-            <div className="text-2xl font-semibold">£{price}</div>
+            <div className="text-2xl font-semibold">£{prebuilt.price}</div>
             <Button itemInfo={prebuilt} />
           </div>
 
