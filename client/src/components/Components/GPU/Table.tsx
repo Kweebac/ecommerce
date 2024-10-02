@@ -21,7 +21,7 @@ const columns = [
       <img
         src={props.getValue()}
         alt="GPU"
-        className="ml-1 h-12 w-12 cursor-pointer p-0.5"
+        className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
       />
     ),
     enableSorting: false,

@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  CPUIcon,
-  GPUIcon,
-  MotherboardIcon,
-  RAMIcon,
-  StorageIcon,
-} from "../Icons";
+import { CPUIcon, GPUIcon, MotherboardIcon, RAMIcon } from "../Icons";
 import { Link } from "react-router-dom";
 
 function ComponentItem({ text, children }) {
@@ -73,11 +67,8 @@ function Card({ item }: { item: object }) {
             {item.name}
           </div>
           <ComponentList item={item} />
-          <div className="mt-2 flex items-center justify-between gap-2 border-t-2 border-t-[--background-color] pt-3">
+          <div className="mt-2 flex items-center justify-end gap-2 border-t border-t-[--background-color] pt-3">
             <div className="font-semibold text-green-3">£{price}</div>
-            <button className="rounded-md bg-green-3 px-4 py-0.5 text-white-1 hover:scale-105">
-              Add
-            </button>
           </div>
         </div>
       </div>

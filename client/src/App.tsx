@@ -43,6 +43,7 @@ import SpeakersItem from "./components/Accessories/Speakers/Item";
 import Mice from "./components/Accessories/Mice/Table";
 import MiceItem from "./components/Accessories/Mice/Item";
 import Prebuilt from "./components/Prebuilt/Main";
+import PrebuiltItem from "./components/Prebuilt/Item";
 
 export const UserContext = createContext<{
   user: object | null;
@@ -148,6 +149,7 @@ export default function App() {
             </Route>
 
             <Route path="prebuilt" element={<Prebuilt />} />
+            <Route path="prebuilt/:id" element={<PrebuiltItem />} />
 
             {isLoggedIn ? (
               <Route path="/logout" element={<Logout />} />

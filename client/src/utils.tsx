@@ -38,7 +38,7 @@ export function useGetItem(
         setItem(data);
       }
     })();
-  }, [id]);
+  }, [id, subCategory, mainCategory]);
 
   return item;
 }

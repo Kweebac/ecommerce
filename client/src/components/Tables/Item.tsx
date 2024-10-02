@@ -27,7 +27,13 @@ export default function Item({ item, options, children }: ItemProps) {
     <div className="my-8 flex items-start justify-center gap-12">
       <div className="grid gap-3">
         <div className="flex gap-3">
-          <img src={item.url} alt="GPU" className="h-64 w-64 rounded-xl" />
+          <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
+            <img
+              src={item.url}
+              alt="GPU"
+              className="rounded-xl object-contain"
+            />
+          </div>
           <img
             src="https://placehold.co/256"
             alt="GPU"
