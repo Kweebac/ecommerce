@@ -56,7 +56,7 @@ export default function Item({ item, options, children }: ItemProps) {
       <div className="grid gap-6">
         <div className="text-3xl font-semibold">{item.name}</div>
         {children && (
-          <div className="grid grid-flow-col justify-start gap-12 ">
+          <div className="grid grid-flow-col justify-start gap-12">
             <div>{children}</div>
           </div>
         )}

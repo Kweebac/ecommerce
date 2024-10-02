@@ -20,7 +20,7 @@ export default function CPUItem() {
         />
         <InfoItem name="Color" value={item.color} styles={styles} />
         <InfoItem
-          name="Water Cooled"
+          name="Water cooled"
           value={item.waterCooled}
           styles={styles}
         />

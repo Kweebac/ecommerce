@@ -53,7 +53,7 @@ export default function Button({ itemInfo }: ButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className="w-full rounded-md bg-green-3 py-3 text-xl font-medium text-white-1"
+      className="w-full rounded-md bg-green-3 px-4 py-3 text-xl font-medium text-white-1"
     >
       Add to Cart
     </button>

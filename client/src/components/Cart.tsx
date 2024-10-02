@@ -84,6 +84,8 @@ function changeName(name: string) {
       return "Webcam";
     case "speakers":
       return "Speakers";
+    case "prebuilt":
+      return "Prebuilt";
   }
 }
 

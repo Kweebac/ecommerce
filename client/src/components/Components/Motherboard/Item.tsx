@@ -15,7 +15,7 @@ export function DDRSpeeds({ name, value, styles }: DDRSpeedsProps) {
   const speedsSecondHalf = value.slice(middle).join(", ");
 
   return (
-    <div className="flex border-t border-t-gray-300 py-1.5">
+    <div className="flex rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
       <span className={styles}>{name}</span>
       <div>
         <div>{speedsFirstHalf}</div>

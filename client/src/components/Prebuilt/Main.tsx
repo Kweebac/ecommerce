@@ -68,7 +68,7 @@ function Card({ item }: { item: object }) {
           </div>
           <ComponentList item={item} />
           <div className="mt-2 flex items-center justify-end gap-2 border-t border-t-[--background-color] pt-3">
-            <div className="font-semibold text-green-3">£{price}</div>
+            <div className="font-semibold">£{price}</div>
           </div>
         </div>
       </div>
