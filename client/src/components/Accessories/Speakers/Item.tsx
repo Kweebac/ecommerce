@@ -8,26 +8,17 @@ export default function SpeakersItem() {
     "speakers",
     "accessories",
   );
-  const styles = "w-52";
 
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
       <Item item={item}>
-        <InfoItem
-          name="Configuration"
-          value={item.configuration}
-          styles={styles}
-        />
-        <InfoItem
-          name="Frequency response"
-          value={item.frequencyResponse}
-          styles={styles}
-        />
+        <InfoItem name="Configuration" value={item.configuration} />
+        <InfoItem name="Frequency response" value={item.frequencyResponse} />
 
-        <InfoItem name="Wattage" value={`${item.wattage} W`} styles={styles} />
-        <InfoItem name="Power" value={`${item.power} W`} styles={styles} />
-        <InfoItem name="Color" value={item.color} styles={styles} />
+        <InfoItem name="Wattage" value={`${item.wattage} W`} />
+        <InfoItem name="Power" value={`${item.power} W`} />
+        <InfoItem name="Color" value={item.color} />
       </Item>
     );
 }

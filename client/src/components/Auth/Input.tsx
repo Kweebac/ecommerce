@@ -14,7 +14,7 @@ export default function Input({
   errors,
 }: InputProps) {
   return (
-    <div className="grid gap-1">
+    <div className="rounded-md bg-white-1">
       <div className="focus-within rounded-md border border-[#dedede] px-3 py-1.5 text-sm">
         <label>
           <div className="text-[#707070]">{label}</div>

@@ -5,7 +5,6 @@ import URLError from "../../URLError";
 
 export default function RAMItem() {
   const item: StorageValues | null | undefined = useGetItem("storage");
-  const styles = "w-36";
 
   const options = {
     pricePerGb: true,
@@ -15,12 +14,8 @@ export default function RAMItem() {
   else if (item !== undefined)
     return (
       <Item item={item} options={options}>
-        <InfoItem name="Type" value={item.type} styles={styles} />
-        <InfoItem
-          name="Capacity"
-          value={`${item.capacity} GB`}
-          styles={styles}
-        />
+        <InfoItem name="Type" value={item.type} />
+        <InfoItem name="Capacity" value={`${item.capacity} GB`} />
       </Item>
     );
 }

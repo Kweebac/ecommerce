@@ -8,20 +8,15 @@ export default function HeadphonesItem() {
     "headphones",
     "accessories",
   );
-  const styles = "w-52";
 
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
       <Item item={item}>
-        <InfoItem name="Microphone" value={item.microphone} styles={styles} />
-        <InfoItem name="Wireless" value={item.wireless} styles={styles} />
-        <InfoItem
-          name="Frequency response"
-          value={item.frequencyResponse}
-          styles={styles}
-        />
-        <InfoItem name="Color" value={item.color} styles={styles} />
+        <InfoItem name="Microphone" value={item.microphone} />
+        <InfoItem name="Wireless" value={item.wireless} />
+        <InfoItem name="Frequency response" value={item.frequencyResponse} />
+        <InfoItem name="Color" value={item.color} />
       </Item>
     );
 }

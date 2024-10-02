@@ -15,8 +15,8 @@ export function DDRSpeeds({ name, value, styles }: DDRSpeedsProps) {
   const speedsSecondHalf = value.slice(middle).join(", ");
 
   return (
-    <div className="flex rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
-      <span className={styles}>{name}</span>
+    <div className="grid rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
+      <span className="text-sm font-semibold text-green-3">{name}</span>
       <div>
         <div>{speedsFirstHalf}</div>
         <div>{speedsSecondHalf}</div>
@@ -27,29 +27,24 @@ export function DDRSpeeds({ name, value, styles }: DDRSpeedsProps) {
 
 export default function MotherboardItem() {
   const item: MotherboardValues | null | undefined = useGetItem("motherboard");
-  const styles = "w-48";
 
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
       <Item item={item}>
-        <InfoItem name="Chipset" value={item.chipset} styles={styles} />
-        <InfoItem name="Form factor" value={item.formFactor} styles={styles} />
-        <InfoItem name="CPU socket" value={item.cpuSocket} styles={styles} />
-        <InfoItem name="RAM" value={item.ram.ddr} styles={styles} />
-        <InfoItem name="RAM slots" value={item.ram.slots} styles={styles} />
-        <DDRSpeeds
-          name="RAM speeds"
-          value={item.ram.ddrSpeeds}
-          styles={styles}
-        />
-        <InfoItem name="M.2 M-key slots" value={item.m2Mkey} styles={styles} />
-        <InfoItem name="PCIe 16x slots" value={item.pcie.x16} styles={styles} />
-        <InfoItem name="PCIe 8x slots" value={item.pcie.x8} styles={styles} />
-        <InfoItem name="PCIe 4x slots" value={item.pcie.x4} styles={styles} />
-        <InfoItem name="PCIe 1x slots" value={item.pcie.x1} styles={styles} />
-        <InfoItem name="Wi-Fi" value={item.wifi} styles={styles} />
-        <InfoItem name="Color" value={item.color} styles={styles} />
+        <InfoItem name="Chipset" value={item.chipset} />
+        <InfoItem name="Form factor" value={item.formFactor} />
+        <InfoItem name="CPU socket" value={item.cpuSocket} />
+        <InfoItem name="RAM" value={item.ram.ddr} />
+        <InfoItem name="RAM slots" value={item.ram.slots} />
+        <DDRSpeeds name="RAM speeds" value={item.ram.ddrSpeeds} />
+        <InfoItem name="M.2 M-key slots" value={item.m2Mkey} />
+        <InfoItem name="PCIe 16x slots" value={item.pcie.x16} />
+        <InfoItem name="PCIe 8x slots" value={item.pcie.x8} />
+        <InfoItem name="PCIe 4x slots" value={item.pcie.x4} />
+        <InfoItem name="PCIe 1x slots" value={item.pcie.x1} />
+        <InfoItem name="Wi-Fi" value={item.wifi} />
+        <InfoItem name="Color" value={item.color} />
       </Item>
     );
 }

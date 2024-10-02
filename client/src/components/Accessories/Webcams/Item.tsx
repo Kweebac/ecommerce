@@ -8,18 +8,13 @@ export default function WebcamItem() {
     "webcams",
     "accessories",
   );
-  const styles = "w-32";
 
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
       <Item item={item}>
-        <InfoItem
-          name="Resolutions"
-          value={item.resolutions.join(", ")}
-          styles={styles}
-        />
-        <InfoItem name="Focus Type" value={item.focusType} styles={styles} />
+        <InfoItem name="Resolutions" value={item.resolutions.join(", ")} />
+        <InfoItem name="Focus Type" value={item.focusType} />
       </Item>
     );
 }

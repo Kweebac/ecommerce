@@ -5,7 +5,6 @@ import URLError from "../../URLError";
 
 export default function MiceItem() {
   const item: MiceValues | null | undefined = useGetItem("mice", "accessories");
-  const styles = "w-32";
 
   if (item === null) return <URLError />;
   else if (item !== undefined)
@@ -16,10 +15,9 @@ export default function MiceItem() {
           value={
             item.wireless.join(", ") === "No, Yes" ? "Both" : item.wireless
           }
-          styles={styles}
         />
-        <InfoItem name="Max DPI" value={item.maxDpi} styles={styles} />
-        <InfoItem name="Color" value={item.color} styles={styles} />
+        <InfoItem name="Max DPI" value={item.maxDpi} />
+        <InfoItem name="Color" value={item.color} />
       </Item>
     );
 }

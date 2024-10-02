@@ -4,13 +4,12 @@ import Button from "../Buttons";
 type InfoItemProps = {
   name: string;
   value: string | number;
-  styles: string;
 };
 
-export function InfoItem({ name, value, styles }: InfoItemProps) {
+export function InfoItem({ name, value }: InfoItemProps) {
   return (
-    <div className="flex rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
-      <span className={styles}>{name}</span>
+    <div className="grid content-start rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
+      <span className="text-sm font-semibold text-green-3">{name}</span>
       <span>{value}</span>
     </div>
   );
@@ -56,9 +55,7 @@ export default function Item({ item, options, children }: ItemProps) {
       <div className="grid gap-6">
         <div className="text-3xl font-semibold">{item.name}</div>
         {children && (
-          <div className="grid grid-flow-col justify-start gap-12">
-            <div>{children}</div>
-          </div>
+          <div className="grid w-max grid-cols-2 gap-2">{children}</div>
         )}
         <div className="grid w-64 justify-items-center gap-3">
           <Button itemInfo={item} />
