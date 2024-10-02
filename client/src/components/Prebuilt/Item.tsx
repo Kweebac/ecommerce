@@ -93,7 +93,7 @@ export default function PrebuiltItem() {
           <h1 className="z-10 mb-8 bg-[--background-color] px-4 text-3xl font-semibold">
             {prebuilt.name}
           </h1>
-          <div className="grid content-start gap-2">
+          <div className="z-10 grid content-start gap-2">
             <ComponentInfo
               icon={<GPUIcon />}
               link={`gpu/${gpu._id}`}

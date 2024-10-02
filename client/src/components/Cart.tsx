@@ -11,8 +11,7 @@ type QuantityProps = {
 };
 
 type CartItemProps = QuantityProps & {
-  mainCategory: string;
-  category: string;
+  url: string;
 };
 
 function Quantity({ info, quantity }: QuantityProps) {
@@ -52,67 +51,84 @@ function Quantity({ info, quantity }: QuantityProps) {
 
 function changeName(name: string) {
   switch (name) {
-    case "gpu":
+    case "components/gpu":
       return "GPU";
-    case "cpu":
+    case "components/cpu":
       return "CPU";
-    case "motherboard":
+    case "components/motherboard":
       return "Motherboard";
-    case "ram":
+    case "components/ram":
       return "RAM";
-    case "storage":
+    case "components/storage":
       return "Storage";
-    case "psu":
+    case "components/psu":
       return "PSU";
-    case "case":
+    case "components/case":
       return "Case";
-    case "cpu-cooler":
+    case "components/cpu-cooler":
       return "CPU Cooler";
-    case "fans":
+    case "components/fans":
       return "Fans";
-    case "os":
+    case "components/os":
       return "OS";
-    case "monitors":
+    case "accessories/monitors":
       return "Monitor";
-    case "keyboards":
+    case "accessories/keyboards":
       return "Keyboard";
-    case "mice":
+    case "accessories/mice":
       return "Mouse";
-    case "headphones":
+    case "accessories/headphones":
       return "Headphones";
-    case "webcams":
+    case "accessories/webcams":
       return "Webcam";
-    case "speakers":
+    case "accessories/speakers":
       return "Speakers";
     case "prebuilt":
       return "Prebuilt";
   }
 }
 
-function CartItem({ info, quantity, mainCategory, category }: CartItemProps) {
+function CartItem({ info, quantity, url }: CartItemProps) {
   const navigate = useNavigate();
   const { setCartVisible } = useContext(CartVisibleContext);
 
+  if (url === "prebuilt") {
+    let price = 0;
+    for (const component in info.components) {
+      if (typeof info.components[component] === "object")
+        price += info.components[component].price;
+    }
+    info.price = Math.round(price * 100) / 100;
+  }
+
   function navigateToItemPage() {
-    navigate(`/${mainCategory}/${category}/${info._id}`);
+    navigate(`/${url}/${info._id}`);
     setCartVisible(false);
   }
 
   return (
     <div className="grid grid-cols-[auto_1fr] gap-4">
-      <img
-        onClick={navigateToItemPage}
-        src={info.url}
-        alt={info.name}
-        className="h-20 w-20 cursor-pointer rounded-lg"
-      />
+      {info.url ? (
+        <img
+          onClick={navigateToItemPage}
+          src={info.url}
+          alt={info.name}
+          className="h-20 w-20 cursor-pointer rounded-lg"
+        />
+      ) : (
+        <img
+          src="https://placehold.co/80"
+          alt="GPU"
+          className="h-20 w-20 rounded-xl"
+        />
+      )}
       <div className="grid content-between">
         <div>
           <div
             onClick={navigateToItemPage}
             className="w-max cursor-pointer font-semibold"
           >
-            {changeName(category)}
+            {changeName(url)}
           </div>
           <div
             onClick={navigateToItemPage}
@@ -178,8 +194,7 @@ export default function Cart() {
                 key={index}
                 info={item.info}
                 quantity={item.quantity}
-                mainCategory={item.mainCategory}
-                category={item.category}
+                url={item.url}
               />
             ))}
           </div>

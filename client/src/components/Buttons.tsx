@@ -8,8 +8,10 @@ type ButtonProps = {
 
 export function SmallButton({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
-  const mainCategory = useLocation().pathname.split("/")[1];
-  const category = useLocation().pathname.split("/")[2];
+
+  let paths = useLocation().pathname.split("/");
+  paths = paths.slice(1, paths.length - 1);
+  const url = paths.join("/");
 
   function handleClick() {
     setCart((prev) =>
@@ -19,7 +21,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1, mainCategory, category }],
+        : [...prev, { info: itemInfo, quantity: 1, url }],
     );
   }
 
@@ -35,8 +37,10 @@ export function SmallButton({ itemInfo }: ButtonProps) {
 
 export default function Button({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
-  const mainCategory = useLocation().pathname.split("/")[1];
-  const category = useLocation().pathname.split("/")[2];
+
+  let paths = useLocation().pathname.split("/");
+  paths = paths.slice(1, paths.length - 1);
+  const url = paths.join("/");
 
   function handleClick() {
     setCart((prev) =>
@@ -46,7 +50,7 @@ export default function Button({ itemInfo }: ButtonProps) {
               ? { ...item, quantity: item.quantity + 1 }
               : item,
           )
-        : [...prev, { info: itemInfo, quantity: 1, mainCategory, category }],
+        : [...prev, { info: itemInfo, quantity: 1, url }],
     );
   }
 
