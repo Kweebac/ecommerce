@@ -130,7 +130,7 @@ export default function PrebuiltItem() {
               component={motherboard}
             >
               <ComponentInfoItem name="Chipset" value={motherboard.chipset} />
-              <ComponentInfoItem name="WiFi" value={motherboard.wifi} />
+              <ComponentInfoItem name="Wi-Fi" value={motherboard.wifi} />
             </ComponentInfo>
 
             <ComponentInfo

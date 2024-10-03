@@ -18,6 +18,9 @@ input[type="radio"] {
 .cards {
   grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
 }
+.item-info {
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+}
 
 .card:hover > div:last-child > div:first-child {
   @apply text-blue-500;

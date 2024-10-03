@@ -19,7 +19,7 @@ export default function MonitorItem() {
         <InfoItem name="Response time" value={`${item.responseTime} ms`} />
         <InfoItem name="Panel" value={item.panelType} />
         <InfoItem name="Brightness" value={`${item.brightness} cd/m²`} />
-        <InfoItem name="Frame sync" value={item.frameSync.join(", ")} />
+        <InfoItem name="Frame sync" value={item.frameSync} />
         <InfoItem name="Speakers" value={item.speakers} />
         <InfoItem name="Curved" value={item.curved} />
       </Item>

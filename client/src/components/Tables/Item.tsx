@@ -3,14 +3,33 @@ import Button from "../Buttons";
 
 type InfoItemProps = {
   name: string;
-  value: string | number;
+  value: string | number | number[];
 };
 
 export function InfoItem({ name, value }: InfoItemProps) {
+  let arrayLength = 0;
+  if (typeof value === "object") {
+    arrayLength = value.length;
+    value = value.join(", ");
+  }
+
   return (
-    <div className="grid content-start rounded-xl border-t-4 border-t-[--background-color] bg-white-1 px-2 py-1.5">
+    <div className="grid max-w-[20rem] content-start rounded-xl bg-white-1 px-3 py-1.5">
       <span className="text-sm font-semibold text-green-3">{name}</span>
-      <span>{value}</span>
+
+      {name === "RAM speeds" && (
+        <span
+          className={
+            arrayLength > 10 ? "text-xs" : arrayLength > 5 ? "text-sm" : ""
+          }
+        >
+          {value}
+        </span>
+      )}
+      {name === "Frame sync" && (
+        <span className={arrayLength > 1 ? "text-sm" : ""}>{value}</span>
+      )}
+      {name !== "RAM speeds" && name !== "Frame sync" && <span>{value}</span>}
     </div>
   );
 }
@@ -55,7 +74,7 @@ export default function Item({ item, options, children }: ItemProps) {
       <div className="grid gap-6">
         <div className="text-3xl font-semibold">{item.name}</div>
         {children && (
-          <div className="grid w-max grid-cols-2 gap-2">{children}</div>
+          <div className="flex w-[30rem] flex-wrap gap-2">{children}</div>
         )}
         <div className="grid w-64 justify-items-center gap-3">
           <Button itemInfo={item} />
