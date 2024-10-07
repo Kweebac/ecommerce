@@ -11,97 +11,9 @@ import Filter from "./Filter";
 import Pages from "../../Tables/Pages";
 import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
-import { SmallButton } from "../../Buttons";
-
-const columns = [
-  {
-    accessorKey: "url",
-    size: 60,
-    cell: (props) => (
-      <img
-        src={props.getValue()}
-        alt="Motherboard"
-        className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
-      />
-    ),
-    enableSorting: false,
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    size: 400,
-    cell: (props) => (
-      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
-    ),
-  },
-  {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 165,
-  },
-  {
-    accessorKey: "formFactor",
-    header: "Form factor",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "cpuSocket",
-    header: "CPU socket",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "ram.ddr",
-    id: "ramDdr",
-    header: "RAM",
-    filterFn: "arrIncludesSome",
-    size: 100,
-  },
-  {
-    accessorKey: "wifi",
-    header: "Wi-Fi",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 130,
-  },
-  {
-    accessorKey: "price",
-    header: "Price",
-    filterFn: "inNumberRange",
-    size: 130,
-    cell: (props) => {
-      const rowItem = props.row.original;
-
-      return (
-        <div className="mr-2 flex items-center justify-between gap-3">
-          <p>£{props.getValue()}</p>
-          <SmallButton itemInfo={rowItem} />
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "color",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-  },
-  {
-    accessorKey: "_id",
-  },
-];
+import { SmallButton, SmallButtonPC } from "../../Buttons";
+import { MotherboardIcon } from "../../Icons";
+import Error from "../../Error";
 
 const checkboxOptions = [
   [
@@ -123,9 +35,108 @@ const checkboxOptions = [
 export default function Motherboard() {
   const [motherboardList, setMotherboardList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [error, setError] = useState("");
   const table = useReactTable({
     data: motherboardList,
-    columns,
+    columns: [
+      {
+        accessorKey: "url",
+        size: 60,
+        cell: (props) => (
+          <img
+            src={props.getValue()}
+            alt="Motherboard"
+            className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
+          />
+        ),
+        enableSorting: false,
+      },
+      {
+        accessorKey: "name",
+        header: "Name",
+        size: 400,
+        cell: (props) => (
+          <p className="cursor-pointer hover:text-blue-500">
+            {props.getValue()}
+          </p>
+        ),
+      },
+      {
+        accessorKey: "chipset",
+        header: "Chipset",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+        size: 165,
+      },
+      {
+        accessorKey: "formFactor",
+        header: "Form factor",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+      },
+      {
+        accessorKey: "cpuSocket",
+        header: "CPU socket",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+      },
+      {
+        accessorKey: "ram.ddr",
+        id: "ramDdr",
+        header: "RAM",
+        filterFn: "arrIncludesSome",
+        size: 100,
+      },
+      {
+        accessorKey: "wifi",
+        header: "Wi-Fi",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+        size: 130,
+      },
+      {
+        accessorKey: "price",
+        header: "Price",
+        filterFn: "inNumberRange",
+        size: 155,
+        cell: (props) => {
+          const rowItem = props.row.original;
+
+          return (
+            <div className="mr-2 flex items-center justify-between gap-3">
+              <p>£{props.getValue()}</p>
+              <div className="flex gap-2">
+                <SmallButtonPC
+                  setError={setError}
+                  error={error}
+                  itemInfo={rowItem}
+                  icon={<MotherboardIcon styles="h-6 w-6" />}
+                />
+                <SmallButton itemInfo={rowItem} />
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+        accessorKey: "color",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+      },
+      {
+        accessorKey: "_id",
+      },
+    ],
     initialState: {
       columnVisibility: {
         color: false,
@@ -153,6 +164,8 @@ export default function Motherboard() {
 
   return (
     <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
+      {error && <Error message={error} />}
+
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}

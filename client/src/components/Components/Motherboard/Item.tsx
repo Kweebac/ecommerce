@@ -16,7 +16,7 @@ export default function MotherboardItem() {
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
-      <Item item={item}>
+      <Item item={item} options={{ addToPc: true }}>
         <InfoItem name="Chipset" value={item.chipset} />
         <InfoItem name="Form factor" value={item.formFactor} />
         <InfoItem name="CPU socket" value={item.cpuSocket} />

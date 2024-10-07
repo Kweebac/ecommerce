@@ -9,7 +9,7 @@ export default function CPUItem() {
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
-      <Item item={item}>
+      <Item item={item} options={{ addToPc: true }}>
         <InfoItem name="Quantity" value={item.quantity} />
         <InfoItem name="Size" value={`${item.size} mm`} />
         <InfoItem name="RPM" value={`${item.rpm} RPM`} />

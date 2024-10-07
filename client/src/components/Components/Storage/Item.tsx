@@ -8,6 +8,7 @@ export default function RAMItem() {
 
   const options = {
     pricePerGb: true,
+    addToPc: true,
   };
 
   if (item === null) return <URLError />;

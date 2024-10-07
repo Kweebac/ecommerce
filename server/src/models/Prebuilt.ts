@@ -6,7 +6,6 @@ const Prebuilt = mongoose.model(
     url: { type: String, required: true },
     name: { type: String, required: true },
     price: { type: Number, required: true },
-    type: { type: String, enum: ["amd", "intel"], required: true },
 
     components: {
       type: {

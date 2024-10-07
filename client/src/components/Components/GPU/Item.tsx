@@ -9,7 +9,7 @@ export default function GPUItem() {
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
-      <Item item={item}>
+      <Item item={item} options={{ addToPc: true }}>
         <InfoItem name="Chipset" value={item.chipset} />
         <InfoItem name="Memory" value={`${item.memory} GB`} />
         <InfoItem name="Core clock" value={`${item.coreClock} MHz`} />

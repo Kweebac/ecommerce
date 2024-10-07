@@ -36,6 +36,7 @@ export default function Header() {
       }
     }
 
+    handleScroll();
     addEventListener("scroll", handleScroll);
 
     () => {

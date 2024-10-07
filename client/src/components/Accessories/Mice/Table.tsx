@@ -55,7 +55,7 @@ const columns = [
     accessorKey: "price",
     header: "Price",
     filterFn: "inNumberRange",
-    size: 130,
+    size: 115,
     cell: (props) => {
       const rowItem = props.row.original;
 

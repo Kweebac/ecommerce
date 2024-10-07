@@ -11,84 +11,9 @@ import Filter from "./Filter";
 import Pages from "../../Tables/Pages";
 import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
-import { SmallButton } from "../../Buttons";
-
-const columns = [
-  {
-    accessorKey: "url",
-    size: 60,
-    cell: (props) => (
-      <img
-        src={props.getValue()}
-        alt="GPU"
-        className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
-      />
-    ),
-    enableSorting: false,
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    size: 375,
-    cell: (props) => (
-      <p className="cursor-pointer hover:text-blue-500">{props.getValue()}</p>
-    ),
-  },
-  {
-    accessorKey: "chipset",
-    header: "Chipset",
-    filterFn: (row: Row, columnId: string, filterValue: any) => {
-      const value = row.getValue(columnId);
-      return filterValue.includes(value);
-    },
-    size: 300,
-  },
-  {
-    accessorKey: "memory",
-    header: "Memory",
-    filterFn: "inNumberRange",
-    size: 135,
-    cell: (props) => <p>{props.getValue()} GB</p>,
-  },
-  {
-    accessorKey: "coreClock",
-    header: "Core clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
-  },
-  {
-    accessorKey: "boostClock",
-    header: "Boost clock",
-    filterFn: "inNumberRange",
-    cell: (props) => <p>{props.getValue()} MHz</p>,
-  },
-  {
-    accessorKey: "price",
-    header: "Price",
-    filterFn: "inNumberRange",
-    size: 140,
-    cell: (props) => {
-      const rowItem = props.row.original;
-
-      return (
-        <div className="mr-2 flex items-center justify-between gap-3">
-          <p>£{props.getValue()}</p>
-          <SmallButton itemInfo={rowItem} />
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "length",
-  },
-  {
-    accessorKey: "color",
-    filterFn: "arrIncludesSome",
-  },
-  {
-    accessorKey: "_id",
-  },
-];
+import { SmallButton, SmallButtonPC } from "../../Buttons";
+import { GPUIcon } from "../../Icons";
+import Error from "../../Error";
 
 const checkboxOptions = [
   [
@@ -109,9 +34,96 @@ const checkboxOptions = [
 export default function GPU() {
   const [gpuList, setGpuList] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [error, setError] = useState("");
   const table = useReactTable({
     data: gpuList,
-    columns,
+    columns: [
+      {
+        accessorKey: "url",
+        size: 60,
+        cell: (props) => (
+          <img
+            src={props.getValue()}
+            alt="GPU"
+            className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
+          />
+        ),
+        enableSorting: false,
+      },
+      {
+        accessorKey: "name",
+        header: "Name",
+        size: 375,
+        cell: (props) => (
+          <p className="cursor-pointer hover:text-blue-500">
+            {props.getValue()}
+          </p>
+        ),
+      },
+      {
+        accessorKey: "chipset",
+        header: "Chipset",
+        filterFn: (row: Row, columnId: string, filterValue: any) => {
+          const value = row.getValue(columnId);
+          return filterValue.includes(value);
+        },
+        size: 300,
+      },
+      {
+        accessorKey: "memory",
+        header: "Memory",
+        filterFn: "inNumberRange",
+        size: 135,
+        cell: (props) => <p>{props.getValue()} GB</p>,
+      },
+      {
+        accessorKey: "coreClock",
+        header: "Core clock",
+        filterFn: "inNumberRange",
+        cell: (props) => <p>{props.getValue()} MHz</p>,
+      },
+      {
+        accessorKey: "boostClock",
+        header: "Boost clock",
+        filterFn: "inNumberRange",
+        cell: (props) => <p>{props.getValue()} MHz</p>,
+      },
+      {
+        accessorKey: "price",
+        header: "Price",
+        filterFn: "inNumberRange",
+        size: 160,
+        cell: (props) => {
+          const rowItem = props.row.original;
+
+          return (
+            <div className="mr-2 flex items-center justify-between gap-3">
+              <p>£{props.getValue()}</p>
+              <div className="flex gap-2">
+                <SmallButtonPC
+                  setError={setError}
+                  error={error}
+                  itemInfo={rowItem}
+                  icon={<GPUIcon styles="h-6 w-6" />}
+                  limit={2}
+                />
+                <SmallButton itemInfo={rowItem} />
+              </div>
+            </div>
+          );
+        },
+      },
+      {
+        accessorKey: "length",
+      },
+      {
+        accessorKey: "color",
+        filterFn: "arrIncludesSome",
+      },
+      {
+        accessorKey: "_id",
+      },
+    ],
     initialState: {
       columnVisibility: {
         length: false,
@@ -137,6 +149,8 @@ export default function GPU() {
 
   return (
     <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
+      {error && <Error message={error} />}
+
       <Filter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}

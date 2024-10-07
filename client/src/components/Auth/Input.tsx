@@ -14,15 +14,15 @@ export default function Input({
   errors,
 }: InputProps) {
   return (
-    <div className="rounded-md bg-white-1">
-      <div className="focus-within rounded-md border border-[#dedede] px-3 py-1.5 text-sm">
+    <div className="grid gap-1 rounded-md">
+      <div className="focus-within rounded-md border border-[#dedede] bg-white-1 px-3 py-1.5">
         <label>
-          <div className="text-[#707070]">{label}</div>
+          <div className="text-sm text-[#707070]">{label}</div>
           <input
             type={type}
             name={name}
             required
-            className="w-[36rem] bg-inherit outline-none"
+            className="w-[36rem] bg-inherit text-lg outline-none"
           />
         </label>
       </div>

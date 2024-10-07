@@ -42,3 +42,42 @@ export function useGetItem(
 
   return item;
 }
+
+export function changeName(name: string) {
+  switch (name) {
+    case "components/gpu":
+      return "GPU";
+    case "components/cpu":
+      return "CPU";
+    case "components/motherboard":
+      return "Motherboard";
+    case "components/ram":
+      return "RAM";
+    case "components/storage":
+      return "Storage";
+    case "components/psu":
+      return "PSU";
+    case "components/case":
+      return "Case";
+    case "components/cpu-cooler":
+      return "CPU Cooler";
+    case "components/fans":
+      return "Fans";
+    case "components/os":
+      return "OS";
+    case "accessories/monitors":
+      return "Monitor";
+    case "accessories/keyboards":
+      return "Keyboard";
+    case "accessories/mice":
+      return "Mouse";
+    case "accessories/headphones":
+      return "Headphones";
+    case "accessories/webcams":
+      return "Webcam";
+    case "accessories/speakers":
+      return "Speakers";
+    case "prebuilt":
+      return "Prebuilt";
+  }
+}

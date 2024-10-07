@@ -38,7 +38,11 @@ const register = [
         email,
         password: await bcrypt.hash(password, 10),
         firstName,
+
+        build: {},
       });
+
+      res.end();
     } else {
       throw new AuthError(errors.array());
     }

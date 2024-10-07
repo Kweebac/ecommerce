@@ -7,5 +7,6 @@ export default function CPUItem() {
   const item: SharedValues | null | undefined = useGetItem("os");
 
   if (item === null) return <URLError />;
-  else if (item !== undefined) return <Item item={item}></Item>;
+  else if (item !== undefined)
+    return <Item item={item} options={{ addToPc: true }}></Item>;
 }

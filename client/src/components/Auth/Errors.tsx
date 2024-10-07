@@ -9,7 +9,7 @@ export default function Errors({ errors, path }: Errors) {
       {errors?.map(
         (error, index) =>
           error.path === path && (
-            <li key={index} className="text-sm text-[#dd1d1d]">
+            <li key={index} className="text-[#dd1d1d]">
               {error.msg}
             </li>
           ),

@@ -44,6 +44,15 @@ import Mice from "./components/Accessories/Mice/Table";
 import MiceItem from "./components/Accessories/Mice/Item";
 import Prebuilt from "./components/Prebuilt/Main";
 import PrebuiltItem from "./components/Prebuilt/Item";
+import Build from "./components/Build/Main";
+
+export const RedirectToHomeContext = createContext<{
+  redirectToHome: boolean;
+  setRedirectToHome: React.Dispatch<React.SetStateAction<boolean>>;
+}>({
+  redirectToHome: true,
+  setRedirectToHome: () => {},
+});
 
 export const UserContext = createContext<{
   user: object | null;
@@ -62,6 +71,7 @@ export const CartContext = createContext<{
 });
 
 export default function App() {
+  const [redirectToHome, setRedirectToHome] = useState<boolean>(true);
   const [user, setUser] = useState<object | null>(null);
   const [cart, setCart] = useState<Array | null>([]);
   const isLoggedIn = user !== null;
@@ -83,89 +93,96 @@ export default function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <CartContext.Provider value={{ cart, setCart }}>
-        <Routes>
-          <Route element={<Header />}>
-            <Route index element={<Home />} />
-            <Route path="components" element={<ComponentsHeader />}>
-              <Route index element={<Navigate to="gpu" />} />
+    <RedirectToHomeContext.Provider
+      value={{ redirectToHome, setRedirectToHome }}
+    >
+      <UserContext.Provider value={{ user, setUser }}>
+        <CartContext.Provider value={{ cart, setCart }}>
+          <Routes>
+            <Route element={<Header />}>
+              <Route index element={<Home />} />
 
-              <Route path="gpu" element={<GPU />} />
-              <Route path="gpu/:id" element={<GPUItem />} />
+              <Route path="build" element={<Build />} />
 
-              <Route path="cpu" element={<CPU />} />
-              <Route path="cpu/:id" element={<CPUItem />} />
+              <Route path="prebuilt" element={<Prebuilt />} />
+              <Route path="prebuilt/:id" element={<PrebuiltItem />} />
 
-              <Route path="motherboard" element={<Motherboard />} />
-              <Route path="motherboard/:id" element={<MotherboardItem />} />
+              <Route path="components" element={<ComponentsHeader />}>
+                <Route index element={<Navigate to="gpu" />} />
 
-              <Route path="ram" element={<RAM />} />
-              <Route path="ram/:id" element={<RAMItem />} />
+                <Route path="gpu" element={<GPU />} />
+                <Route path="gpu/:id" element={<GPUItem />} />
 
-              <Route path="storage" element={<Storage />} />
-              <Route path="storage/:id" element={<StorageItem />} />
+                <Route path="cpu" element={<CPU />} />
+                <Route path="cpu/:id" element={<CPUItem />} />
 
-              <Route path="psu" element={<PSU />} />
-              <Route path="psu/:id" element={<PSUItem />} />
+                <Route path="motherboard" element={<Motherboard />} />
+                <Route path="motherboard/:id" element={<MotherboardItem />} />
 
-              <Route path="case" element={<Case />} />
-              <Route path="case/:id" element={<CaseItem />} />
+                <Route path="ram" element={<RAM />} />
+                <Route path="ram/:id" element={<RAMItem />} />
 
-              <Route path="cpu-cooler" element={<CPUCooler />} />
-              <Route path="cpu-cooler/:id" element={<CPUCoolerItem />} />
+                <Route path="storage" element={<Storage />} />
+                <Route path="storage/:id" element={<StorageItem />} />
 
-              <Route path="fans" element={<Fans />} />
-              <Route path="fans/:id" element={<FanItem />} />
+                <Route path="psu" element={<PSU />} />
+                <Route path="psu/:id" element={<PSUItem />} />
 
-              <Route path="os" element={<OS />} />
-              <Route path="os/:id" element={<OSItem />} />
+                <Route path="case" element={<Case />} />
+                <Route path="case/:id" element={<CaseItem />} />
+
+                <Route path="cpu-cooler" element={<CPUCooler />} />
+                <Route path="cpu-cooler/:id" element={<CPUCoolerItem />} />
+
+                <Route path="fans" element={<Fans />} />
+                <Route path="fans/:id" element={<FanItem />} />
+
+                <Route path="os" element={<OS />} />
+                <Route path="os/:id" element={<OSItem />} />
+
+                <Route path="*" element={<URLError />} />
+              </Route>
+
+              <Route path="accessories" element={<AccessoriesHeader />}>
+                <Route index element={<Navigate to="monitors" />} />
+
+                <Route path="monitors" element={<Monitors />} />
+                <Route path="monitors/:id" element={<MonitorItem />} />
+
+                <Route path="keyboards" element={<Keyboards />} />
+                <Route path="keyboards/:id" element={<KeyboardItem />} />
+
+                <Route path="mice" element={<Mice />} />
+                <Route path="mice/:id" element={<MiceItem />} />
+
+                <Route path="headphones" element={<Headphones />} />
+                <Route path="headphones/:id" element={<HeadphonesItem />} />
+
+                <Route path="webcams" element={<Webcams />} />
+                <Route path="webcams/:id" element={<WebcamItem />} />
+
+                <Route path="speakers" element={<Speakers />} />
+                <Route path="speakers/:id" element={<SpeakersItem />} />
+
+                <Route path="*" element={<URLError />} />
+              </Route>
+
+              {isLoggedIn ? (
+                <Route path="/logout" element={<Logout />} />
+              ) : (
+                <>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </>
+              )}
 
               <Route path="*" element={<URLError />} />
             </Route>
+          </Routes>
 
-            <Route path="accessories" element={<AccessoriesHeader />}>
-              <Route index element={<Navigate to="monitors" />} />
-
-              <Route path="monitors" element={<Monitors />} />
-              <Route path="monitors/:id" element={<MonitorItem />} />
-
-              <Route path="keyboards" element={<Keyboards />} />
-              <Route path="keyboards/:id" element={<KeyboardItem />} />
-
-              <Route path="mice" element={<Mice />} />
-              <Route path="mice/:id" element={<MiceItem />} />
-
-              <Route path="headphones" element={<Headphones />} />
-              <Route path="headphones/:id" element={<HeadphonesItem />} />
-
-              <Route path="webcams" element={<Webcams />} />
-              <Route path="webcams/:id" element={<WebcamItem />} />
-
-              <Route path="speakers" element={<Speakers />} />
-              <Route path="speakers/:id" element={<SpeakersItem />} />
-
-              <Route path="*" element={<URLError />} />
-            </Route>
-
-            <Route path="prebuilt" element={<Prebuilt />} />
-            <Route path="prebuilt/:id" element={<PrebuiltItem />} />
-
-            {isLoggedIn ? (
-              <Route path="/logout" element={<Logout />} />
-            ) : (
-              <>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-              </>
-            )}
-
-            <Route path="*" element={<URLError />} />
-          </Route>
-        </Routes>
-
-        <Footer />
-      </CartContext.Provider>
-    </UserContext.Provider>
+          <Footer />
+        </CartContext.Provider>
+      </UserContext.Provider>
+    </RedirectToHomeContext.Provider>
   );
 }

@@ -4,6 +4,7 @@ import { Close, MinusIcon, PlusIcon } from "./Icons";
 import { CartVisibleContext } from "./Header";
 import { CheckoutButton } from "./Buttons";
 import { useNavigate } from "react-router-dom";
+import { changeName } from "../utils";
 
 type QuantityProps = {
   info: object;
@@ -49,45 +50,6 @@ function Quantity({ info, quantity }: QuantityProps) {
   );
 }
 
-function changeName(name: string) {
-  switch (name) {
-    case "components/gpu":
-      return "GPU";
-    case "components/cpu":
-      return "CPU";
-    case "components/motherboard":
-      return "Motherboard";
-    case "components/ram":
-      return "RAM";
-    case "components/storage":
-      return "Storage";
-    case "components/psu":
-      return "PSU";
-    case "components/case":
-      return "Case";
-    case "components/cpu-cooler":
-      return "CPU Cooler";
-    case "components/fans":
-      return "Fans";
-    case "components/os":
-      return "OS";
-    case "accessories/monitors":
-      return "Monitor";
-    case "accessories/keyboards":
-      return "Keyboard";
-    case "accessories/mice":
-      return "Mouse";
-    case "accessories/headphones":
-      return "Headphones";
-    case "accessories/webcams":
-      return "Webcam";
-    case "accessories/speakers":
-      return "Speakers";
-    case "prebuilt":
-      return "Prebuilt";
-  }
-}
-
 function CartItem({ info, quantity, url }: CartItemProps) {
   const navigate = useNavigate();
   const { setCartVisible } = useContext(CartVisibleContext);
@@ -96,8 +58,6 @@ function CartItem({ info, quantity, url }: CartItemProps) {
     navigate(`/${url}/${info._id}`);
     setCartVisible(false);
   }
-
-  console.log(url);
 
   return (
     <div className="grid grid-cols-[auto_1fr] gap-4">

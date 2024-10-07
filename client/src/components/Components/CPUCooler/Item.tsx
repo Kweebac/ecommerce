@@ -9,7 +9,7 @@ export default function CPUItem() {
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
-      <Item item={item}>
+      <Item item={item} options={{ addToPc: true }}>
         <InfoItem name="RPM" value={`${item.rpm} RPM`} />
         <InfoItem name="Noise" value={`${item.noise} dB`} />
         <InfoItem name="CPU sockets" value={item.cpuSockets.join(", ")} />

@@ -9,7 +9,7 @@ export default function CPUItem() {
   if (item === null) return <URLError />;
   else if (item !== undefined)
     return (
-      <Item item={item}>
+      <Item item={item} options={{ addToPc: true }}>
         <InfoItem name="Wattage" value={`${item.wattage} W`} />
         <InfoItem name="Rating" value={item.rating} />
         <InfoItem name="Color" value={item.color} />

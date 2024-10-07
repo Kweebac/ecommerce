@@ -1,5 +1,5 @@
 import { ComponentValues } from "@/src/types/Components";
-import Button from "../Buttons";
+import Button, { ButtonPC } from "../Buttons";
 
 type InfoItemProps = {
   name: string;
@@ -36,40 +36,15 @@ export function InfoItem({ name, value }: InfoItemProps) {
 
 type ItemProps = {
   item: ComponentValues | null | undefined;
-  options?: { pricePerGb?: boolean };
+  options?: { pricePerGb?: boolean; addToPc?: boolean };
   children?: React.ReactNode;
 };
 
 export default function Item({ item, options, children }: ItemProps) {
   return (
     <div className="my-8 flex items-start justify-center gap-12">
-      <div className="grid gap-3">
-        <div className="flex gap-3">
-          <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
-            <img
-              src={item.url}
-              alt="GPU"
-              className="rounded-xl object-contain"
-            />
-          </div>
-          <img
-            src="https://placehold.co/256"
-            alt="GPU"
-            className="h-64 w-64 rounded-xl"
-          />
-        </div>
-        <div className="flex gap-3">
-          <img
-            src="https://placehold.co/256"
-            alt="GPU"
-            className="h-64 w-64 rounded-xl"
-          />
-          <img
-            src="https://placehold.co/256"
-            alt="GPU"
-            className="h-64 w-64 rounded-xl"
-          />
-        </div>
+      <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
+        <img src={item.url} alt="GPU" className="rounded-xl object-contain" />
       </div>
       <div className="grid gap-6">
         <div className="text-3xl font-semibold">{item.name}</div>
@@ -77,7 +52,10 @@ export default function Item({ item, options, children }: ItemProps) {
           <div className="flex w-[30rem] flex-wrap gap-2">{children}</div>
         )}
         <div className="grid w-64 justify-items-center gap-3">
-          <Button itemInfo={item} />
+          <div className="flex w-full gap-2">
+            <Button itemInfo={item} />
+            {options?.addToPc && <ButtonPC itemInfo={item} />}
+          </div>
           {options?.pricePerGb ? (
             <div className="flex items-center gap-2">
               <div className="text-3xl">£{item.price}</div>

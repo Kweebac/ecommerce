@@ -208,7 +208,7 @@ export default function PrebuiltItem() {
             <Button itemInfo={prebuilt} />
           </div>
 
-          <div className="absolute left-6 mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2)] rounded-l-[25px] border border-r-0 border-black"></div>
+          <div className="absolute left-3 mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2)] rounded-l-[25px] border border-r-0 border-black"></div>
         </div>
       </main>
     );

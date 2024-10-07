@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useContext, useState } from "react";
-import { UserContext } from "../../App";
+import { RedirectToHomeContext, UserContext } from "../../App";
 import { handleSetUser } from "../../utils";
 import Input from "./Input";
 
 export default function Login() {
+  const { redirectToHome, setRedirectToHome } = useContext(
+    RedirectToHomeContext,
+  );
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const { setUser } = useContext(UserContext);
@@ -28,14 +31,16 @@ export default function Login() {
       } else if (res.ok) {
         try {
           handleSetUser(setUser);
-
-          navigate("/");
+          if (redirectToHome) {
+            setRedirectToHome(false);
+            navigate("/");
+          } else navigate(-1);
         } catch (error) {
           console.error(error);
         }
       }
     },
-    [navigate, setUser],
+    [navigate, setUser, redirectToHome, setRedirectToHome],
   );
 
   return (
