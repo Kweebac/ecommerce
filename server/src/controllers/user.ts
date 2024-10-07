@@ -17,13 +17,15 @@ const editBuild: RequestHandler = [
   body("id").escape().trim().isString(),
 
   asyncHandler(async (req, res) => {
-    const errors = validationResult(req);
+    const { componentType, id } = req.body;
+    const user = req.user;
 
+    const errors = validationResult(req);
     if (errors.isEmpty()) {
       if (req.user) {
-        req.user.build[req.body.componentType] = req.body.id;
+        user.build[componentType] = id;
 
-        await req.user.save();
+        await user.save();
       }
 
       res.end();

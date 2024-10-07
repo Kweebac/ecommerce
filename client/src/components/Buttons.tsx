@@ -93,40 +93,11 @@ export function SmallButtonPC({
   const navigate = useNavigate();
 
   let componentType = useLocation().pathname.split("/")[2];
-  let componentTitle = changeName(`components/${componentType}`);
+  const componentTitle = changeName(`components/${componentType}`);
 
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function handleClick() {
-    if (
-      Array.isArray(user.build[componentType]) &&
-      user.build[componentType].length >= limit
-    ) {
-      setError(`You have reached the ${componentTitle} limit.`);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-
-      return;
-    } else if (componentType === "os" && user.build[componentType]) {
-      setError(`You have already selected an ${componentTitle}.`);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-
-      return;
-    } else if (
-      !Array.isArray(user.build[componentType]) &&
-      user.build[componentType]
-    ) {
-      setError(`You have already selected a ${componentTitle}.`);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-
-      return;
-    }
-
     const res = await fetch("http://localhost:3000/api/user/build", {
       method: "POST",
       body: JSON.stringify({ componentType, id: itemInfo._id }),
@@ -138,6 +109,35 @@ export function SmallButtonPC({
       setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
+      if (
+        Array.isArray(user.build[componentType]) &&
+        user.build[componentType].length >= limit
+      ) {
+        setError(`You have reached the ${componentTitle} limit.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      } else if (componentType === "os" && user.build[componentType]) {
+        setError(`You have already selected an ${componentTitle}.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      } else if (
+        !Array.isArray(user.build[componentType]) &&
+        user.build[componentType]
+      ) {
+        setError(`You have already selected a ${componentTitle}.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      }
+
       handleSetUser(setUser);
       navigate("/build");
     }
@@ -154,12 +154,31 @@ export function SmallButtonPC({
   );
 }
 
-export function ButtonPC({ itemInfo }: ButtonPCProps) {
+export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   const { setRedirectToHome } = useContext(RedirectToHomeContext);
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
   let componentType = useLocation().pathname.split("/")[2];
+  const componentTitle = changeName(`components/${componentType}`);
+
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
+
+  let limit;
+  switch (componentType) {
+    case "gpu":
+      limit = 2;
+      break;
+    case "ram":
+      limit = 2;
+      break;
+    case "storage":
+      limit = 2;
+      break;
+    case "fans":
+      limit = 4;
+      break;
+  }
 
   async function handleClick() {
     const res = await fetch("http://localhost:3000/api/user/build", {
@@ -173,6 +192,35 @@ export function ButtonPC({ itemInfo }: ButtonPCProps) {
       setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
+      if (
+        Array.isArray(user.build[componentType]) &&
+        user.build[componentType].length >= limit
+      ) {
+        setError(`You have reached the ${componentTitle} limit.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      } else if (componentType === "os" && user.build[componentType]) {
+        setError(`You have already selected an ${componentTitle}.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      } else if (
+        !Array.isArray(user.build[componentType]) &&
+        user.build[componentType]
+      ) {
+        setError(`You have already selected a ${componentTitle}.`);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+
+        return;
+      }
+
       handleSetUser(setUser);
       navigate("/build");
     }
@@ -182,6 +230,7 @@ export function ButtonPC({ itemInfo }: ButtonPCProps) {
     <button
       onClick={handleClick}
       className="w-full rounded-md bg-green-2 p-2 text-lg font-medium text-green-3 shadow-md"
+      disabled={error ? true : false}
     >
       Add to PC
     </button>

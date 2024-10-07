@@ -1,5 +1,7 @@
 import { ComponentValues } from "@/src/types/Components";
 import Button, { ButtonPC } from "../Buttons";
+import { useState } from "react";
+import Error from "../Error";
 
 type InfoItemProps = {
   name: string;
@@ -41,31 +43,39 @@ type ItemProps = {
 };
 
 export default function Item({ item, options, children }: ItemProps) {
+  const [error, setError] = useState("");
+
   return (
-    <div className="my-8 flex items-start justify-center gap-12">
-      <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
-        <img src={item.url} alt="GPU" className="rounded-xl object-contain" />
-      </div>
-      <div className="grid gap-6">
-        <div className="text-3xl font-semibold">{item.name}</div>
-        {children && (
-          <div className="flex w-[30rem] flex-wrap gap-2">{children}</div>
-        )}
-        <div className="grid w-64 justify-items-center gap-3">
-          <div className="flex w-full gap-2">
-            <Button itemInfo={item} />
-            {options?.addToPc && <ButtonPC itemInfo={item} />}
-          </div>
-          {options?.pricePerGb ? (
-            <div className="flex items-center gap-2">
-              <div className="text-3xl">£{item.price}</div>
-              <div className="text-lg">(£{item.pricePerGb} / GB)</div>
-            </div>
-          ) : (
-            <div className="text-3xl">£{item.price}</div>
+    <>
+      {error && <Error message={error} />}
+
+      <div className="my-8 flex items-start justify-center gap-12">
+        <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
+          <img src={item.url} alt="GPU" className="rounded-xl object-contain" />
+        </div>
+        <div className="grid gap-6">
+          <div className="text-3xl font-semibold">{item.name}</div>
+          {children && (
+            <div className="flex w-[30rem] flex-wrap gap-2">{children}</div>
           )}
+          <div className="grid w-64 justify-items-center gap-3">
+            <div className="flex w-full gap-2">
+              <Button itemInfo={item} />
+              {options?.addToPc && (
+                <ButtonPC setError={setError} error={error} itemInfo={item} />
+              )}
+            </div>
+            {options?.pricePerGb ? (
+              <div className="flex items-center gap-2">
+                <div className="text-3xl">£{item.price}</div>
+                <div className="text-lg">(£{item.pricePerGb} / GB)</div>
+              </div>
+            ) : (
+              <div className="text-3xl">£{item.price}</div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
