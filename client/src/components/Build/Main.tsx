@@ -64,7 +64,7 @@ function ComponentInfo({ icon, alt, component, children }) {
   async function deleteBuildItem() {
     const res = await fetch("http://localhost:3000/api/user/build", {
       method: "DELETE",
-      body: JSON.stringify({ componentType }),
+      body: JSON.stringify({ componentType, id: component._id }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });

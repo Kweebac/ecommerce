@@ -81,3 +81,9 @@ export function changeName(name: string) {
       return "Prebuilt";
   }
 }
+
+export function getUrl(useLocation) {
+  let paths = useLocation().pathname.split("/");
+  paths = paths.slice(1);
+  return paths.join("/");
+}

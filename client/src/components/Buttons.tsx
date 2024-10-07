@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext, RedirectToHomeContext, UserContext } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PlainCartIcon } from "./Icons";
-import { changeName, handleSetUser } from "../utils";
+import { changeName, getUrl, handleSetUser } from "../utils";
 
 type ButtonProps = {
   itemInfo: object;
@@ -11,9 +11,7 @@ type ButtonProps = {
 export function SmallButton({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
 
-  let paths = useLocation().pathname.split("/");
-  paths = paths.slice(1);
-  const url = paths.join("/");
+  const url = getUrl(useLocation);
 
   function handleClick() {
     setCart((prev) =>
@@ -40,9 +38,7 @@ export function SmallButton({ itemInfo }: ButtonProps) {
 export default function Button({ itemInfo }: ButtonProps) {
   const { setCart } = useContext(CartContext);
 
-  let paths = useLocation().pathname.split("/");
-  paths = paths.slice(1, paths.length - 1);
-  const url = paths.join("/");
+  const url = getUrl(useLocation);
 
   function handleClick() {
     setCart((prev) =>
@@ -89,7 +85,7 @@ export function SmallButtonPC({
   limit,
 }: ButtonPCProps) {
   const { setRedirectToHome } = useContext(RedirectToHomeContext);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   let componentType = useLocation().pathname.split("/")[2];
@@ -100,44 +96,26 @@ export function SmallButtonPC({
   async function handleClick() {
     const res = await fetch("http://localhost:3000/api/user/build", {
       method: "POST",
-      body: JSON.stringify({ componentType, id: itemInfo._id }),
+      body: JSON.stringify({
+        componentType,
+        componentTitle,
+        id: itemInfo._id,
+        limit,
+      }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
-    if (res.status === 401) {
+    if (res.status === 400) {
+      const err = await res.json();
+      setError(err.message);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else if (res.status === 401) {
       setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
-      if (
-        Array.isArray(user.build[componentType]) &&
-        user.build[componentType].length >= limit
-      ) {
-        setError(`You have reached the ${componentTitle} limit.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      } else if (componentType === "os" && user.build[componentType]) {
-        setError(`You have already selected an ${componentTitle}.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      } else if (
-        !Array.isArray(user.build[componentType]) &&
-        user.build[componentType]
-      ) {
-        setError(`You have already selected a ${componentTitle}.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      }
-
       handleSetUser(setUser);
       navigate("/build");
     }
@@ -156,7 +134,7 @@ export function SmallButtonPC({
 
 export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   const { setRedirectToHome } = useContext(RedirectToHomeContext);
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   let componentType = useLocation().pathname.split("/")[2];
@@ -165,62 +143,34 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   let limit;
-  switch (componentType) {
-    case "gpu":
-      limit = 2;
-      break;
-    case "ram":
-      limit = 2;
-      break;
-    case "storage":
-      limit = 2;
-      break;
-    case "fans":
-      limit = 4;
-      break;
-  }
+  if (componentType === "gpu") limit = 2;
+  else if (componentType === "ram") limit = 2;
+  else if (componentType === "storage") limit = 2;
+  else if (componentType === "fans") limit = 4;
 
   async function handleClick() {
     const res = await fetch("http://localhost:3000/api/user/build", {
       method: "POST",
-      body: JSON.stringify({ componentType, id: itemInfo._id }),
+      body: JSON.stringify({
+        componentType,
+        componentTitle,
+        id: itemInfo._id,
+        limit,
+      }),
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
 
-    if (res.status === 401) {
+    if (res.status === 400) {
+      const err = await res.json();
+      setError(err.message);
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    } else if (res.status === 401) {
       setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
-      if (
-        Array.isArray(user.build[componentType]) &&
-        user.build[componentType].length >= limit
-      ) {
-        setError(`You have reached the ${componentTitle} limit.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      } else if (componentType === "os" && user.build[componentType]) {
-        setError(`You have already selected an ${componentTitle}.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      } else if (
-        !Array.isArray(user.build[componentType]) &&
-        user.build[componentType]
-      ) {
-        setError(`You have already selected a ${componentTitle}.`);
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-
-        return;
-      }
-
       handleSetUser(setUser);
       navigate("/build");
     }
