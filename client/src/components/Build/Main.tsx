@@ -18,23 +18,10 @@ import Button from "../Buttons";
 import { UserContext } from "../../../src/App";
 import { handleSetUser } from "../../../src/utils";
 
-function AddComponent({
-  empty,
-  icon,
-  url,
-}: {
-  empty: boolean;
-  icon: JSX.Element;
-  url: string;
-}) {
+function AddComponent({ icon, url }: { icon: JSX.Element; url: string }) {
   return (
     <div className="grid min-w-[40rem] grid-flow-col items-center justify-start gap-6">
-      <div
-        className="z-10 bg-[--background-color] text-xl"
-        style={{ width: empty ? "max-content" : "72px" }}
-      >
-        £0
-      </div>
+      <div className="z-10 w-20 bg-[--background-color] text-xl">£0</div>
       {icon}
       <Link to={url}>
         <div className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-green-3 shadow-md hover:scale-110">
@@ -76,9 +63,7 @@ function ComponentInfo({ icon, alt, component, children }) {
 
   return (
     <div className="grid grid-flow-col items-center justify-start gap-6">
-      <div className="z-10 w-[72px] bg-[--background-color] text-xl">
-        £{price}
-      </div>
+      <div className="z-10 w-20 bg-[--background-color] text-xl">£{price}</div>
       {icon}
       <div className="flex items-center gap-4 rounded-xl bg-white-1 pr-4 hover:shadow-md">
         <Link to={`/components/${link}`}>
@@ -107,19 +92,9 @@ function ComponentInfo({ icon, alt, component, children }) {
 export default function Build() {
   const { user } = useContext(UserContext);
   const build = user?.build;
-  let emptyBuild = true;
   let totalPrice = 0;
 
   if (build) {
-    const buildCopy = { ...build, _id: undefined };
-
-    for (const key in buildCopy) {
-      if (Array.isArray(buildCopy[key]) && buildCopy[key].length)
-        emptyBuild = false;
-      else if (!Array.isArray(buildCopy[key]) && buildCopy[key])
-        emptyBuild = false;
-    }
-
     for (let key in build) {
       key = build[key];
       if (Array.isArray(key)) key.forEach((item) => (totalPrice += item.price));
@@ -137,31 +112,32 @@ export default function Build() {
         </h1>
         <div className="z-10 grid gap-2">
           {build?.gpu.length ? (
-            <ComponentInfo
-              icon={<GPUIcon />}
-              alt="GPU"
-              component={build.gpu[0]}
-            >
-              <ComponentInfoItem name="Chipset" value={build.gpu[0].chipset} />
-              <ComponentInfoItem
-                name="Memory"
-                value={`${build.gpu[0].memory} GB`}
-              />
-              <ComponentInfoItem
-                name="Core clock"
-                value={`${build.gpu[0].coreClock} MHz`}
-              />
-              <ComponentInfoItem
-                name="Boost clock"
-                value={`${build.gpu[0].boostClock} MHz`}
-              />
-            </ComponentInfo>
+            <>
+              {build.gpu.map((gpu, index) => (
+                <ComponentInfo
+                  key={index}
+                  icon={<GPUIcon />}
+                  alt="GPU"
+                  component={gpu}
+                >
+                  <ComponentInfoItem name="Chipset" value={gpu.chipset} />
+                  <ComponentInfoItem name="Memory" value={`${gpu.memory} GB`} />
+                  <ComponentInfoItem
+                    name="Core clock"
+                    value={`${gpu.coreClock} MHz`}
+                  />
+                  <ComponentInfoItem
+                    name="Boost clock"
+                    value={`${gpu.boostClock} MHz`}
+                  />
+                </ComponentInfo>
+              ))}
+              {build.gpu.length < 2 && (
+                <AddComponent icon={<GPUIcon />} url="/components/gpu" />
+              )}
+            </>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<GPUIcon />}
-              url="/components/gpu"
-            />
+            <AddComponent icon={<GPUIcon />} url="/components/gpu" />
           )}
 
           {build?.cpu ? (
@@ -178,11 +154,7 @@ export default function Build() {
               />
             </ComponentInfo>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<CPUIcon />}
-              url="/components/cpu"
-            />
+            <AddComponent icon={<CPUIcon />} url="/components/cpu" />
           )}
 
           {build?.motherboard ? (
@@ -199,55 +171,65 @@ export default function Build() {
             </ComponentInfo>
           ) : (
             <AddComponent
-              empty={emptyBuild}
               icon={<MotherboardIcon />}
               url="/components/motherboard"
             />
           )}
 
           {build?.ram.length ? (
-            <ComponentInfo
-              icon={<RAMIcon />}
-              alt="RAM"
-              component={build.ram[0]}
-            >
-              <ComponentInfoItem
-                name="Modules"
-                value={`${build.ram[0].modules} GB`}
-              />
-              <ComponentInfoItem
-                name="Speed"
-                value={`${build.ram[0].ddr}-${build.ram[0].ddrSpeed}`}
-              />
-              <ComponentInfoItem name="FWL" value={`${build.ram[0].fwl} ns`} />
-              <ComponentInfoItem name="CL" value={build.ram[0].cl} />
-            </ComponentInfo>
+            <>
+              {build.ram.map((ram, index) => (
+                <ComponentInfo
+                  key={index}
+                  icon={<RAMIcon />}
+                  alt="RAM"
+                  component={ram}
+                >
+                  <ComponentInfoItem
+                    name="Modules"
+                    value={`${ram.modules} GB`}
+                  />
+                  <ComponentInfoItem
+                    name="Speed"
+                    value={`${ram.ddr}-${ram.ddrSpeed}`}
+                  />
+                  <ComponentInfoItem name="FWL" value={`${ram.fwl} ns`} />
+                  <ComponentInfoItem name="CL" value={ram.cl} />
+                </ComponentInfo>
+              ))}
+              {build.ram.length < 2 && (
+                <AddComponent icon={<RAMIcon />} url="/components/ram" />
+              )}
+            </>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<RAMIcon />}
-              url="/components/ram"
-            />
+            <AddComponent icon={<RAMIcon />} url="/components/ram" />
           )}
 
           {build?.storage.length ? (
-            <ComponentInfo
-              icon={<StorageIcon />}
-              alt="Storage"
-              component={build.storage[0]}
-            >
-              <ComponentInfoItem name="Type" value={build.storage[0].type} />
-              <ComponentInfoItem
-                name="Capacity"
-                value={`${build.storage[0].capacity} GB`}
-              />
-            </ComponentInfo>
+            <>
+              {build.storage.map((storage, index) => (
+                <ComponentInfo
+                  key={index}
+                  icon={<StorageIcon />}
+                  alt="Storage"
+                  component={storage}
+                >
+                  <ComponentInfoItem name="Type" value={storage.type} />
+                  <ComponentInfoItem
+                    name="Capacity"
+                    value={`${storage.capacity} GB`}
+                  />
+                </ComponentInfo>
+              ))}
+              {build.storage.length < 2 && (
+                <AddComponent
+                  icon={<StorageIcon />}
+                  url="/components/storage"
+                />
+              )}
+            </>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<StorageIcon />}
-              url="/components/storage"
-            />
+            <AddComponent icon={<StorageIcon />} url="/components/storage" />
           )}
 
           {build?.psu ? (
@@ -259,11 +241,7 @@ export default function Build() {
               <ComponentInfoItem name="Efficiency" value={build.psu.rating} />
             </ComponentInfo>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<PSUIcon />}
-              url="/components/psu"
-            />
+            <AddComponent icon={<PSUIcon />} url="/components/psu" />
           )}
 
           {build?.case ? (
@@ -279,11 +257,7 @@ export default function Build() {
               />
             </ComponentInfo>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<CaseIcon />}
-              url="/components/case"
-            />
+            <AddComponent icon={<CaseIcon />} url="/components/case" />
           )}
 
           {build?.cpuCooler ? (
@@ -307,37 +281,34 @@ export default function Build() {
             </ComponentInfo>
           ) : (
             <AddComponent
-              empty={emptyBuild}
               icon={<CPUCoolerIcon />}
               url="/components/cpu-cooler"
             />
           )}
 
           {build?.fans.length ? (
-            <ComponentInfo
-              icon={<FanIcon />}
-              alt="Fans"
-              component={build.fans[0]}
-            >
-              <ComponentInfoItem
-                name="RPM"
-                value={`${build.fans[0].rpm} RPM`}
-              />
-              <ComponentInfoItem
-                name="Airflow"
-                value={`${build.fans[0].airflow} CFM`}
-              />
-              <ComponentInfoItem
-                name="Noise"
-                value={`${build.fans[0].noise} dB`}
-              />
-            </ComponentInfo>
+            <>
+              {build.fans.map((fan, index) => (
+                <ComponentInfo
+                  key={index}
+                  icon={<FanIcon />}
+                  alt="Fans"
+                  component={fan}
+                >
+                  <ComponentInfoItem name="RPM" value={`${fan.rpm} RPM`} />
+                  <ComponentInfoItem
+                    name="Airflow"
+                    value={`${fan.airflow} CFM`}
+                  />
+                  <ComponentInfoItem name="Noise" value={`${fan.noise} dB`} />
+                </ComponentInfo>
+              ))}
+              {build.fans.length < 4 && (
+                <AddComponent icon={<FanIcon />} url="/components/fans" />
+              )}
+            </>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<FanIcon />}
-              url="/components/fans"
-            />
+            <AddComponent icon={<FanIcon />} url="/components/fans" />
           )}
 
           {build?.os ? (
@@ -347,11 +318,7 @@ export default function Build() {
               component={build.os}
             ></ComponentInfo>
           ) : (
-            <AddComponent
-              empty={emptyBuild}
-              icon={<OSIcon />}
-              url="/components/os"
-            />
+            <AddComponent icon={<OSIcon />} url="/components/os" />
           )}
         </div>
         <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-4">

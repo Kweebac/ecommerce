@@ -82,8 +82,8 @@ export function changeName(name: string) {
   }
 }
 
-export function getUrl(useLocation) {
-  let paths = useLocation().pathname.split("/");
+export function getUrl(location) {
+  let paths = location().pathname.split("/");
   paths = paths.slice(1);
   return paths.join("/");
 }

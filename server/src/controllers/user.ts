@@ -29,11 +29,6 @@ const editBuild: RequestHandler = [
               .status(400)
               .json({ message: `You have reached the ${componentTitle} limit.` });
 
-          if (user.build[componentType].includes(id))
-            return res
-              .status(400)
-              .json({ message: `You have already selected this ${componentTitle}.` });
-
           user.build[componentType].push(id);
         } else {
           if (user.build[componentType])
@@ -65,9 +60,18 @@ const deleteBuild: RequestHandler = [
     if (errors.isEmpty()) {
       if (user) {
         if (Array.isArray(user.build[componentType])) {
-          user.build[componentType] = user.build[componentType].filter(
-            (item) => !item.equals(id)
-          );
+          let finished = false;
+
+          user.build[componentType] = user.build[componentType].filter((item) => {
+            if (finished) return true;
+
+            if (item.equals(id)) {
+              finished = true;
+              return false;
+            } else {
+              return true;
+            }
+          });
         } else {
           user.build = { ...user.build, [componentType]: undefined };
         }
