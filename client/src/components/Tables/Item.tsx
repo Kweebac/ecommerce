@@ -1,7 +1,7 @@
 import { ComponentValues } from "@/src/types/Components";
 import Button, { ButtonPC } from "../Buttons";
 import { useState } from "react";
-import Error from "../Error";
+import PopupError from "../PopupError";
 
 type InfoItemProps = {
   name: string;
@@ -47,11 +47,15 @@ export default function Item({ item, options, children }: ItemProps) {
 
   return (
     <>
-      {error && <Error message={error} />}
+      {error && <PopupError PopupError message={error} />}
 
       <div className="my-8 flex items-start justify-center gap-12">
-        <div className="h-64 w-64 place-content-center rounded-xl bg-white-1">
-          <img src={item.url} alt="GPU" className="rounded-xl object-contain" />
+        <div className="rounded-xl bg-white-1">
+          <img
+            src={item.url}
+            alt="GPU"
+            className="h-64 w-64 rounded-xl object-contain"
+          />
         </div>
         <div className="grid gap-6">
           <div className="text-3xl font-semibold">{item.name}</div>

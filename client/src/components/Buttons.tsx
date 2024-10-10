@@ -64,7 +64,7 @@ export default function Button({ itemInfo }: ButtonProps) {
 
 export function CheckoutButton() {
   return (
-    <button className="w-full rounded-md bg-green-3 py-3 text-xl font-medium text-white-1 shadow-md">
+    <button className="w-full rounded-md bg-green-3 px-4 py-3 text-xl font-medium text-white-1 shadow-md">
       Checkout
     </button>
   );

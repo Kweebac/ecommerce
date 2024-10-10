@@ -51,7 +51,7 @@ export default function Filter({
         name="CAPACITY"
         units={" GB"}
         min={128}
-        max={8192}
+        max={4096}
         step={128}
         setColumnFilters={setColumnFilters}
         minStepsBetweenThumbs={0}

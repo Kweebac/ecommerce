@@ -12,7 +12,7 @@ import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
 import { SmallButton, SmallButtonPC } from "../../Buttons";
 import { RAMIcon } from "../../Icons";
-import Error from "../../Error";
+import PopupError from "../../PopupError";
 
 const checkboxOptions = [
   ["2 x 8", "2 x 16", "2 x 32"],
@@ -148,7 +148,7 @@ export default function RAM() {
 
   return (
     <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
-      {error && <Error message={error} />}
+      {error && <PopupError message={error} />}
 
       <Filter
         columnFilters={columnFilters}

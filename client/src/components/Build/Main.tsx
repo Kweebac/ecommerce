@@ -14,18 +14,30 @@ import {
   RAMIcon,
   StorageIcon,
 } from "../Icons";
-import Button from "../Buttons";
+import { CheckoutButton } from "../Buttons";
 import { UserContext } from "../../../src/App";
 import { handleSetUser } from "../../../src/utils";
+import BuildErrors from "../BuildErrors";
 
-function AddComponent({ icon, url }: { icon: JSX.Element; url: string }) {
+function AddComponent({
+  icon,
+  url,
+  optional,
+}: {
+  icon: JSX.Element;
+  url: string;
+  optional?: boolean;
+}) {
   return (
     <div className="grid min-w-[40rem] grid-flow-col items-center justify-start gap-6">
       <div className="z-10 w-20 bg-[--background-color] text-xl">£0</div>
       {icon}
       <Link to={url}>
-        <div className="grid h-8 w-8 cursor-pointer place-items-center rounded-full bg-green-3 shadow-md hover:scale-110">
-          <PlusIcon color="#ffffff" styles="h-8 w-8 rounded-full" />
+        <div className="grid grid-flow-col place-items-center gap-4">
+          <div className="h-8 w-8 rounded-full bg-green-3 shadow-md hover:scale-110">
+            <PlusIcon color="#ffffff" styles="h-8 w-8 rounded-full" />
+          </div>
+          {optional && <i className="text-gray-600">OPTIONAL</i>}
         </div>
       </Link>
     </div>
@@ -68,8 +80,8 @@ function ComponentInfo({ icon, alt, component, children }) {
       <div className="flex items-center gap-4 rounded-xl bg-white-1 pr-4 hover:shadow-md">
         <Link to={`/components/${link}`}>
           <div className="flex items-center gap-2 pl-2">
-            <div className="h-16 w-16 place-content-center p-1">
-              <img src={url} alt={alt} className="object-contain" />
+            <div className="place-content-center p-1">
+              <img src={url} alt={alt} className="h-14 w-14 object-contain" />
             </div>
 
             <div className="flex gap-10">
@@ -106,6 +118,9 @@ export default function Build() {
 
   return (
     <main className="my-8 grid justify-center">
+      <div className="mb-8 grid justify-items-center gap-2">
+        {build && <BuildErrors build={build} />}
+      </div>
       <div className="relative grid w-max justify-items-center">
         <h1 className="z-10 mb-8 bg-[--background-color] px-4 text-3xl font-semibold">
           Build your own PC
@@ -133,7 +148,11 @@ export default function Build() {
                 </ComponentInfo>
               ))}
               {build.gpu.length < 2 && (
-                <AddComponent icon={<GPUIcon />} url="/components/gpu" />
+                <AddComponent
+                  icon={<GPUIcon />}
+                  url="/components/gpu"
+                  optional={true}
+                />
               )}
             </>
           ) : (
@@ -198,7 +217,11 @@ export default function Build() {
                 </ComponentInfo>
               ))}
               {build.ram.length < 2 && (
-                <AddComponent icon={<RAMIcon />} url="/components/ram" />
+                <AddComponent
+                  icon={<RAMIcon />}
+                  url="/components/ram"
+                  optional={true}
+                />
               )}
             </>
           ) : (
@@ -225,6 +248,7 @@ export default function Build() {
                 <AddComponent
                   icon={<StorageIcon />}
                   url="/components/storage"
+                  optional={true}
                 />
               )}
             </>
@@ -304,7 +328,11 @@ export default function Build() {
                 </ComponentInfo>
               ))}
               {build.fans.length < 4 && (
-                <AddComponent icon={<FanIcon />} url="/components/fans" />
+                <AddComponent
+                  icon={<FanIcon />}
+                  url="/components/fans"
+                  optional={true}
+                />
               )}
             </>
           ) : (
@@ -323,7 +351,7 @@ export default function Build() {
         </div>
         <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-4">
           <div className="text-2xl font-semibold">£{totalPrice}</div>
-          <Button itemInfo={build} />
+          <CheckoutButton />
         </div>
 
         <div className="absolute left-3 mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2)] rounded-l-[25px] border border-r-0 border-black"></div>

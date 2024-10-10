@@ -12,7 +12,7 @@ import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
 import { SmallButton, SmallButtonPC } from "../../Buttons";
 import { CPUCoolerIcon } from "../../Icons";
-import Error from "../../Error";
+import PopupError from "../../PopupError";
 
 const checkboxOptions = [
   ["AM5", "AM4", "LGA1700"],
@@ -90,10 +90,6 @@ export default function CPUCooler() {
         accessorKey: "waterCooled",
       },
       {
-        accessorKey: "cpuSockets",
-        filterFn: "arrIncludesSome",
-      },
-      {
         accessorKey: "height",
       },
       {
@@ -108,7 +104,6 @@ export default function CPUCooler() {
       columnVisibility: {
         waterCooled: false,
         height: false,
-        cpuSockets: false,
         color: false,
         _id: false,
       },
@@ -133,7 +128,7 @@ export default function CPUCooler() {
 
   return (
     <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
-      {error && <Error message={error} />}
+      {error && <PopupError message={error} />}
 
       <Filter
         columnFilters={columnFilters}

@@ -54,6 +54,7 @@ function CartItem({ info, quantity, url }: CartItemProps) {
   const navigate = useNavigate();
   const { setCartVisible } = useContext(CartVisibleContext);
   url = url.split("/").slice(0, 2).join("/");
+  if (url.split("/")[0] === "prebuilt") url = url.split("/")[0];
 
   function navigateToItemPage() {
     navigate(`/${url}/${info._id}`);

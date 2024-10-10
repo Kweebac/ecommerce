@@ -33,13 +33,6 @@ export default function Filter({
       />
 
       <CheckboxFilter
-        id={"cpuSockets"}
-        name="CPU SOCKET"
-        options={checkboxOptions[0]}
-        setColumnFilters={setColumnFilters}
-      />
-
-      <CheckboxFilter
         id="color"
         options={checkboxOptions[1]}
         setColumnFilters={setColumnFilters}

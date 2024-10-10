@@ -12,7 +12,7 @@ import Rows from "../../Tables/Rows";
 import Headers from "../../Tables/Headers";
 import { SmallButton, SmallButtonPC } from "../../Buttons";
 import { FanIcon } from "../../Icons";
-import Error from "../../Error";
+import PopupError from "../../PopupError";
 
 const checkboxOptions = [["Black", "White"]];
 
@@ -133,7 +133,7 @@ export default function Fans() {
 
   return (
     <main className="my-8 grid grid-flow-col items-start justify-center gap-20">
-      {error && <Error message={error} />}
+      {error && <PopupError message={error} />}
 
       <Filter
         columnFilters={columnFilters}
