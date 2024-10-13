@@ -1,16 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import Input from "./Input";
-import { RedirectToHomeContext } from "../../../src/App";
 
 export default function Register() {
   const navigate = useNavigate();
-  const { setRedirectToHome } = useContext(RedirectToHomeContext);
   const [errors, setErrors] = useState([]);
-
-  useEffect(() => {
-    setRedirectToHome(true);
-  }, [setRedirectToHome]);
 
   const handleRegister = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {

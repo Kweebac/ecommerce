@@ -1,7 +1,7 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { Logo, CartIcon } from "./Icons";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { CartContext, UserContext } from "../App";
+import { CartContext, RedirectToHomeContext, UserContext } from "../App";
 import Cart from "./Cart";
 
 export const CartVisibleContext = createContext<{
@@ -20,6 +20,21 @@ export default function Header() {
   if (cartItems > 99) cartItems = 99;
   const header = useRef<HTMLHeadingElement>(null);
   const div = useRef<HTMLDivElement>(null);
+
+  const { setRedirectToHome } = useContext(RedirectToHomeContext);
+  const location = useLocation();
+  const url = location.pathname.split("/")[1];
+
+  useEffect(() => {
+    if (url === "register" || url === "logout") setRedirectToHome(true);
+    else if (
+      url === "build" ||
+      url === "prebuilt" ||
+      url === "components" ||
+      url === "accessories"
+    )
+      setRedirectToHome(false);
+  }, [url, setRedirectToHome]);
 
   useEffect(() => {
     function handleScroll() {

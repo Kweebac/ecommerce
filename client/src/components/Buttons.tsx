@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CartContext, RedirectToHomeContext, UserContext } from "../App";
+import { CartContext, UserContext } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PlainCartIcon } from "./Icons";
 import { changeName, getUrl, handleSetUser } from "../utils";
@@ -84,7 +84,6 @@ export function SmallButtonPC({
   icon,
   limit,
 }: ButtonPCProps) {
-  const { setRedirectToHome } = useContext(RedirectToHomeContext);
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -113,7 +112,6 @@ export function SmallButtonPC({
         setError("");
       }, 3000);
     } else if (res.status === 401) {
-      setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
       handleSetUser(setUser);
@@ -133,7 +131,6 @@ export function SmallButtonPC({
 }
 
 export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
-  const { setRedirectToHome } = useContext(RedirectToHomeContext);
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -168,7 +165,6 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
         setError("");
       }, 3000);
     } else if (res.status === 401) {
-      setRedirectToHome(false);
       navigate("/login");
     } else if (res.ok) {
       handleSetUser(setUser);

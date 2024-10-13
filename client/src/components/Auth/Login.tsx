@@ -5,9 +5,7 @@ import { handleSetUser } from "../../utils";
 import Input from "./Input";
 
 export default function Login() {
-  const { redirectToHome, setRedirectToHome } = useContext(
-    RedirectToHomeContext,
-  );
+  const { redirectToHome } = useContext(RedirectToHomeContext);
   const navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const { setUser } = useContext(UserContext);
@@ -25,8 +23,6 @@ export default function Login() {
         formData = new FormData(e.currentTarget);
       }
 
-      console.log(redirectToHome);
-
       const res = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         // @ts-expect-error works
@@ -43,16 +39,13 @@ export default function Login() {
         try {
           handleSetUser(setUser);
           if (redirectToHome) navigate("/");
-          else {
-            setRedirectToHome(true);
-            navigate(-1);
-          }
+          else navigate(-1);
         } catch (error) {
           console.error(error);
         }
       }
     },
-    [navigate, setUser, redirectToHome, setRedirectToHome],
+    [navigate, setUser, redirectToHome],
   );
 
   return (
