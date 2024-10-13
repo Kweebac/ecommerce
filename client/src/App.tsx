@@ -75,6 +75,7 @@ export default function App() {
   const [user, setUser] = useState<object | null>(null);
   const [cart, setCart] = useState<Array | null>([]);
   const isLoggedIn = user !== null;
+  console.log("Redirect to home", redirectToHome);
 
   useEffect(() => {
     (async () => {

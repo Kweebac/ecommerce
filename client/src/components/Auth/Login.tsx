@@ -13,13 +13,24 @@ export default function Login() {
   const { setUser } = useContext(UserContext);
 
   const handleLogin = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: React.FormEvent<HTMLFormElement>, testUser: boolean = false) => {
       e.preventDefault();
+
+      let formData;
+      if (testUser) {
+        formData = new FormData();
+        formData.append("email", "test@test");
+        formData.append("password", "testtest");
+      } else {
+        formData = new FormData(e.currentTarget);
+      }
+
+      console.log(redirectToHome);
 
       const res = await fetch("http://localhost:3000/api/auth/login", {
         method: "POST",
         // @ts-expect-error works
-        body: new URLSearchParams(new FormData(e.currentTarget)),
+        body: new URLSearchParams(formData),
         credentials: "include",
       });
 
@@ -31,10 +42,11 @@ export default function Login() {
       } else if (res.ok) {
         try {
           handleSetUser(setUser);
-          if (redirectToHome) {
-            setRedirectToHome(false);
-            navigate("/");
-          } else navigate(-1);
+          if (redirectToHome) navigate("/");
+          else {
+            setRedirectToHome(true);
+            navigate(-1);
+          }
         } catch (error) {
           console.error(error);
         }
@@ -56,9 +68,17 @@ export default function Login() {
 
         <Input type="password" name="password" errors={errors} />
 
-        <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1">
-          Login
-        </button>
+        <div className="grid w-[20rem] grid-cols-[2fr_1fr] gap-2 justify-self-end">
+          <button className="rounded-xl bg-green-3 px-8 py-3 text-white-1 shadow-md">
+            Login
+          </button>
+          <button
+            onClick={(e) => handleLogin(e, true)}
+            className="rounded-xl bg-green-2 py-3 text-green-3 shadow-md"
+          >
+            Test user
+          </button>
+        </div>
       </form>
     </main>
   );

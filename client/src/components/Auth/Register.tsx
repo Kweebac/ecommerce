@@ -1,10 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Input from "./Input";
+import { RedirectToHomeContext } from "../../../src/App";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { setRedirectToHome } = useContext(RedirectToHomeContext);
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    setRedirectToHome(true);
+  }, [setRedirectToHome]);
 
   const handleRegister = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,9 +27,7 @@ export default function Register() {
       } else if (res.status === 400) {
         const errors = await res.json();
         setErrors(errors);
-      } else if (res.ok) {
-        navigate("/login");
-      }
+      } else if (res.ok) navigate("/login");
     },
     [navigate],
   );
@@ -48,7 +52,7 @@ export default function Register() {
           errors={errors}
         />
 
-        <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1">
+        <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1 shadow-md">
           Register
         </button>
       </form>

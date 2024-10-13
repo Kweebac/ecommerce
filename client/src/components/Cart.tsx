@@ -27,7 +27,11 @@ function Quantity({ info, quantity }: QuantityProps) {
         item.info._id === info._id
           ? {
               ...item,
-              quantity: increase ? item.quantity + 1 : item.quantity - 1,
+              quantity: increase
+                ? item.quantity + 1 > 99
+                  ? item.quantity
+                  : item.quantity + 1
+                : item.quantity - 1,
             }
           : item,
       ),
