@@ -76,6 +76,8 @@ const loginFailure: RequestHandler = (req, res) => {
 };
 
 const isAuth: RequestHandler = (req, res, next) => {
+  console.log("yo");
+  console.log(req.isAuthenticated());
   req.isAuthenticated() ? next() : res.sendStatus(401);
 };
 

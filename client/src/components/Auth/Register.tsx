@@ -27,7 +27,7 @@ export default function Register() {
   );
 
   return (
-    <main className="w-max justify-self-center p-8">
+    <main className="w-max justify-self-center p-4 sm:p-8">
       <form onSubmit={(e) => handleRegister(e)} className="grid gap-4">
         <h1 className="text-3xl font-semibold">Register</h1>
 
@@ -46,7 +46,7 @@ export default function Register() {
           errors={errors}
         />
 
-        <button className="w-60 justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1 shadow-md">
+        <button className="w-[40vw] justify-self-end rounded-xl bg-green-3 px-8 py-3 text-white-1 shadow-md md:w-60">
           Register
         </button>
       </form>

@@ -11,9 +11,13 @@ export async function handleSetUser(
     signal: abortController?.signal,
   });
 
+  console.log("res.status", res.status);
+  console.log("res.ok", res.ok);
+
   if (res.status === 401) {
     setUser(null);
   } else if (res.ok) {
+    console.log("sets user");
     const user = await res.json();
     setUser(user);
   }
@@ -86,4 +90,27 @@ export function getUrl(location) {
   let paths = location().pathname.split("/");
   paths = paths.slice(1);
   return paths.join("/");
+}
+
+export function useGetScreenWidth() {
+  const [width, setWidth] = useState(window.innerWidth);
+  const screen = {
+    xxl: width >= 1536,
+    xl: width >= 1280,
+    lg: width >= 1024,
+    md: width >= 768,
+    sm: width >= 640,
+  };
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+
+    addEventListener("resize", handleResize);
+
+    return () => removeEventListener("resize", handleResize);
+  }, []);
+
+  return screen;
 }

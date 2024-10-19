@@ -49,7 +49,7 @@ export default function Login() {
   );
 
   return (
-    <main className="w-max justify-self-center p-8">
+    <main className="w-max justify-self-center p-4 sm:p-8">
       <form onSubmit={(e) => handleLogin(e)} className="grid gap-4">
         <h1 className="text-3xl font-semibold">Login</h1>
 
@@ -61,13 +61,13 @@ export default function Login() {
 
         <Input type="password" name="password" errors={errors} />
 
-        <div className="grid w-[20rem] grid-cols-[2fr_1fr] gap-2 justify-self-end">
+        <div className="grid w-max grid-cols-[2fr_1fr] gap-2 justify-self-end md:w-[20rem]">
           <button className="rounded-xl bg-green-3 px-8 py-3 text-white-1 shadow-md">
             Login
           </button>
           <button
             onClick={(e) => handleLogin(e, true)}
-            className="rounded-xl bg-green-2 py-3 text-green-3 shadow-md"
+            className="rounded-xl bg-green-2 px-4 py-3 text-green-3 shadow-md"
           >
             Test user
           </button>

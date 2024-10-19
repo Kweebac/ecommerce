@@ -7,6 +7,7 @@ import {
   SpeakersIcon,
   WebcamIcon,
 } from "../Icons";
+import { useGetScreenWidth } from "../../utils";
 
 type ListItemProps = {
   icon: JSX.Element;
@@ -32,29 +33,33 @@ function ListItem({ icon, name, styles = "px-2" }: ListItemProps) {
 }
 
 export default function AccessoriesHeader() {
+  const { xl } = useGetScreenWidth();
+
   return (
     <div className="grid grid-rows-[auto_1fr] ">
       <header className="m-4 justify-self-center">
-        <ul className="grid grid-flow-col gap-4 text-center">
-          <ListItem icon={<MonitorIcon />} name="Monitors"></ListItem>
-          <ListItem
-            icon={<KeyboardIcon />}
-            name="Keyboards"
-            styles="px-1"
-          ></ListItem>
-          <ListItem icon={<MouseIcon />} name="Mice"></ListItem>
-          <ListItem
-            icon={<HeadphonesIcon />}
-            name="Headphones"
-            styles="px-0"
-          ></ListItem>
-          <ListItem
-            icon={<WebcamIcon />}
-            name="Webcams"
-            styles="pl-0"
-          ></ListItem>
-          <ListItem icon={<SpeakersIcon />} name="Speakers"></ListItem>
-        </ul>
+        {xl && (
+          <ul className="grid grid-flow-col gap-4 text-center">
+            <ListItem icon={<MonitorIcon />} name="Monitors"></ListItem>
+            <ListItem
+              icon={<KeyboardIcon />}
+              name="Keyboards"
+              styles="px-1"
+            ></ListItem>
+            <ListItem icon={<MouseIcon />} name="Mice"></ListItem>
+            <ListItem
+              icon={<HeadphonesIcon />}
+              name="Headphones"
+              styles="px-0"
+            ></ListItem>
+            <ListItem
+              icon={<WebcamIcon />}
+              name="Webcams"
+              styles="pl-0"
+            ></ListItem>
+            <ListItem icon={<SpeakersIcon />} name="Speakers"></ListItem>
+          </ul>
+        )}
       </header>
 
       <Outlet />

@@ -22,7 +22,7 @@ export default function Input({
             type={type}
             name={name}
             required
-            className="w-[36rem] bg-inherit text-lg outline-none"
+            className="w-[60vw] bg-inherit text-lg outline-none md:w-[36rem]"
           />
         </label>
       </div>
