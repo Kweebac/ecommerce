@@ -1,18 +1,18 @@
 function Newsletter() {
   return (
-    <div className="w-[443px]">
+    <div className="w-[320px] sm:w-[443px]">
       <p className="mb-1 text-2xl font-semibold">Newsletter</p>
       <p>
         Join our family here at PC. Get the latest, greatest, and totally not
         annoying emails every single week!
       </p>
-      <div className="mt-6 grid grid-cols-[2fr_1fr] gap-4">
+      <div className="mt-6 grid grid-cols-[auto_auto] justify-start gap-4 sm:grid-cols-[2fr_1fr]">
         <input
           type="email"
           placeholder="Email"
-          className="placeholder:gray-300 rounded-lg border border-gray-300 px-4 py-3 outline-none"
+          className="placeholder:gray-300 w-full rounded-lg border border-gray-300 px-4 py-3 outline-none sm:w-max"
         />
-        <button className="rounded-lg bg-green-3 text-lg font-medium text-white-1">
+        <button className="rounded-lg bg-green-3 px-4 text-lg font-medium text-white-1">
           Subscribe
         </button>
       </div>
@@ -23,11 +23,11 @@ function Newsletter() {
 export default function Footer() {
   return (
     <footer className="flex justify-center bg-green-2 shadow-inner">
-      <div className="grid w-[--page-margin] justify-center p-8">
-        <div className="flex gap-36">
+      <div className="grid justify-center p-4 lg:w-[--page-margin] lg:p-8">
+        <div className="grid gap-8 md:grid-flow-col md:gap-36">
           <div>
             <h1 className="mb-2 text-2xl font-semibold">Follow us</h1>
-            <ul className="grid gap-1 text-[#756f69]">
+            <ul className="text-md grid grid-flow-col gap-1 text-[#756f69] md:grid-flow-row">
               <li className="cursor-pointer">Twitter</li>
               <li className="cursor-pointer">Instagram</li>
               <li className="cursor-pointer">Facebook</li>
@@ -37,7 +37,7 @@ export default function Footer() {
           <Newsletter />
         </div>
 
-        <div className="mt-16 flex justify-between border-t border-gray-300 pt-4 text-sm text-[#756f69]">
+        <div className="mt-8 grid justify-items-center border-t border-gray-300 pt-4 text-sm text-[#756f69] sm:grid-flow-col sm:justify-between md:mt-16">
           <div className="flex gap-2">
             <div className="cursor-pointer">Privacy policy</div>
             <div>·</div>

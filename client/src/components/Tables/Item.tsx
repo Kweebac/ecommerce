@@ -49,7 +49,7 @@ export default function Item({ item, options, children }: ItemProps) {
     <>
       {error && <PopupError PopupError message={error} />}
 
-      <div className="my-8 flex items-start justify-center gap-12">
+      <div className="my-8 grid items-start justify-center justify-items-center gap-12 lg:grid-flow-col">
         <div className="rounded-xl bg-white-1">
           <img
             src={item.url}
@@ -57,10 +57,12 @@ export default function Item({ item, options, children }: ItemProps) {
             className="h-64 w-64 rounded-xl object-contain"
           />
         </div>
-        <div className="grid gap-6">
-          <div className="text-3xl font-semibold">{item.name}</div>
+        <div className="grid justify-items-center gap-6 lg:justify-items-start">
+          <div className="text-center text-3xl font-semibold">{item.name}</div>
           {children && (
-            <div className="flex w-[30rem] flex-wrap gap-2">{children}</div>
+            <div className="flex w-[360px] flex-wrap justify-center gap-2 sm:w-[30rem] lg:justify-start">
+              {children}
+            </div>
           )}
           <div className="grid w-64 justify-items-center gap-3">
             <div className="flex w-full gap-2">

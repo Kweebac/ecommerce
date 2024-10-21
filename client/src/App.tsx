@@ -92,6 +92,8 @@ export default function App() {
     })();
   }, []);
 
+  console.log("User", user);
+
   return (
     <RedirectToHomeContext.Provider
       value={{ redirectToHome, setRedirectToHome }}

@@ -7,7 +7,7 @@ export default function PopupError({ message }: { message: string }) {
         <ErrorIcon styles="h-8 w-8 rounded-full shadow-md" />
         <div className="text-sm">
           <div className="font-semibold">Something went wrong!</div>
-          <div>{message}</div>
+          <div className="max-w-[215px] sm:max-w-max">{message}</div>
         </div>
       </div>
     </div>

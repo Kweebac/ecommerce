@@ -1,20 +1,72 @@
 import { useContext } from "react";
 import logo from "../assets/logo.png";
+import logoDark from "../assets/logo-dark.png";
 import { CartVisibleContext } from "./Header";
 
 const svgClass = "h-16 w-16";
 const pathClass = "fill-green-3";
 
-export function Logo() {
-  return (
-    <div className="flex items-center">
-      <img src={logo} alt="PC logo" className="h-20 w-20" />
-      <div>
-        <h1 className="text-xl font-bold text-green-3">PC</h1>
-        <p className="text-xs font-semibold text-green-3">Build your own</p>
+export function Logo({
+  dark = false,
+  fullSize = false,
+}: {
+  dark: boolean;
+  fullSize: boolean;
+}) {
+  if (fullSize)
+    return (
+      <div className="flex items-center">
+        <img src={dark ? logoDark : logo} alt="PC logo" className="h-20 w-20" />
+        <div>
+          {dark ? (
+            <>
+              <h1 className="text-xl font-bold text-green-2">PC Levelling</h1>
+              <p className="text-xs font-semibold text-green-2">
+                Level up your PC
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-xl font-bold text-green-3">PC Levelling</h1>
+              <p className="text-xs font-semibold text-green-3">
+                Level up your PC
+              </p>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  else
+    return (
+      <div className="flex items-center">
+        <img
+          src={dark ? logoDark : logo}
+          alt="PC logo"
+          className="h-16 w-16 sm:h-20 sm:w-20"
+        />
+        <div>
+          {dark ? (
+            <>
+              <h1 className="text-sm font-bold text-green-2 sm:text-xl">
+                PC Levelling
+              </h1>
+              <p className="text-xs font-semibold text-green-2">
+                Level up your PC
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-sm font-bold text-green-3 sm:text-xl">
+                PC Levelling
+              </h1>
+              <p className="text-xs font-semibold text-green-3">
+                Level up your PC
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    );
 }
 
 type CartIconProps = { items: number };
@@ -75,7 +127,7 @@ export function PlainCartIcon() {
   );
 }
 
-export function Close() {
+export function Close({ color = "#000000" }: { color?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +141,7 @@ export function Close() {
         <path
           id="Vector"
           d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
-          stroke="#000000"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -725,6 +777,37 @@ export function ErrorIcon({
           stroke="none"
           fillRule="evenodd"
           fill={color}
+        />
+      </g>
+    </svg>
+  );
+}
+
+export function MenuIcon() {
+  return (
+    <svg
+      className="h-7 w-7 cursor-pointer"
+      xmlns="http://www.w3.org/2000/svg"
+      width="800px"
+      height="800px"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M4 6H20M4 12H20M4 18H20"
+          stroke="#4b654b"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
     </svg>

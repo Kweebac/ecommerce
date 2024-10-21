@@ -29,6 +29,7 @@ input[type="radio"] {
 @layer base {
   :root {
     --page-margin: 90vw;
+    --page-margin-mobile: 100vw;
     --filter-width: 16rem;
     --background-color: #f4f4f3;
 
