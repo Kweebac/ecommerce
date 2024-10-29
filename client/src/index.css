@@ -15,9 +15,6 @@ input[type="radio"] {
   accent-color: #4b654b;
 }
 
-.cards {
-  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
-}
 .item-info {
   grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
 }
@@ -29,6 +26,7 @@ input[type="radio"] {
 @layer base {
   :root {
     --page-margin: 90vw;
+    --page-margin-mobile: 100vw;
     --filter-width: 16rem;
     --background-color: #f4f4f3;
 

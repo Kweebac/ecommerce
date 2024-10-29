@@ -3,8 +3,13 @@ import { ErrorIcon } from "./Icons";
 function BuildError({ message }: { message: string }) {
   return (
     <div className="flex items-center gap-3 rounded-md bg-red-500 px-3 py-2">
-      <ErrorIcon styles="h-6 w-6 rounded-full shadow-md" color="#f4f4f3" />
-      <div className="text-[--background-color]">{message}</div>
+      <ErrorIcon
+        styles="min-w-max h-6 w-6 rounded-full shadow-md"
+        color="#f4f4f3"
+      />
+      <div className="text-xs text-[--background-color] md:text-sm lg:text-base">
+        {message}
+      </div>
     </div>
   );
 }

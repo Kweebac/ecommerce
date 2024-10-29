@@ -16,7 +16,7 @@ import {
 } from "../Icons";
 import { CheckoutButton } from "../Buttons";
 import { UserContext } from "../../../src/App";
-import { handleSetUser } from "../../../src/utils";
+import { handleSetUser, useGetScreenWidth } from "../../../src/utils";
 import BuildErrors from "../BuildErrors";
 
 function AddComponent({
@@ -29,7 +29,7 @@ function AddComponent({
   optional?: boolean;
 }) {
   return (
-    <div className="grid min-w-[40rem] grid-flow-col items-center justify-start gap-6">
+    <div className="grid min-w-[20rem] grid-flow-col items-center justify-start gap-4 sm:min-w-[24rem] sm:gap-6 md:min-w-[40rem]">
       <div className="z-10 w-20 bg-[--background-color] text-xl">£0</div>
       {icon}
       <Link to={url}>
@@ -55,6 +55,7 @@ function ComponentInfoItem({ name, value }: { name: string; value: string }) {
 
 function ComponentInfo({ icon, alt, component, children }) {
   const { setUser } = useContext(UserContext);
+  const { xl, md } = useGetScreenWidth();
   const { url, name, price } = component;
   const link = `${alt.toLowerCase().replace(/\s/g, "-")}/${component._id}`;
   let componentType = alt.toLowerCase().replace(/\s/g, "-");
@@ -74,8 +75,10 @@ function ComponentInfo({ icon, alt, component, children }) {
   }
 
   return (
-    <div className="grid grid-flow-col items-center justify-start gap-6">
-      <div className="z-10 w-20 bg-[--background-color] text-xl">£{price}</div>
+    <div className="grid grid-flow-col items-center justify-start gap-4 sm:gap-6">
+      <div className="z-10 w-20 bg-[--background-color] text-lg sm:text-xl">
+        £{price}
+      </div>
       {icon}
       <div className="flex items-center gap-4 rounded-xl bg-white-1 pr-4 hover:shadow-md">
         <Link to={`/components/${link}`}>
@@ -84,10 +87,12 @@ function ComponentInfo({ icon, alt, component, children }) {
               <img src={url} alt={alt} className="h-14 w-14 object-contain" />
             </div>
 
-            <div className="flex gap-10">
-              <ComponentInfoItem name="Name" value={name} />
-              {children}
-            </div>
+            {md && (
+              <div className="flex gap-10">
+                <ComponentInfoItem name="Name" value={name} />
+                {xl && children}
+              </div>
+            )}
           </div>
         </Link>
         <div
@@ -117,12 +122,12 @@ export default function Build() {
   }
 
   return (
-    <main className="my-8 grid justify-center">
+    <main className="my-8 grid justify-items-center">
       <div className="mb-8 grid justify-items-center gap-2">
         {build && <BuildErrors build={build} />}
       </div>
       <div className="relative grid w-max justify-items-center">
-        <h1 className="z-10 mb-8 bg-[--background-color] px-4 text-3xl font-semibold">
+        <h1 className="z-10 mb-8 bg-[--background-color] px-2 text-2xl font-semibold sm:px-4 sm:text-3xl">
           Build your own PC
         </h1>
         <div className="z-10 grid gap-2">
@@ -131,7 +136,7 @@ export default function Build() {
               {build.gpu.map((gpu, index) => (
                 <ComponentInfo
                   key={index}
-                  icon={<GPUIcon />}
+                  icon={<GPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   alt="GPU"
                   component={gpu}
                 >
@@ -149,18 +154,25 @@ export default function Build() {
               ))}
               {build.gpu.length < 2 && (
                 <AddComponent
-                  icon={<GPUIcon />}
+                  icon={<GPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   url="/components/gpu"
                   optional={true}
                 />
               )}
             </>
           ) : (
-            <AddComponent icon={<GPUIcon />} url="/components/gpu" />
+            <AddComponent
+              icon={<GPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/gpu"
+            />
           )}
 
           {build?.cpu ? (
-            <ComponentInfo icon={<CPUIcon />} alt="CPU" component={build.cpu}>
+            <ComponentInfo
+              icon={<CPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              alt="CPU"
+              component={build.cpu}
+            >
               <ComponentInfoItem name="Series" value={build.cpu.series} />
               <ComponentInfoItem name="Cores" value={build.cpu.cores} />
               <ComponentInfoItem
@@ -173,12 +185,15 @@ export default function Build() {
               />
             </ComponentInfo>
           ) : (
-            <AddComponent icon={<CPUIcon />} url="/components/cpu" />
+            <AddComponent
+              icon={<CPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/cpu"
+            />
           )}
 
           {build?.motherboard ? (
             <ComponentInfo
-              icon={<MotherboardIcon />}
+              icon={<MotherboardIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               alt="Motherboard"
               component={build.motherboard}
             >
@@ -190,7 +205,7 @@ export default function Build() {
             </ComponentInfo>
           ) : (
             <AddComponent
-              icon={<MotherboardIcon />}
+              icon={<MotherboardIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               url="/components/motherboard"
             />
           )}
@@ -200,7 +215,7 @@ export default function Build() {
               {build.ram.map((ram, index) => (
                 <ComponentInfo
                   key={index}
-                  icon={<RAMIcon />}
+                  icon={<RAMIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   alt="RAM"
                   component={ram}
                 >
@@ -218,14 +233,17 @@ export default function Build() {
               ))}
               {build.ram.length < 2 && (
                 <AddComponent
-                  icon={<RAMIcon />}
+                  icon={<RAMIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   url="/components/ram"
                   optional={true}
                 />
               )}
             </>
           ) : (
-            <AddComponent icon={<RAMIcon />} url="/components/ram" />
+            <AddComponent
+              icon={<RAMIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/ram"
+            />
           )}
 
           {build?.storage.length ? (
@@ -233,7 +251,7 @@ export default function Build() {
               {build.storage.map((storage, index) => (
                 <ComponentInfo
                   key={index}
-                  icon={<StorageIcon />}
+                  icon={<StorageIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   alt="Storage"
                   component={storage}
                 >
@@ -246,18 +264,25 @@ export default function Build() {
               ))}
               {build.storage.length < 2 && (
                 <AddComponent
-                  icon={<StorageIcon />}
+                  icon={<StorageIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   url="/components/storage"
                   optional={true}
                 />
               )}
             </>
           ) : (
-            <AddComponent icon={<StorageIcon />} url="/components/storage" />
+            <AddComponent
+              icon={<StorageIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/storage"
+            />
           )}
 
           {build?.psu ? (
-            <ComponentInfo icon={<PSUIcon />} alt="PSU" component={build.psu}>
+            <ComponentInfo
+              icon={<PSUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              alt="PSU"
+              component={build.psu}
+            >
               <ComponentInfoItem
                 name="Wattage"
                 value={`${build.psu.wattage} W`}
@@ -265,12 +290,15 @@ export default function Build() {
               <ComponentInfoItem name="Efficiency" value={build.psu.rating} />
             </ComponentInfo>
           ) : (
-            <AddComponent icon={<PSUIcon />} url="/components/psu" />
+            <AddComponent
+              icon={<PSUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/psu"
+            />
           )}
 
           {build?.case ? (
             <ComponentInfo
-              icon={<CaseIcon />}
+              icon={<CaseIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               alt="Case"
               component={build.case}
             >
@@ -281,12 +309,15 @@ export default function Build() {
               />
             </ComponentInfo>
           ) : (
-            <AddComponent icon={<CaseIcon />} url="/components/case" />
+            <AddComponent
+              icon={<CaseIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/case"
+            />
           )}
 
           {build?.cpuCooler ? (
             <ComponentInfo
-              icon={<CPUCoolerIcon />}
+              icon={<CPUCoolerIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               alt="CPU Cooler"
               component={build.cpuCooler}
             >
@@ -305,7 +336,7 @@ export default function Build() {
             </ComponentInfo>
           ) : (
             <AddComponent
-              icon={<CPUCoolerIcon />}
+              icon={<CPUCoolerIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               url="/components/cpu-cooler"
             />
           )}
@@ -315,7 +346,7 @@ export default function Build() {
               {build.fans.map((fan, index) => (
                 <ComponentInfo
                   key={index}
-                  icon={<FanIcon />}
+                  icon={<FanIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   alt="Fans"
                   component={fan}
                 >
@@ -329,28 +360,34 @@ export default function Build() {
               ))}
               {build.fans.length < 4 && (
                 <AddComponent
-                  icon={<FanIcon />}
+                  icon={<FanIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                   url="/components/fans"
                   optional={true}
                 />
               )}
             </>
           ) : (
-            <AddComponent icon={<FanIcon />} url="/components/fans" />
+            <AddComponent
+              icon={<FanIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/fans"
+            />
           )}
 
           {build?.os ? (
             <ComponentInfo
-              icon={<OSIcon />}
+              icon={<OSIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               alt="OS"
               component={build.os}
             ></ComponentInfo>
           ) : (
-            <AddComponent icon={<OSIcon />} url="/components/os" />
+            <AddComponent
+              icon={<OSIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
+              url="/components/os"
+            />
           )}
         </div>
-        <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-4">
-          <div className="text-2xl font-semibold">£{totalPrice}</div>
+        <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-2 sm:px-4">
+          <div className="text-xl font-semibold sm:text-2xl">£{totalPrice}</div>
           <CheckoutButton />
         </div>
 

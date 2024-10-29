@@ -11,6 +11,7 @@ import {
   RAMIcon,
   StorageIcon,
 } from "../Icons";
+import { useGetScreenWidth } from "../../../src/utils";
 
 type ListItemProps = {
   icon: JSX.Element;
@@ -36,29 +37,32 @@ function ListItem({ icon, name, styles = "px-2" }: ListItemProps) {
 }
 
 export default function ComponentsHeader() {
+  const { xl } = useGetScreenWidth();
   return (
     <div className="grid grid-rows-[auto_1fr] ">
       <header className="m-4 justify-self-center">
-        <ul className="grid grid-flow-col gap-4 text-center">
-          <ListItem icon={<GPUIcon />} name="GPU" styles="px-3"></ListItem>
-          <ListItem icon={<CPUIcon />} name="CPU"></ListItem>
-          <ListItem
-            icon={<MotherboardIcon />}
-            name="Motherboard"
-            styles="px-0"
-          ></ListItem>
-          <ListItem icon={<RAMIcon />} name="RAM"></ListItem>
-          <ListItem icon={<StorageIcon />} name="Storage"></ListItem>
-          <ListItem icon={<PSUIcon />} name="PSU"></ListItem>
-          <ListItem icon={<CaseIcon />} name="Case"></ListItem>
-          <ListItem
-            icon={<CPUCoolerIcon />}
-            name="CPU Cooler"
-            styles="px-0"
-          ></ListItem>
-          <ListItem icon={<FanIcon />} name="Fans"></ListItem>
-          <ListItem icon={<OSIcon />} name="OS"></ListItem>
-        </ul>
+        {xl && (
+          <ul className="grid grid-flow-col gap-4 text-center">
+            <ListItem icon={<GPUIcon />} name="GPU" styles="px-3"></ListItem>
+            <ListItem icon={<CPUIcon />} name="CPU"></ListItem>
+            <ListItem
+              icon={<MotherboardIcon />}
+              name="Motherboard"
+              styles="px-0"
+            ></ListItem>
+            <ListItem icon={<RAMIcon />} name="RAM"></ListItem>
+            <ListItem icon={<StorageIcon />} name="Storage"></ListItem>
+            <ListItem icon={<PSUIcon />} name="PSU"></ListItem>
+            <ListItem icon={<CaseIcon />} name="Case"></ListItem>
+            <ListItem
+              icon={<CPUCoolerIcon />}
+              name="CPU Cooler"
+              styles="px-0"
+            ></ListItem>
+            <ListItem icon={<FanIcon />} name="Fans"></ListItem>
+            <ListItem icon={<OSIcon />} name="OS"></ListItem>
+          </ul>
+        )}
       </header>
 
       <Outlet />

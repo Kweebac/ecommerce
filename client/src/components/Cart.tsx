@@ -83,7 +83,7 @@ function CartItem({ info, quantity, url }: CartItemProps) {
           </div>
           <div
             onClick={navigateToItemPage}
-            className="w-max max-w-[250px] cursor-pointer truncate text-sm"
+            className="w-max max-w-[180px] cursor-pointer truncate text-sm sm:max-w-[250px]"
           >
             {info.name}
           </div>
@@ -123,7 +123,7 @@ export default function Cart() {
         onClick={() => setCartVisible(false)}
         className="backdrop-brightness-50"
       ></div>
-      <div className="grid w-[25rem] grid-rows-[auto_1fr_auto] bg-white-1">
+      <div className="grid w-[320px] grid-rows-[auto_1fr_auto] bg-white-1 sm:w-[25rem]">
         <div className="flex h-[82px] items-center justify-between border-b border-gray-300 p-4 shadow-md">
           <h1 className="text-lg font-medium">Your cart ({cartItems})</h1>
           <div

@@ -12,6 +12,7 @@ import {
   StorageIcon,
 } from "../Icons";
 import Button from "../Buttons";
+import { useGetScreenWidth } from "../../../src/utils";
 
 function ComponentInfoItem({ name, value }: { name: string; value: string }) {
   return (
@@ -23,24 +24,27 @@ function ComponentInfoItem({ name, value }: { name: string; value: string }) {
 }
 
 function ComponentInfo({ icon, link, alt, component, children }) {
+  const { xl, md } = useGetScreenWidth();
   const { url, name, price } = component;
 
   return (
-    <div className="grid grid-flow-col items-center justify-start gap-6">
-      <div className="z-10 w-[72px] bg-[--background-color] text-xl">
+    <div className="grid min-w-[22rem] grid-flow-col items-center justify-start gap-4 sm:min-w-[35rem] sm:gap-6 md:min-w-[40rem]">
+      <div className="z-10 w-20 bg-[--background-color] text-lg sm:text-xl">
         £{price}
       </div>
       {icon}
       <Link to={`/components/${link}`}>
-        <div className="flex items-center gap-2 rounded-xl bg-white-1 pl-2 pr-4 hover:shadow-md">
+        <div className="flex items-center gap-2 rounded-xl bg-white-1 pl-2 pr-2 hover:shadow-md md:pr-4">
           <div className="h-16 w-16 place-content-center p-1">
             <img src={url} alt={alt} className="object-contain" />
           </div>
 
-          <div className="flex gap-10">
-            <ComponentInfoItem name="Name" value={name} />
-            {children}
-          </div>
+          {md && (
+            <div className="flex gap-10">
+              <ComponentInfoItem name="Name" value={name} />
+              {xl && children}
+            </div>
+          )}
         </div>
       </Link>
     </div>
@@ -81,14 +85,16 @@ export default function PrebuiltItem() {
   if (prebuilt === null) return <URLError />;
   else if (prebuilt !== undefined)
     return (
-      <main className="my-8 grid justify-center">
+      <main className="my-8 grid justify-items-center">
         <div className="relative grid w-max justify-items-center">
-          <h1 className="z-10 mb-8 bg-[--background-color] px-4 text-3xl font-semibold">
-            {prebuilt.name}
+          <h1 className="z-10 mb-6 w-[17rem] text-center text-xl font-semibold sm:mb-8 sm:w-[21rem] sm:px-4 sm:text-2xl md:w-[25rem] md:text-3xl xl:w-max">
+            <mark className="bg-[--background-color] px-2">
+              {prebuilt.name}
+            </mark>
           </h1>
           <div className="z-10 grid content-start gap-2">
             <ComponentInfo
-              icon={<GPUIcon />}
+              icon={<GPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`gpu/${gpu._id}`}
               alt="GPU"
               component={gpu}
@@ -106,7 +112,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<CPUIcon />}
+              icon={<CPUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`cpu/${cpu._id}`}
               alt="CPU"
               component={cpu}
@@ -124,7 +130,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<MotherboardIcon />}
+              icon={<MotherboardIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`motherboard/${motherboard._id}`}
               alt="Motherboard"
               component={motherboard}
@@ -134,7 +140,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<RAMIcon />}
+              icon={<RAMIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`ram/${ram._id}`}
               alt="RAM"
               component={ram}
@@ -149,7 +155,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<StorageIcon />}
+              icon={<StorageIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`storage/${storage._id}`}
               alt="Storage"
               component={storage}
@@ -162,7 +168,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<PSUIcon />}
+              icon={<PSUIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`psu/${psu._id}`}
               alt="PSU"
               component={psu}
@@ -172,7 +178,7 @@ export default function PrebuiltItem() {
             </ComponentInfo>
 
             <ComponentInfo
-              icon={<CaseIcon />}
+              icon={<CaseIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
               link={`case/${caseItem._id}`}
               alt="Case"
               component={caseItem}
@@ -186,7 +192,7 @@ export default function PrebuiltItem() {
 
             {cpuCooler && (
               <ComponentInfo
-                icon={<CPUCoolerIcon />}
+                icon={<CPUCoolerIcon styles="h-14 w-14 sm:h-16 sm:w-16" />}
                 link={`cpu-cooler/${cpuCooler._id}`}
                 alt="CPU Cooler"
                 component={cpuCooler}
@@ -203,8 +209,10 @@ export default function PrebuiltItem() {
               </ComponentInfo>
             )}
           </div>
-          <div className="z-10 mt-8 flex items-center gap-4 bg-[--background-color] px-4">
-            <div className="text-2xl font-semibold">£{prebuilt.price}</div>
+          <div className="z-10 mt-6 flex items-center gap-4 bg-[--background-color] px-2 sm:mt-8 sm:px-4">
+            <div className="text-lg font-semibold sm:text-xl md:text-2xl">
+              £{prebuilt.price}
+            </div>
             <Button itemInfo={prebuilt} />
           </div>
 
