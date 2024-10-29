@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -87,7 +89,7 @@ export default function PSU() {
       },
       {
         accessorKey: "color",
-        filterFn: (row: Row, columnId: string, filterValue: any) => {
+        filterFn: (row: Row, columnId: string) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },

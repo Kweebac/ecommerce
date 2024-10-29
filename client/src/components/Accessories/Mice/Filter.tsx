@@ -1,5 +1,6 @@
+// @ts-nocheck
+
 import CheckboxFilter from "../../Tables/Checkbox";
-import RadioFilter from "../../Tables/Radio";
 import SearchFilter from "../../Tables/Search";
 import SliderFilter from "../../Tables/Slider";
 

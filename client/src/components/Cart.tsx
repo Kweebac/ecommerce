@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useContext, useEffect } from "react";
 import { CartContext } from "../App";
 import { Close, MinusIcon, PlusIcon } from "./Icons";

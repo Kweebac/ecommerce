@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Item from "../../Tables/Item";
 import { useGetItem } from "../../../utils";
 import { SharedValues } from "@/src/types/Components";

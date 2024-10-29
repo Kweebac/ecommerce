@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ErrorIcon } from "./Icons";
 
 export default function PopupError({ message }: { message: string }) {

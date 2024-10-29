@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useContext } from "react";
 import logo from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";

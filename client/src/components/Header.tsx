@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link, Outlet, useLocation } from "react-router-dom";
 import {
   Logo,

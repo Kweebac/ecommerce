@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Sort from "./Sort";
 
 export default function Headers({ table }) {

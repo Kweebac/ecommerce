@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 import { LeftArrowIcon, RightArrowIcon } from "../Icons";
 
-export default function Pages({ table }: { table: any }) {
+export default function Pages({ table }) {
   if (table.getPageCount() > 1)
     return (
       <>

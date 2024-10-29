@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { StorageValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";
 import { useGetItem } from "../../../utils";

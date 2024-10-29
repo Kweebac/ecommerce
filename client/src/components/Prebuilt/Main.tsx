@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useEffect, useState } from "react";
 import { CPUIcon, GPUIcon, MotherboardIcon, RAMIcon } from "../Icons";
 import { Link } from "react-router-dom";

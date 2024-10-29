@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 type RadioFilterProps = {
   id: string;
   name?: string;

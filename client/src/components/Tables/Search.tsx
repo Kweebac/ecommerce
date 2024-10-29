@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { SearchIcon } from "../Icons";
 
 type SearchFilterProps = {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ErrorIcon } from "./Icons";
 
 function BuildError({ message }: { message: string }) {

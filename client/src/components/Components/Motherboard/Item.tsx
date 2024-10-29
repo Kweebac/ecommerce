@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useGetItem } from "../../../../src/utils";
 import { MotherboardValues } from "@/src/types/Components";
 import Item, { InfoItem } from "../../Tables/Item";

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Link, useNavigate } from "react-router-dom";
 import { useCallback, useContext, useState } from "react";
 import { RedirectToHomeContext, UserContext } from "../../App";

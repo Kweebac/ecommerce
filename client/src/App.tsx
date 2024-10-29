@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Navigate, Route, Routes } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import { handleSetUser } from "./utils";

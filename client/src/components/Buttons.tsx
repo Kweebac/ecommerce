@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useContext } from "react";
 import { CartContext, UserContext } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";

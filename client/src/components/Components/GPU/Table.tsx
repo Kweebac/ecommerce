@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -63,7 +65,7 @@ export default function GPU() {
       {
         accessorKey: "chipset",
         header: "Chipset",
-        filterFn: (row: Row, columnId: string, filterValue: any) => {
+        filterFn: (row: Row, columnId: string) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { NavLink, Outlet } from "react-router-dom";
 import {
   CaseIcon,

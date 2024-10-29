@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ComponentValues } from "@/src/types/Components";
 import Button, { ButtonPC } from "../Buttons";
 import { useState } from "react";

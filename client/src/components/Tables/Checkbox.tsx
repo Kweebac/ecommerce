@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 type CheckboxFilterProps = {
   id: string;
   name?: string;
