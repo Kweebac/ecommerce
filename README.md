@@ -49,7 +49,7 @@
 
 ## About The Project
 
-[![Website screenshot][product-screenshot]](website_url)
+[![Website screenshot][product-screenshot]](https://kweebac-ecommerce.vercel.app/)
 
 Build your own PC or buy individual components
 
@@ -91,13 +91,10 @@ Build your own PC or buy individual components
 
 ## Roadmap
 
-- [ ] Buy individual PC components
-  - [ ] Search
-  - [ ] Filters
-- [ ] Build your own PC
-- [ ] Account customization
-- [ ] Order tracking & past orders
-- [ ] Send emails
+- [ ] Fix not being able to login on production (works on dev)
+- [ ] Make components and accessories pages responsive
+- [ ] Fix automatic login bug
+- [ ] Implement TS properly
 
 See the [open issues](https://github.com/Kweebac/ecommerce/issues) for a full list of proposed features (and known issues).
 
@@ -137,7 +134,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 [license-url]: https://github.com/Kweebac/ecommerce/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/alfie-marshall-045bba268/
-[product-screenshot]: https://designshack.net/wp-content/uploads/Free-Abstract-Borders-Background-Template.jpg
+[product-screenshot]: https://i.imgur.com/d9M8fjq.png
 [React]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://react.dev/
 [TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white

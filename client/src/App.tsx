@@ -77,13 +77,14 @@ export default function App() {
   const [user, setUser] = useState<object | null>(null);
   const [cart, setCart] = useState<Array | null>([]);
   const isLoggedIn = user !== null;
+  console.log("user", user); // remove
 
   useEffect(() => {
     (async () => {
       const abortController = new AbortController();
 
       try {
-        handleSetUser(setUser, abortController);
+        await handleSetUser(setUser, abortController);
       } catch (error) {
         console.error(error);
       }
@@ -93,8 +94,6 @@ export default function App() {
       };
     })();
   }, []);
-
-  console.log("User", user);
 
   return (
     <RedirectToHomeContext.Provider

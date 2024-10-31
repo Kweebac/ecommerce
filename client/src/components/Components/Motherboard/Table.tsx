@@ -66,7 +66,7 @@ export default function Motherboard() {
       {
         accessorKey: "chipset",
         header: "Chipset",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -75,7 +75,7 @@ export default function Motherboard() {
       {
         accessorKey: "formFactor",
         header: "Form factor",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -83,7 +83,7 @@ export default function Motherboard() {
       {
         accessorKey: "cpuSocket",
         header: "CPU socket",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -98,7 +98,7 @@ export default function Motherboard() {
       {
         accessorKey: "wifi",
         header: "Wi-Fi",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -130,7 +130,7 @@ export default function Motherboard() {
       },
       {
         accessorKey: "color",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -156,7 +156,7 @@ export default function Motherboard() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/motherboard",
       );
       const data = await res.json();
 

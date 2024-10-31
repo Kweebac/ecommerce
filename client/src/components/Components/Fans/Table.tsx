@@ -126,7 +126,9 @@ export default function Fans() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/fans");
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/fans",
+      );
       const data = await res.json();
 
       setFansList(data);

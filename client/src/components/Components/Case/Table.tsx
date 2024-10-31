@@ -60,7 +60,7 @@ export default function Case() {
       {
         accessorKey: "type",
         header: "Type",
-        filterFn: (row: Row, columnId: string) => {
+        filterFn: (row: Row, columnId: string, filterValue) => {
           const value = row.getValue(columnId);
           return filterValue.includes(value);
         },
@@ -122,7 +122,9 @@ export default function Case() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/case");
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/case",
+      );
       const data = await res.json();
 
       setCaseList(data);

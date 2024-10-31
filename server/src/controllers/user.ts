@@ -9,6 +9,9 @@ const getUser: RequestHandler = async (req, res) => {
     "build.gpu build.cpu build.motherboard build.ram build.storage build.psu build.case build.cpuCooler build.fans build.os"
   );
 
+  console.log("getUser route");
+  console.log("user", user);
+  console.log("req.user", req.user);
   res.json(user);
 };
 

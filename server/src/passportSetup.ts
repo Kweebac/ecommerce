@@ -1,7 +1,6 @@
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import passport from "passport";
-
 import User from "./models/User";
 
 passport.use(

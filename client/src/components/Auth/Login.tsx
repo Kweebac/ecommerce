@@ -25,12 +25,15 @@ export default function Login() {
         formData = new FormData(e.currentTarget);
       }
 
-      const res = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        // @ts-expect-error works
-        body: new URLSearchParams(formData),
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/auth/login",
+        {
+          method: "POST",
+          // @ts-expect-error works
+          body: new URLSearchParams(formData),
+          credentials: "include",
+        },
+      );
 
       if (res.status === 403) {
         navigate(-1);
@@ -39,7 +42,7 @@ export default function Login() {
         setErrors(errors);
       } else if (res.ok) {
         try {
-          handleSetUser(setUser);
+          await handleSetUser(setUser);
           if (redirectToHome) navigate("/");
           else navigate(-1);
         } catch (error) {

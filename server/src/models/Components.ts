@@ -28,7 +28,7 @@ const CPU = mongoose.model(
     cores: { type: Number, required: true },
     pCoreClock: { type: Number, required: true },
     pBoostClock: { type: Number, required: true },
-    integratedGraphics: { type: String, enum: ["Yes", "No"], required: true },
+    integratedGraphics: { type: String, enum: ["Yes", "None"], required: true },
     socket: { type: String, required: true },
     tdp: { type: Number, required: true },
   })
@@ -48,6 +48,7 @@ const Motherboard = mongoose.model(
       type: {
         ddr: { type: String, required: true },
         ddrSpeeds: { type: [Number], required: true },
+        slots: { type: Number, required: true },
       },
       required: true,
     },
@@ -147,6 +148,7 @@ const Fans = mongoose.model(
     price: { type: Number, required: true },
     name: { type: String, required: true },
 
+    quantity: { type: Number, required: true },
     size: { type: Number, required: true },
     rpm: { type: String, required: true },
     airflow: { type: String, required: true },

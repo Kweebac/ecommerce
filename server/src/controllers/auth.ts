@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ValidationError, body, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import passport from "passport";
@@ -49,14 +51,29 @@ const register = [
   }),
 ];
 
+// const login = [
+//   body("email").escape(),
+//   body("password").escape(),
+//   passport.authenticate("local", {
+//     successRedirect: "/api/auth/login/success",
+//     failureRedirect: "/api/auth/login/failure",
+//     failureMessage: true,
+//   }),
+// ];
 const login = [
   body("email").escape(),
   body("password").escape(),
   passport.authenticate("local", {
-    successRedirect: "/api/auth/login/success",
     failureRedirect: "/api/auth/login/failure",
     failureMessage: true,
   }),
+  (req, res, next) => {
+    console.log("login should've worked?");
+    console.log("req.isAuthenticated()", req.isAuthenticated());
+    // res.redirect("/api/auth/login/success");
+    res.setHeader("Access-Control-Allow-Origin", "https://kweebac-ecommerce.vercel.app");
+    res.redirect("https://kweebac-ecommerce.vercel.app/prebuilt");
+  },
 ];
 
 const logout: RequestHandler = (req, res, next) => {
@@ -66,6 +83,8 @@ const logout: RequestHandler = (req, res, next) => {
 };
 
 const loginSuccess: RequestHandler = (req, res) => {
+  console.log("login should've worked?");
+  console.log("req.isAuthenticated()", req.isAuthenticated());
   res.end();
 };
 
@@ -76,6 +95,8 @@ const loginFailure: RequestHandler = (req, res) => {
 };
 
 const isAuth: RequestHandler = (req, res, next) => {
+  console.log("isAuth route");
+  console.log("req.isAuthenticated()", req.isAuthenticated());
   req.isAuthenticated() ? next() : res.sendStatus(401);
 };
 

@@ -1,11 +1,12 @@
+// @ts-nocheck
+
+import dotenv from "dotenv";
+if (process.env.NODE_ENV !== "production") dotenv.config();
 import express, { ErrorRequestHandler } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import session from "express-session";
 import passport from "passport";
-import dotenv from "dotenv";
-if (process.env.NODE_ENV !== "production") dotenv.config();
-
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import componentsRouter from "./routes/components";
@@ -15,7 +16,6 @@ import prebuiltRouter from "./routes/prebuilt";
 const app = express();
 
 require("./mongooseSetup");
-require("./passportSetup");
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -23,19 +23,21 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: true,
+    origin: "https://kweebac-ecommerce.vercel.app",
   })
 );
+
 app.use(
   session({
     // @ts-expect-error
     secret: process.env.SESSION_SECRET,
-    resave: false,
     saveUninitialized: false,
+    resave: false,
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+require("./passportSetup");
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
@@ -50,4 +52,4 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, "0.0.0.0");

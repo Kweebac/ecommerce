@@ -120,7 +120,7 @@ export default function CPUCooler() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "http://localhost:3000/api/components/cpu-cooler",
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/cpu-cooler",
       );
       const data = await res.json();
 
