@@ -16,7 +16,11 @@ input[type="radio"] {
 }
 
 .item-info {
-  grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+  grid-template-columns:
+    xxxl
+    ?
+    xxxl
+    ? repeat(auto-fit, minmax(1fr, 1fr));
 }
 
 .card:hover > div:last-child > div:first-child {

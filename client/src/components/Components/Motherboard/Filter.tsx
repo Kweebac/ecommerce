@@ -14,7 +14,7 @@ export default function Filter({
   checkboxOptions = [],
 }: FilterProps) {
   return (
-    <div className="grid w-[--filter-width] gap-4">
+    <div className="grid w-[--filter-width] gap-4 text-sm sm:text-base">
       <SearchFilter
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}

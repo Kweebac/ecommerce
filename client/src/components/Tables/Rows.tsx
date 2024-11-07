@@ -80,24 +80,26 @@ export default function Rows({ table }) {
                       );
                   })}
               </div>
-              <div className="flex w-full flex-wrap justify-start gap-3">
-                {row
-                  .getVisibleCells()
-                  .slice(3)
-                  .map((cell) => {
-                    return (
-                      <div
-                        key={cell.id}
-                        className="rounded-lg bg-[--background-color] px-2 py-1 shadow-sm"
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </div>
-                    );
-                  })}
-              </div>
+              {row.getVisibleCells().length > 3 && (
+                <div className="flex w-full flex-wrap justify-start gap-3">
+                  {row
+                    .getVisibleCells()
+                    .slice(3)
+                    .map((cell) => {
+                      return (
+                        <div
+                          key={cell.id}
+                          className="rounded-lg bg-[--background-color] px-2 py-1 shadow-sm"
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
             </div>
           )}
         </div>

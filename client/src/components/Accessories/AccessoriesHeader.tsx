@@ -37,7 +37,7 @@ export default function AccessoriesHeader() {
 
   return (
     <div className="grid grid-rows-[auto_1fr] ">
-      <header className="m-4 justify-self-center">
+      <header className="justify-self-center xl:m-4">
         {xl && (
           <ul className="grid grid-flow-col gap-4 text-center">
             <ListItem icon={<MonitorIcon />} name="Monitors"></ListItem>
