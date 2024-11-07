@@ -16,6 +16,7 @@ import prebuiltRouter from "./routes/prebuilt";
 const app = express();
 
 require("./mongooseSetup");
+require("./passportSetup");
 
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://kweebac-ecommerce.vercel.app",
+    origin: true,
   })
 );
 
@@ -37,7 +38,6 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportSetup");
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

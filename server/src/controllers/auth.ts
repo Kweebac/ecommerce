@@ -51,30 +51,28 @@ const register = [
   }),
 ];
 
-// const login = [
-//   body("email").escape(),
-//   body("password").escape(),
-//   passport.authenticate("local", {
-//     successRedirect: "/api/auth/login/success",
-//     failureRedirect: "/api/auth/login/failure",
-//     failureMessage: true,
-//   }),
-// ];
 const login = [
   body("email").escape(),
   body("password").escape(),
   passport.authenticate("local", {
+    successRedirect: "/api/auth/login/success",
     failureRedirect: "/api/auth/login/failure",
     failureMessage: true,
   }),
-  (req, res, next) => {
-    console.log("login should've worked?");
-    console.log("req.isAuthenticated()", req.isAuthenticated());
-    // res.redirect("/api/auth/login/success");
-    res.setHeader("Access-Control-Allow-Origin", "https://kweebac-ecommerce.vercel.app");
-    res.redirect("https://kweebac-ecommerce.vercel.app/prebuilt");
-  },
 ];
+// const login = [
+//   body("email").escape(),
+//   body("password").escape(),
+//   passport.authenticate("local", {
+//     failureRedirect: "/api/auth/login/failure",
+//     failureMessage: true,
+//   }),
+//   (req, res, next) => {
+//     console.log("login should've worked?");
+//     console.log("req.isAuthenticated()", req.isAuthenticated());
+//     res.end();
+//   },
+// ];
 
 const logout: RequestHandler = (req, res, next) => {
   req.logout((err) => {

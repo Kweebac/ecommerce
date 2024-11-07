@@ -11,9 +11,13 @@ const pathClass = "fill-green-3";
 export function Logo({
   dark = false,
   fullSize = false,
+  title,
+  description,
 }: {
   dark: boolean;
   fullSize: boolean;
+  title?: string;
+  description?: string;
 }) {
   if (fullSize)
     return (
@@ -22,16 +26,20 @@ export function Logo({
         <div>
           {dark ? (
             <>
-              <h1 className="text-xl font-bold text-green-2">PC Levelling</h1>
+              <h1 className="text-xl font-bold text-green-2">
+                {title === undefined ? "PC Levelling" : title}
+              </h1>
               <p className="text-xs font-semibold text-green-2">
-                Level up your PC
+                {description === undefined ? "Level up your PC" : description}
               </p>
             </>
           ) : (
             <>
-              <h1 className="text-xl font-bold text-green-3">PC Levelling</h1>
+              <h1 className="text-xl font-bold text-green-3">
+                {title === undefined ? "PC Levelling" : title}
+              </h1>
               <p className="text-xs font-semibold text-green-3">
-                Level up your PC
+                {description === undefined ? "Level up your PC" : description}
               </p>
             </>
           )}

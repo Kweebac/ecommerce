@@ -41,8 +41,8 @@ function ListItem({ icon, name, styles = "px-2" }: ListItemProps) {
 export default function ComponentsHeader() {
   const { xl } = useGetScreenWidth();
   return (
-    <div className="grid grid-rows-[auto_1fr] ">
-      <header className="m-4 justify-self-center">
+    <div className="grid grid-rows-[auto_1fr]">
+      <header className="justify-self-center xl:m-4 ">
         {xl && (
           <ul className="grid grid-flow-col gap-4 text-center">
             <ListItem icon={<GPUIcon />} name="GPU" styles="px-3"></ListItem>

@@ -15,6 +15,9 @@ export default {
       },
     },
     extend: {
+      screens: {
+        "3xl": "1920px",
+      },
       colors: {
         green: {
           1: "#f5f0e8",

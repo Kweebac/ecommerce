@@ -105,7 +105,7 @@ export default function Headphones() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://kweebac-ecommerce-api.up.railway.app/api/accessories/headphones",
+        "http://localhost:3000/api/accessories/headphones",
       );
       const data = await res.json();
 

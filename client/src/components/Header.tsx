@@ -26,7 +26,7 @@ import {
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { CartContext, RedirectToHomeContext, UserContext } from "../App";
 import Cart from "./Cart";
-import { useGetScreenWidth } from "../utils";
+import { useDisableScroll, useGetScreenWidth } from "../utils";
 
 export const CartVisibleContext = createContext<{
   cartVisible: boolean;
@@ -98,7 +98,7 @@ export default function Header() {
         value={{ dropdownVisible, setDropdownVisible }}
       >
         {dropdownVisible && (
-          <MobileHeaderDropdown setDropdownVisible={setDropdownVisible} />
+          <HeaderDropdown setDropdownVisible={setDropdownVisible} />
         )}
 
         <div className="grid min-h-[calc(100vh-399px)] grid-rows-[auto_1fr] bg-[--background-color] sm:min-h-[calc(100vh-355px)] md:min-h-[calc(100vh-291px)] lg:min-h-[calc(100vh-323px)]">
@@ -159,8 +159,9 @@ export default function Header() {
   );
 }
 
-function MobileHeaderDropdown({ setDropdownVisible }) {
+function HeaderDropdown({ setDropdownVisible }) {
   const { user } = useContext(UserContext);
+  useDisableScroll();
 
   return (
     <div className="absolute z-30 grid w-screen grid-cols-[auto_1fr]">

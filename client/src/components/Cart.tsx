@@ -6,7 +6,7 @@ import { Close, MinusIcon, PlusIcon } from "./Icons";
 import { CartVisibleContext } from "./Header";
 import { CheckoutButton } from "./Buttons";
 import { useNavigate } from "react-router-dom";
-import { changeName } from "../utils";
+import { changeName, useDisableScroll } from "../utils";
 
 type QuantityProps = {
   info: object;
@@ -104,20 +104,13 @@ function CartItem({ info, quantity, url }: CartItemProps) {
 export default function Cart() {
   const { cart } = useContext(CartContext);
   const { setCartVisible } = useContext(CartVisibleContext);
+  useDisableScroll();
   const cartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   const total =
     Math.round(
       cart.reduce((acc, item) => acc + item.info.price * item.quantity, 0) *
         100,
     ) / 100;
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
 
   return (
     <div className="fixed z-30 grid h-screen w-screen grid-cols-[1fr_auto]">

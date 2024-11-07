@@ -140,9 +140,7 @@ export default function CPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://kweebac-ecommerce-api.up.railway.app/api/components/cpu",
-      );
+      const res = await fetch("http://localhost:3000/api/components/cpu");
       const data = await res.json();
 
       setCpuList(data);
