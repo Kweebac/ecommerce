@@ -146,7 +146,7 @@ export default function Fans() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -165,22 +165,42 @@ export default function Fans() {
           {
             accessorKey: "size",
             header: "Size",
-            cell: (props) => <p>{props.getValue()} mm</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Size</p>
+                <p className="text-sm">{props.getValue()} mm</p>
+              </div>
+            ),
           },
           {
             accessorKey: "rpm",
             header: "RPM",
-            cell: (props) => <p>{props.getValue()} RPM</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">RPM</p>
+                <p className="text-sm">{props.getValue()} RPM</p>
+              </div>
+            ),
           },
           {
             accessorKey: "airflow",
             header: "Airflow",
-            cell: (props) => <p>{props.getValue()} CFM</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Airflow</p>
+                <p className="text-sm">{props.getValue()} CFM</p>
+              </div>
+            ),
           },
           {
             accessorKey: "noise",
             header: "Noise",
-            cell: (props) => <p>{props.getValue()} dB</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Noise</p>
+                <p className="text-sm">{props.getValue()} dB</p>
+              </div>
+            ),
           },
           {
             accessorKey: "quantity",

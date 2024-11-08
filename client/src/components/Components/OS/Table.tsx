@@ -32,54 +32,6 @@ export default function OS() {
       ? [
           {
             accessorKey: "url",
-            cell: (props) => (
-              <img
-                src={props.getValue()}
-                alt="OS"
-                className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
-              />
-            ),
-            enableSorting: false,
-          },
-          {
-            accessorKey: "name",
-            header: "Name",
-            cell: (props) => (
-              <p className="cursor-pointer hover:text-blue-500">
-                {props.getValue()}
-              </p>
-            ),
-          },
-          {
-            accessorKey: "price",
-            header: "Price",
-            filterFn: "inNumberRange",
-            cell: (props) => {
-              const rowItem = props.row.original;
-
-              return (
-                <div className="mr-2 flex items-center justify-between gap-3">
-                  <p>£{props.getValue()}</p>
-                  <div className="flex gap-2">
-                    <SmallButtonPC
-                      setError={setError}
-                      error={error}
-                      itemInfo={rowItem}
-                      icon={<OSIcon styles="h-6 w-6" />}
-                    />
-                    <SmallButton itemInfo={rowItem} />
-                  </div>
-                </div>
-              );
-            },
-          },
-          {
-            accessorKey: "_id",
-          },
-        ]
-      : [
-          {
-            accessorKey: "url",
             size: 60,
             cell: (props) => (
               <img
@@ -109,7 +61,55 @@ export default function OS() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="mr-2 flex items-center justify-between gap-3">
+                  <p>£{props.getValue()}</p>
+                  <div className="flex gap-2">
+                    <SmallButtonPC
+                      setError={setError}
+                      error={error}
+                      itemInfo={rowItem}
+                      icon={<OSIcon styles="h-6 w-6" />}
+                    />
+                    <SmallButton itemInfo={rowItem} />
+                  </div>
+                </div>
+              );
+            },
+          },
+          {
+            accessorKey: "_id",
+          },
+        ]
+      : [
+          {
+            accessorKey: "url",
+            cell: (props) => (
+              <img
+                src={props.getValue()}
+                alt="OS"
+                className="ml-1 h-12 w-12 cursor-pointer object-contain p-0.5"
+              />
+            ),
+            enableSorting: false,
+          },
+          {
+            accessorKey: "name",
+            header: "Name",
+            cell: (props) => (
+              <p className="cursor-pointer hover:text-blue-500">
+                {props.getValue()}
+              </p>
+            ),
+          },
+          {
+            accessorKey: "price",
+            header: "Price",
+            filterFn: "inNumberRange",
+            cell: (props) => {
+              const rowItem = props.row.original;
+
+              return (
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC

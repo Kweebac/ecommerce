@@ -153,7 +153,7 @@ export default function Monitors() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <SmallButton itemInfo={rowItem} />
                 </div>
@@ -163,25 +163,52 @@ export default function Monitors() {
           {
             accessorKey: "screenSize",
             header: "Screen size",
-            cell: (props) => <p>{props.getValue()}"</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Screen size</p>
+                <p className="text-sm">{props.getValue()}"</p>
+              </div>
+            ),
           },
           {
             accessorKey: "resolution",
             header: "Resolution",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Resolution</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "refreshRate",
             header: "Refresh rate",
-            cell: (props) => <p>{props.getValue()} Hz</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Refresh rate</p>
+                <p className="text-sm">{props.getValue()} Hz</p>
+              </div>
+            ),
           },
           {
             accessorKey: "responseTime",
             header: "Response time",
-            cell: (props) => <p>{props.getValue()} ms</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Response time</p>
+                <p className="text-sm">{props.getValue()} ms</p>
+              </div>
+            ),
           },
           {
             accessorKey: "panelType",
             header: "Panel",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Panel</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "frameSync",

@@ -9,7 +9,7 @@ export default function FilterDropdown({
   dropdownVisible,
   children,
 }) {
-  useDisableScroll();
+  useDisableScroll(dropdownVisible);
 
   return (
     <div

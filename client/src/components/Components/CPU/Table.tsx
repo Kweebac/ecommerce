@@ -160,7 +160,7 @@ export default function CPU() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -182,23 +182,45 @@ export default function CPU() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Core clock</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "cores",
             header: "Cores",
             filterFn: "inNumberRange",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Cores</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "pCoreClock",
             header: "Core clock",
             filterFn: "inNumberRange",
-            cell: (props) => <p>{props.getValue()} GHz</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Core clock</p>
+                <p>{props.getValue()} GHz</p>
+              </div>
+            ),
           },
           {
             accessorKey: "pBoostClock",
             header: "Boost clock",
             filterFn: "inNumberRange",
-            cell: (props) => <p>{props.getValue()} GHz</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Core clock</p>
+                <p>{props.getValue()} GHz</p>
+              </div>
+            ),
           },
           {
             accessorKey: "integratedGraphics",

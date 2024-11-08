@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   Logo,
   CartIcon,
@@ -25,16 +25,7 @@ import {
 } from "./Icons";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { CartContext, RedirectToHomeContext, UserContext } from "../App";
-import Cart from "./Cart";
 import { useDisableScroll, useGetScreenWidth } from "../utils";
-
-export const CartVisibleContext = createContext<{
-  cartVisible: boolean;
-  setCartVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}>({
-  cartVisible: false,
-  setCartVisible: () => {},
-});
 
 export const DropdownVisibleContext = createContext<{
   dropdownVisible: boolean;
@@ -47,7 +38,6 @@ export const DropdownVisibleContext = createContext<{
 export default function Header() {
   const { user } = useContext(UserContext);
   const { cart } = useContext(CartContext);
-  const [cartVisible, setCartVisible] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   let cartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
   if (cartItems > 99) cartItems = 99;
@@ -93,69 +83,59 @@ export default function Header() {
   }, []);
 
   return (
-    <CartVisibleContext.Provider value={{ cartVisible, setCartVisible }}>
-      <DropdownVisibleContext.Provider
-        value={{ dropdownVisible, setDropdownVisible }}
+    <DropdownVisibleContext.Provider
+      value={{ dropdownVisible, setDropdownVisible }}
+    >
+      {dropdownVisible && (
+        <HeaderDropdown setDropdownVisible={setDropdownVisible} />
+      )}
+
+      <header
+        ref={header}
+        className="sticky top-0 z-20 grid justify-items-center"
       >
-        {dropdownVisible && (
-          <HeaderDropdown setDropdownVisible={setDropdownVisible} />
-        )}
+        <div
+          ref={div}
+          className="grid w-[90%] grid-cols-[auto_1fr] items-center border-b border-b-gray-300 text-lg sm:w-4/5 xl:grid-cols-[1fr_auto_1fr]"
+        >
+          <Link to="/" className="justify-self-start">
+            <Logo />
+          </Link>
 
-        <div className="grid min-h-[calc(100vh-399px)] grid-rows-[auto_1fr] bg-[--background-color] sm:min-h-[calc(100vh-355px)] md:min-h-[calc(100vh-291px)] lg:min-h-[calc(100vh-323px)]">
-          {cartVisible && <Cart />}
+          {screen.xl && (
+            <nav className="justify-self-center">
+              <ul className="flex xl:gap-6 2xl:gap-8">
+                <Link to="/build">Build your own</Link>
+                <Link to="/prebuilt">Prebuilt</Link>
+                <Link to="/components">Components</Link>
+                <Link to="/accessories">Accessories</Link>
+              </ul>
+            </nav>
+          )}
 
-          <header
-            ref={header}
-            className="sticky top-0 z-20 grid justify-items-center"
-          >
-            <div
-              ref={div}
-              className="grid w-[90%] grid-cols-[auto_1fr] items-center border-b border-b-gray-300 text-lg sm:w-4/5 xl:grid-cols-[1fr_auto_1fr]"
-            >
-              <Link to="/" className="justify-self-start">
-                <Logo />
-              </Link>
-
+          <nav className="justify-self-end">
+            <ul className="flex items-center gap-3 sm:gap-8">
               {screen.xl && (
-                <nav className="justify-self-center">
-                  <ul className="flex xl:gap-6 2xl:gap-8">
-                    <Link to="/build">Build your own</Link>
-                    <Link to="/prebuilt">Prebuilt</Link>
-                    <Link to="/components">Components</Link>
-                    <Link to="/accessories">Accessories</Link>
-                  </ul>
-                </nav>
+                <>
+                  {user ? (
+                    <Link to="/logout">Logout</Link>
+                  ) : (
+                    <Link to="/login">Login</Link>
+                  )}
+                </>
               )}
 
-              <nav className="justify-self-end">
-                <ul className="flex items-center gap-3 sm:gap-8">
-                  {screen.xl && (
-                    <>
-                      {user ? (
-                        <Link to="/logout">Logout</Link>
-                      ) : (
-                        <Link to="/login">Login</Link>
-                      )}
-                    </>
-                  )}
-
-                  <CartIcon items={cartItems} />
-                  {!screen.xl && (
-                    <div onClick={() => setDropdownVisible(true)}>
-                      <MenuIcon />
-                    </div>
-                  )}
-                </ul>
-              </nav>
-            </div>
-          </header>
-
-          <div className="grid w-[--page-margin-mobile] justify-self-center sm:w-[--page-margin]">
-            <Outlet />
-          </div>
+              <CartIcon items={cartItems} />
+              {!screen.xl && (
+                <div onClick={() => setDropdownVisible(true)}>
+                  <MenuIcon />
+                </div>
+              )}
+            </ul>
+          </nav>
         </div>
-      </DropdownVisibleContext.Provider>
-    </CartVisibleContext.Provider>
+      </header>
+    </DropdownVisibleContext.Provider>
   );
 }
 

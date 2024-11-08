@@ -47,7 +47,7 @@ export default function Rows({ table }) {
               })}
             </>
           ) : (
-            <div className="grid gap-5">
+            <div className="grid gap-5 self-start">
               <div className="grid w-full grid-flow-col grid-cols-[auto_1fr_auto] gap-1">
                 {row
                   .getVisibleCells()
@@ -86,6 +86,8 @@ export default function Rows({ table }) {
                     .getVisibleCells()
                     .slice(3)
                     .map((cell) => {
+                      if (cell.column.id === "pricePerGb") return;
+
                       return (
                         <div
                           key={cell.id}

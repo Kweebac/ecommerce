@@ -138,7 +138,7 @@ export default function CPUCooler() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -156,12 +156,22 @@ export default function CPUCooler() {
           {
             accessorKey: "rpm",
             header: "RPM",
-            cell: (props) => <p>{props.getValue()} RPM</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">RPM</p>
+                <p className="text-sm">{props.getValue()} RPM</p>
+              </div>
+            ),
           },
           {
             accessorKey: "noise",
             header: "Noise",
-            cell: (props) => <p>{props.getValue()} dB</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Noise</p>
+                <p className="text-sm">{props.getValue()} dB</p>
+              </div>
+            ),
           },
           {
             accessorKey: "waterCooled",

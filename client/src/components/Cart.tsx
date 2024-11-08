@@ -3,7 +3,7 @@
 import { useContext, useEffect } from "react";
 import { CartContext } from "../App";
 import { Close, MinusIcon, PlusIcon } from "./Icons";
-import { CartVisibleContext } from "./Header";
+import { CartVisibleContext } from "../App";
 import { CheckoutButton } from "./Buttons";
 import { useNavigate } from "react-router-dom";
 import { changeName, useDisableScroll } from "../utils";

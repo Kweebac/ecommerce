@@ -134,7 +134,7 @@ export default function PSU() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -153,12 +153,23 @@ export default function PSU() {
             accessorKey: "wattage",
             header: "Wattage",
             filterFn: "inNumberRange",
-            cell: (props) => <p>{props.getValue()} W</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Wattage</p>
+                <p className="text-sm">{props.getValue()} W</p>
+              </div>
+            ),
           },
           {
             accessorKey: "rating",
             header: "Rating",
             filterFn: "arrIncludesSome",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Rating</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "color",

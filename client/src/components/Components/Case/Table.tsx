@@ -141,7 +141,7 @@ export default function Case() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -163,6 +163,12 @@ export default function Case() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Type</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "motherboardFormFactors",

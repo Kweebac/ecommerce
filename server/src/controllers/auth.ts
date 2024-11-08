@@ -81,8 +81,6 @@ const logout: RequestHandler = (req, res, next) => {
 };
 
 const loginSuccess: RequestHandler = (req, res) => {
-  console.log("login should've worked?");
-  console.log("req.isAuthenticated()", req.isAuthenticated());
   res.end();
 };
 
@@ -93,8 +91,6 @@ const loginFailure: RequestHandler = (req, res) => {
 };
 
 const isAuth: RequestHandler = (req, res, next) => {
-  console.log("isAuth route");
-  console.log("req.isAuthenticated()", req.isAuthenticated());
   req.isAuthenticated() ? next() : res.sendStatus(401);
 };
 

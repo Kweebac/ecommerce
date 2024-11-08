@@ -138,7 +138,7 @@ export default function Keyboards() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <SmallButton itemInfo={rowItem} />
                 </div>
@@ -148,6 +148,12 @@ export default function Keyboards() {
           {
             accessorKey: "style",
             header: "Style",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Style</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "wireless",
@@ -157,7 +163,12 @@ export default function Keyboards() {
               let value = props.getValue().join(", ");
               if (value === "No, Yes") value = "Both";
 
-              return <p>{value}</p>;
+              return (
+                <div>
+                  <p className="text-xs text-green-3">Wireless</p>
+                  <p className="text-sm">{value}</p>
+                </div>
+              );
             },
           },
           {

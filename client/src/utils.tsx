@@ -114,14 +114,16 @@ export function useGetScreenWidth() {
   return screen;
 }
 
-export function useDisableScroll() {
+export function useDisableScroll(shouldWork = true) {
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (shouldWork) {
+      document.body.style.overflow = "hidden";
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
+  }, [shouldWork]);
 
   return;
 }

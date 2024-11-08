@@ -24,7 +24,7 @@ export default function Sort({ header, children }: SortProps) {
   return (
     <div
       onClick={header.column.getToggleSortingHandler()}
-      className="flex cursor-pointer items-center"
+      className="flex w-max cursor-pointer items-center"
     >
       {children}
       {{

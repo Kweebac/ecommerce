@@ -115,7 +115,7 @@ export default function Speakers() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <SmallButton itemInfo={rowItem} />
                 </div>
@@ -125,6 +125,12 @@ export default function Speakers() {
           {
             accessorKey: "frequencyResponse",
             header: "Frequency response",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Frequency response</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "wattage",

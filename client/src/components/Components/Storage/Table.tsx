@@ -132,8 +132,11 @@ export default function Storage() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
-                  <p>£{props.getValue()}</p>
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
+                  <div className="grid justify-items-center">
+                    <p>£{props.getValue()}</p>
+                    <p className="text-xs">(£{rowItem.pricePerGb} / GB)</p>
+                  </div>
                   <div className="flex gap-2">
                     <SmallButtonPC
                       setError={setError}
@@ -149,21 +152,31 @@ export default function Storage() {
             },
           },
           {
+            accessorKey: "pricePerGb",
+            header: "Price / GB",
+            filterFn: "inNumberRange",
+          },
+          {
             accessorKey: "type",
             header: "Type",
             filterFn: "arrIncludesSome",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Type</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "capacity",
             header: "Capacity",
             filterFn: "inNumberRange",
-            cell: (props) => <p>{props.getValue()} GB</p>,
-          },
-          {
-            accessorKey: "pricePerGb",
-            header: "Price / GB",
-            filterFn: "inNumberRange",
-            cell: (props) => <p>£{props.getValue()}</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Capacity</p>
+                <p className="text-sm">{props.getValue()} GB</p>
+              </div>
+            ),
           },
           {
             accessorKey: "_id",

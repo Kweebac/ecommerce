@@ -124,7 +124,7 @@ export default function Headphones() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <SmallButton itemInfo={rowItem} />
                 </div>
@@ -134,11 +134,23 @@ export default function Headphones() {
           {
             accessorKey: "frequencyResponse",
             header: "Frequency response",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Frequency response</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "wireless",
             header: "Wireless",
             filterFn: "arrIncludesSome",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Wireless</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "microphone",

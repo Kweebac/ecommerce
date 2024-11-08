@@ -162,8 +162,11 @@ export default function RAM() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
-                  <p>£{props.getValue()}</p>
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
+                  <div className="grid justify-items-center">
+                    <p>£{props.getValue()}</p>
+                    <p className="text-xs">(£{rowItem.pricePerGb} / GB)</p>
+                  </div>
                   <div className="flex gap-2">
                     <SmallButtonPC
                       setError={setError}
@@ -179,37 +182,65 @@ export default function RAM() {
             },
           },
           {
+            accessorKey: "pricePerGb",
+            header: "Price / GB",
+            filterFn: "inNumberRange",
+          },
+          {
             accessorKey: "modules",
             header: "Modules",
             filterFn: "arrIncludesSome",
-            cell: (props) => <p>{props.getValue()} GB</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Modules</p>
+                <p className="text-sm">{props.getValue()} GB</p>
+              </div>
+            ),
           },
           {
             accessorKey: "ddr",
             header: "Type",
             filterFn: "arrIncludesSome",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Type</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "ddrSpeed",
             header: "Speed",
             filterFn: "inNumberRange",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Speed</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "fwl",
             header: "FWL",
             filterFn: "inNumberRange",
-            cell: (props) => <p>{props.getValue()} ns</p>,
+
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">FWL</p>
+                <p className="text-sm">{props.getValue()} ns</p>
+              </div>
+            ),
           },
           {
             accessorKey: "cl",
             header: "CL",
             filterFn: "inNumberRange",
-          },
-          {
-            accessorKey: "pricePerGb",
-            header: "Price / GB",
-            filterFn: "inNumberRange",
-            cell: (props) => <p>£{props.getValue()}</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">CL</p>
+                <p className="text-sm">{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "color",

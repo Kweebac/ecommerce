@@ -175,7 +175,7 @@ export default function Motherboard() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <div className="flex gap-2">
                     <SmallButtonPC
@@ -197,6 +197,12 @@ export default function Motherboard() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Chipset</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "formFactor",
@@ -205,6 +211,12 @@ export default function Motherboard() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Form factor</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "cpuSocket",
@@ -213,12 +225,24 @@ export default function Motherboard() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">CPU socket</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "ram.ddr",
             id: "ramDdr",
             header: "RAM",
             filterFn: "arrIncludesSome",
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">RAM</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "wifi",
@@ -227,6 +251,12 @@ export default function Motherboard() {
               const value = row.getValue(columnId);
               return filterValue.includes(value);
             },
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Wi-Fi</p>
+                <p>{props.getValue()}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "color",

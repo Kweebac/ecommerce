@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import logo from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";
-import { CartVisibleContext } from "./Header";
+import { CartVisibleContext } from "../App";
 
 const svgClass = "h-16 w-16";
 const pathClass = "fill-green-3";

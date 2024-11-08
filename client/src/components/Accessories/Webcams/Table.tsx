@@ -113,7 +113,7 @@ export default function Webcams() {
               const rowItem = props.row.original;
 
               return (
-                <div className="ml-5 grid items-center justify-items-center">
+                <div className="ml-5 grid items-center justify-items-center gap-0.5">
                   <p>£{props.getValue()}</p>
                   <SmallButton itemInfo={rowItem} />
                 </div>
@@ -124,7 +124,12 @@ export default function Webcams() {
             accessorKey: "resolutions",
             header: "Resolutions",
             filterFn: "arrIncludesSome",
-            cell: (props) => <p>{props.getValue().join(", ")}</p>,
+            cell: (props) => (
+              <div>
+                <p className="text-xs text-green-3">Resolutions</p>
+                <p className="text-sm">{props.getValue().join(", ")}</p>
+              </div>
+            ),
           },
           {
             accessorKey: "focusType",
