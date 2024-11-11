@@ -9,6 +9,7 @@ export async function handleSetUser(
   abortController?: AbortController,
 ) {
   const res = await fetch("http://localhost:3000/api/user", {
+    cache: "no-store",
     credentials: "include",
     signal: abortController?.signal,
   });
