@@ -153,7 +153,9 @@ export default function Webcams() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/accessories/webcams");
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/accessories/webcams",
+      );
       const data = await res.json();
 
       setWebcamsList(data);

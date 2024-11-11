@@ -252,7 +252,9 @@ export default function GPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/gpu");
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/gpu",
+      );
       const data = await res.json();
 
       setGpuList(data);

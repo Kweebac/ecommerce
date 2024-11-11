@@ -10,11 +10,14 @@ export default function Register() {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const res = await fetch("http://localhost:3000/api/auth/register", {
-        method: "POST",
-        // @ts-expect-error works
-        body: new URLSearchParams(new FormData(e.currentTarget)),
-      });
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/auth/register",
+        {
+          method: "POST",
+          // @ts-expect-error works
+          body: new URLSearchParams(new FormData(e.currentTarget)),
+        },
+      );
 
       if (res.status === 403) {
         navigate(-1);

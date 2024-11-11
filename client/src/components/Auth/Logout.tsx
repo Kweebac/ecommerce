@@ -9,10 +9,13 @@ export default function Logout() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        },
+      );
 
       if (res.status === 401 || res.ok) {
         try {

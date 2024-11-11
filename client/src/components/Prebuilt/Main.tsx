@@ -63,9 +63,12 @@ export default function Prebuilt() {
       const abortController = new AbortController();
 
       try {
-        const res = await fetch("http://localhost:3000/api/prebuilt", {
-          signal: abortController.signal,
-        });
+        const res = await fetch(
+          "https://kweebac-ecommerce-api.up.railway.app/api/prebuilt",
+          {
+            signal: abortController.signal,
+          },
+        );
         const data = await res.json();
 
         setPrebuilts(data);

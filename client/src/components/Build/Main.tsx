@@ -64,12 +64,15 @@ function ComponentInfo({ icon, alt, component, children }) {
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function deleteBuildItem() {
-    const res = await fetch("http://localhost:3000/api/user/build", {
-      method: "DELETE",
-      body: JSON.stringify({ componentType, id: component._id }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    const res = await fetch(
+      "https://kweebac-ecommerce-api.up.railway.app/api/user/build",
+      {
+        method: "DELETE",
+        body: JSON.stringify({ componentType, id: component._id }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      },
+    );
 
     if (res.ok) {
       await handleSetUser(setUser);

@@ -60,6 +60,19 @@ const login = [
     failureMessage: true,
   }),
 ];
+// const login = [
+//   body("email").escape(),
+//   body("password").escape(),
+//   passport.authenticate("local", {
+//     failureRedirect: "/api/auth/login/failure",
+//     failureMessage: true,
+//   }),
+//   (req, res, next) => {
+//     console.log("login should've worked?");
+//     console.log("req.isAuthenticated()", req.isAuthenticated());
+//     res.end();
+//   },
+// ];
 
 const logout: RequestHandler = (req, res, next) => {
   req.logout((err) => {

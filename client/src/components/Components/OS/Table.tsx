@@ -142,7 +142,9 @@ export default function OS() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/os");
+      const res = await fetch(
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/os",
+      );
       const data = await res.json();
 
       setOsList(data);

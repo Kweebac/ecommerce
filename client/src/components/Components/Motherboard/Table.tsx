@@ -286,7 +286,7 @@ export default function Motherboard() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
+        "https://kweebac-ecommerce-api.up.railway.app/api/components/motherboard",
       );
       const data = await res.json();
 
