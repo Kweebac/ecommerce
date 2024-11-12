@@ -181,7 +181,7 @@ export default function Mice() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/accessories/mice");
+      const res = await fetch("/api/accessories/mice");
       const data = await res.json();
 
       setMiceList(data);

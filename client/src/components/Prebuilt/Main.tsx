@@ -63,7 +63,7 @@ export default function Prebuilt() {
       const abortController = new AbortController();
 
       try {
-        const res = await fetch("http://localhost:3000/api/prebuilt", {
+        const res = await fetch("/api/prebuilt", {
           signal: abortController.signal,
         });
         const data = await res.json();

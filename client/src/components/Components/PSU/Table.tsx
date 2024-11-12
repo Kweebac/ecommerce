@@ -197,7 +197,7 @@ export default function PSU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/psu");
+      const res = await fetch("/api/components/psu");
       const data = await res.json();
 
       setPsuList(data);

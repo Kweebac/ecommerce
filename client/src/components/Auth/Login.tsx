@@ -25,7 +25,7 @@ export default function Login() {
         formData = new FormData(e.currentTarget);
       }
 
-      const res = await fetch("http://localhost:3000/api/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         // @ts-expect-error works
         body: new URLSearchParams(formData),

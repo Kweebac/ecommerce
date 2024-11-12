@@ -179,9 +179,7 @@ export default function Headphones() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/accessories/headphones",
-      );
+      const res = await fetch("/api/accessories/headphones");
       const data = await res.json();
 
       setHeadphonesList(data);

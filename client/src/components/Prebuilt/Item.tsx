@@ -66,7 +66,7 @@ export default function PrebuiltItem() {
       const abortController = new AbortController();
 
       try {
-        const res = await fetch(`http://localhost:3000/api/prebuilt/${id}`, {
+        const res = await fetch(`/api/prebuilt/${id}`, {
           signal: abortController.signal,
         });
         if (res.status === 404) setPrebuilt(null);

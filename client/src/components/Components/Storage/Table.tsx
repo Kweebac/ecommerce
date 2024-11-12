@@ -196,7 +196,7 @@ export default function Storage() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/storage");
+      const res = await fetch("/api/components/storage");
       const data = await res.json();
 
       setStorageList(data);

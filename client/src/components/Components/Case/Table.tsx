@@ -202,7 +202,7 @@ export default function Case() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("http://localhost:3000/api/components/case");
+      const res = await fetch("/api/components/case");
       const data = await res.json();
 
       setCaseList(data);

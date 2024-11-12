@@ -95,7 +95,7 @@ export function SmallButtonPC({
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function handleClick() {
-    const res = await fetch("http://localhost:3000/api/user/build", {
+    const res = await fetch("/api/user/build", {
       method: "POST",
       body: JSON.stringify({
         componentType,
@@ -148,7 +148,7 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   else if (componentType === "fans") limit = 4;
 
   async function handleClick() {
-    const res = await fetch("http://localhost:3000/api/user/build", {
+    const res = await fetch("/api/user/build", {
       method: "POST",
       body: JSON.stringify({
         componentType,

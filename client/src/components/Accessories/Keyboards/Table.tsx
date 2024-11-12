@@ -206,9 +206,7 @@ export default function Keyboards() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/accessories/keyboards",
-      );
+      const res = await fetch("/api/accessories/keyboards");
       const data = await res.json();
 
       setKeyboardList(data);

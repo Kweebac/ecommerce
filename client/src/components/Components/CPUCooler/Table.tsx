@@ -204,9 +204,7 @@ export default function CPUCooler() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/cpu-cooler",
-      );
+      const res = await fetch("/api/components/cpu-cooler");
       const data = await res.json();
 
       setCpuCoolerList(data);

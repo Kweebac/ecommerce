@@ -285,9 +285,7 @@ export default function Motherboard() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "http://localhost:3000/api/components/motherboard",
-      );
+      const res = await fetch("/api/components/motherboard");
       const data = await res.json();
 
       setMotherboardList(data);

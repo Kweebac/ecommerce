@@ -55,33 +55,18 @@ const login = [
   body("email").escape(),
   body("password").escape(),
   passport.authenticate("local", {
-    successRedirect: "/api/auth/login/success",
     failureRedirect: "/api/auth/login/failure",
     failureMessage: true,
   }),
+  (req, res) => {
+    res.end();
+  },
 ];
-// const login = [
-//   body("email").escape(),
-//   body("password").escape(),
-//   passport.authenticate("local", {
-//     failureRedirect: "/api/auth/login/failure",
-//     failureMessage: true,
-//   }),
-//   (req, res, next) => {
-//     console.log("login should've worked?");
-//     console.log("req.isAuthenticated()", req.isAuthenticated());
-//     res.end();
-//   },
-// ];
 
 const logout: RequestHandler = (req, res, next) => {
   req.logout((err) => {
     err ? next(err) : res.end();
   });
-};
-
-const loginSuccess: RequestHandler = (req, res) => {
-  res.end();
 };
 
 const loginFailure: RequestHandler = (req, res) => {
@@ -98,4 +83,4 @@ const isNotAuth: RequestHandler = (req, res, next) => {
   req.isAuthenticated() ? res.sendStatus(403) : next();
 };
 
-export { register, login, logout, loginSuccess, loginFailure, isAuth, isNotAuth };
+export { register, login, logout, loginFailure, isAuth, isNotAuth };
