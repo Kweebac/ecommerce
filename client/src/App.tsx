@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { handleSetUser } from "./utils";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
@@ -85,8 +85,8 @@ export default function App() {
   const [redirectToHome, setRedirectToHome] = useState<boolean>(true);
   const [user, setUser] = useState<object | null>(null);
   const [cart, setCart] = useState<Array | null>([]);
-  const isLoggedIn = user !== null;
   const [cartVisible, setCartVisible] = useState(false);
+  const [useEffectHasRun, setUseEffectHasRun] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -97,6 +97,8 @@ export default function App() {
       } catch (error) {
         console.error(error);
       }
+
+      setUseEffectHasRun(true);
 
       return () => {
         abortController.abort();
@@ -188,12 +190,20 @@ export default function App() {
                     <Route path="*" element={<URLError />} />
                   </Route>
 
-                  {isLoggedIn ? (
-                    <Route path="/logout" element={<Logout />} />
-                  ) : (
+                  {useEffectHasRun && (
                     <>
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/register" element={<Register />} />
+                      <Route
+                        path="/logout"
+                        element={user ? <Logout /> : <Navigate to="/login" />}
+                      />
+                      <Route
+                        path="/login"
+                        element={user ? <Navigate to="/" /> : <Login />}
+                      />
+                      <Route
+                        path="/register"
+                        element={user ? <Navigate to="/" /> : <Register />}
+                      />
                     </>
                   )}
 

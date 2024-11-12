@@ -207,7 +207,7 @@ export default function Keyboards() {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://kweebac-ecommerce-api.up.railway.app/api/accessories/keyboards",
+        "http://localhost:3000/api/accessories/keyboards",
       );
       const data = await res.json();
 

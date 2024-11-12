@@ -95,20 +95,17 @@ export function SmallButtonPC({
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function handleClick() {
-    const res = await fetch(
-      "https://kweebac-ecommerce-api.up.railway.app/api/user/build",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          componentType,
-          componentTitle,
-          id: itemInfo._id,
-          limit,
-        }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      },
-    );
+    const res = await fetch("http://localhost:3000/api/user/build", {
+      method: "POST",
+      body: JSON.stringify({
+        componentType,
+        componentTitle,
+        id: itemInfo._id,
+        limit,
+      }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
 
     if (res.status === 400) {
       const err = await res.json();
@@ -151,20 +148,17 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   else if (componentType === "fans") limit = 4;
 
   async function handleClick() {
-    const res = await fetch(
-      "https://kweebac-ecommerce-api.up.railway.app/api/user/build",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          componentType,
-          componentTitle,
-          id: itemInfo._id,
-          limit,
-        }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      },
-    );
+    const res = await fetch("http://localhost:3000/api/user/build", {
+      method: "POST",
+      body: JSON.stringify({
+        componentType,
+        componentTitle,
+        id: itemInfo._id,
+        limit,
+      }),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    });
 
     if (res.status === 400) {
       const err = await res.json();

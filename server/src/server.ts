@@ -23,8 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(
   cors({
+    origin: ["https://kweebac-ecommerce.vercel.app", "http://localhost:5173"],
     credentials: true,
-    origin: true,
   })
 );
 

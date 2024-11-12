@@ -245,9 +245,7 @@ export default function Monitors() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://kweebac-ecommerce-api.up.railway.app/api/accessories/monitors",
-      );
+      const res = await fetch("http://localhost:3000/api/accessories/monitors");
       const data = await res.json();
 
       setMonitorList(data);

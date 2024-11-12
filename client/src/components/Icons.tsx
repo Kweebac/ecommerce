@@ -4,6 +4,7 @@ import { useContext } from "react";
 import logo from "../assets/logo.png";
 import logoDark from "../assets/logo-dark.png";
 import { CartVisibleContext } from "../App";
+import { cn } from "../../lib/utils";
 
 const svgClass = "h-16 w-16";
 const pathClass = "fill-green-3";
@@ -761,9 +762,12 @@ export function DeleteIcon({ styles }: Styles) {
 }
 
 export function ErrorIcon({
-  styles,
+  className,
   color = "#dc2626",
-}: Styles & { color: string }) {
+}: {
+  className: string;
+  color: string;
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -771,7 +775,7 @@ export function ErrorIcon({
       height="800px"
       viewBox="0 0 16 16"
       fill="none"
-      className={styles}
+      className={cn("rounded-full shadow-md", className)}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 

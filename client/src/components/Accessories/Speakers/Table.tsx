@@ -163,9 +163,7 @@ export default function Speakers() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(
-        "https://kweebac-ecommerce-api.up.railway.app/api/accessories/speakers",
-      );
+      const res = await fetch("http://localhost:3000/api/accessories/speakers");
       const data = await res.json();
 
       setSpeakersList(data);
