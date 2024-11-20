@@ -150,9 +150,9 @@ function MotherboardChipsetError({ cpu, motherboard }) {
   let amdError = false;
 
   if (cpu && motherboard) {
-    if (motherboard && motherboard.chipset === "AMD B550") {
+    if (motherboard.chipset === "AMD B550") {
       if (cpu.name.includes("AMD")) {
-        const series = Array.from(cpu.name.split(" ")[3][0]);
+        const series = cpu.name.split(" ")[3][0];
         if (series !== "3" && series !== "4" && series !== "5") {
           amdError = true;
         }
@@ -160,11 +160,11 @@ function MotherboardChipsetError({ cpu, motherboard }) {
         amdError = true;
       }
     } else if (
-      (motherboard && motherboard.chipset === "AMD B650") ||
-      (motherboard && motherboard.chipset === "AMD X670")
+      motherboard.chipset === "AMD B650" ||
+      motherboard.chipset === "AMD X670"
     ) {
       if (cpu.name.includes("AMD")) {
-        const series = Array.from(cpu.name.split(" ")[3][0]);
+        const series = cpu.name.split(" ")[3][0];
         if (series !== "7" && series !== "8" && series !== "9") {
           amdError = true;
         }

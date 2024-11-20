@@ -10,11 +10,14 @@ export default function Register() {
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        // @ts-expect-error works
-        body: new URLSearchParams(new FormData(e.currentTarget)),
-      });
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/auth/register",
+        {
+          method: "POST",
+          // @ts-expect-error works
+          body: new URLSearchParams(new FormData(e.currentTarget)),
+        },
+      );
 
       if (res.status === 403) {
         navigate(-1);

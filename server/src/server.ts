@@ -21,6 +21,7 @@ require("./passportSetup");
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(
   session({
@@ -28,11 +29,6 @@ app.use(
     secret: process.env.SESSION_SECRET,
     saveUninitialized: false,
     resave: false,
-    cookie: {
-      sameSite: "lax",
-      httpOnly: true,
-      secure: "true",
-    },
   })
 );
 app.use(passport.initialize());

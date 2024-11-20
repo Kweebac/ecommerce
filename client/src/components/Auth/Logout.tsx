@@ -9,10 +9,13 @@ export default function Logout() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/auth/logout",
+        {
+          method: "POST",
+          credentials: "include",
+        },
+      );
 
       if (res.status === 401 || res.ok) {
         try {

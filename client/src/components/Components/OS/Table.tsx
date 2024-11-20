@@ -142,7 +142,9 @@ export default function OS() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/os");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/os",
+      );
       const data = await res.json();
 
       setOsList(data);

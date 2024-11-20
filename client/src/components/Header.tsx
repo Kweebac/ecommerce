@@ -145,7 +145,7 @@ function HeaderDropdown({ setDropdownVisible }) {
 
   return (
     <div className="absolute z-30 grid w-screen grid-cols-[auto_1fr]">
-      <aside className="relative grid min-h-screen w-[280px] grid-rows-[auto_1fr] bg-green-3 p-6 text-green-2">
+      <aside className="relative grid h-screen w-[280px] grid-rows-[auto_1fr] overflow-scroll bg-green-3 p-6 text-green-2">
         <div
           onClick={() => setDropdownVisible(false)}
           className="absolute right-3 top-3 w-max cursor-pointer rounded-full"

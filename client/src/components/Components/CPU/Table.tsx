@@ -252,7 +252,9 @@ export default function CPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/cpu");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/cpu",
+      );
       const data = await res.json();
 
       setCpuList(data);

@@ -25,12 +25,15 @@ export default function Login() {
         formData = new FormData(e.currentTarget);
       }
 
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        // @ts-expect-error works
-        body: new URLSearchParams(formData),
-        credentials: "include",
-      });
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/auth/login",
+        {
+          method: "POST",
+          // @ts-expect-error works
+          body: new URLSearchParams(formData),
+          credentials: "include",
+        },
+      );
 
       if (res.status === 403) {
         navigate(-1);

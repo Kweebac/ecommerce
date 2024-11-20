@@ -230,7 +230,9 @@ export default function Fans() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/fans");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/fans",
+      );
       const data = await res.json();
 
       setFansList(data);

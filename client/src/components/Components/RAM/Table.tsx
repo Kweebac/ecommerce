@@ -268,7 +268,9 @@ export default function RAM() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/ram");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/ram",
+      );
       const data = await res.json();
 
       setRamList(data);

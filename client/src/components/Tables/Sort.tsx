@@ -42,7 +42,7 @@ export function SortDropdown({ setDropdownVisible, table }) {
 
   return (
     <div className="absolute top-0 z-30 grid w-screen grid-cols-[auto_1fr]">
-      <aside className="relative grid min-h-screen w-max grid-rows-[auto_1fr] bg-white-1 p-6 text-green-3">
+      <aside className="relative grid h-screen w-max grid-rows-[auto_1fr] overflow-scroll bg-white-1 p-6 text-green-3">
         <div
           onClick={() => setDropdownVisible(false)}
           className="absolute right-3 top-3 w-max cursor-pointer rounded-full"

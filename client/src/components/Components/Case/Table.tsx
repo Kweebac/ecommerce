@@ -202,7 +202,9 @@ export default function Case() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/case");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/case",
+      );
       const data = await res.json();
 
       setCaseList(data);

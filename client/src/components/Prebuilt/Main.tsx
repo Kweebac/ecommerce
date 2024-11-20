@@ -63,9 +63,12 @@ export default function Prebuilt() {
       const abortController = new AbortController();
 
       try {
-        const res = await fetch("/api/prebuilt", {
-          signal: abortController.signal,
-        });
+        const res = await fetch(
+          import.meta.env.VITE_BACKEND_HOST + "/api/prebuilt",
+          {
+            signal: abortController.signal,
+          },
+        );
         const data = await res.json();
 
         setPrebuilts(data);

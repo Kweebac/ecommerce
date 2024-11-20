@@ -8,11 +8,11 @@ export async function handleSetUser(
   setUser: React.Dispatch<React.SetStateAction<object | null>>,
   abortController?: AbortController,
 ) {
-const res = await fetch("/api/user", {
-  cache: "no-store",
-  credentials: "include",
-  signal: abortController?.signal,
-});
+  const res = await fetch(import.meta.env.VITE_BACKEND_HOST + "/api/user", {
+    cache: "no-store",
+    credentials: "include",
+    signal: abortController?.signal,
+  });
 
   if (res.status === 401) {
     setUser(null);
@@ -31,7 +31,10 @@ export function useGetItem(
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`/api/${mainCategory}/${subCategory}/${id}`);
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST +
+          `/api/${mainCategory}/${subCategory}/${id}`,
+      );
 
       if (res.status === 404) setItem(null);
       else {

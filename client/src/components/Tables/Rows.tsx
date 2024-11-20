@@ -60,7 +60,7 @@ export default function Rows({ table }) {
 
                     if (id === "name" || id === "url")
                       return (
-                        <div className="grid content-center">
+                        <div key={cell.id} className="grid content-center">
                           <Link to={url} key={cell.id}>
                             {flexRender(
                               cell.column.columnDef.cell,

@@ -95,17 +95,20 @@ export function SmallButtonPC({
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function handleClick() {
-    const res = await fetch("/api/user/build", {
-      method: "POST",
-      body: JSON.stringify({
-        componentType,
-        componentTitle,
-        id: itemInfo._id,
-        limit,
-      }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_HOST + "/api/user/build",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          componentType,
+          componentTitle,
+          id: itemInfo._id,
+          limit,
+        }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      },
+    );
 
     if (res.status === 400) {
       const err = await res.json();
@@ -148,17 +151,20 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   else if (componentType === "fans") limit = 4;
 
   async function handleClick() {
-    const res = await fetch("/api/user/build", {
-      method: "POST",
-      body: JSON.stringify({
-        componentType,
-        componentTitle,
-        id: itemInfo._id,
-        limit,
-      }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_HOST + "/api/user/build",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          componentType,
+          componentTitle,
+          id: itemInfo._id,
+          limit,
+        }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      },
+    );
 
     if (res.status === 400) {
       const err = await res.json();

@@ -153,7 +153,9 @@ export default function Webcams() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/accessories/webcams");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/accessories/webcams",
+      );
       const data = await res.json();
 
       setWebcamsList(data);

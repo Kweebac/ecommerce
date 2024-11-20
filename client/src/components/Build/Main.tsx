@@ -64,12 +64,15 @@ function ComponentInfo({ icon, alt, component, children }) {
   if (componentType === "cpu-cooler") componentType = "cpuCooler";
 
   async function deleteBuildItem() {
-    const res = await fetch("/api/user/build", {
-      method: "DELETE",
-      body: JSON.stringify({ componentType, id: component._id }),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-    });
+    const res = await fetch(
+      import.meta.env.VITE_BACKEND_HOST + "/api/user/build",
+      {
+        method: "DELETE",
+        body: JSON.stringify({ componentType, id: component._id }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      },
+    );
 
     if (res.ok) {
       await handleSetUser(setUser);

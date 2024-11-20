@@ -163,7 +163,9 @@ export default function Speakers() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/accessories/speakers");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/accessories/speakers",
+      );
       const data = await res.json();
 
       setSpeakersList(data);

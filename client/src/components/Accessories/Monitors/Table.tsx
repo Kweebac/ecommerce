@@ -245,7 +245,9 @@ export default function Monitors() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/accessories/monitors");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/accessories/monitors",
+      );
       const data = await res.json();
 
       setMonitorList(data);

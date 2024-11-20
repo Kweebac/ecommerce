@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { handleSetUser } from "./utils";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";

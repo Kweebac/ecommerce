@@ -252,7 +252,9 @@ export default function GPU() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/components/gpu");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/components/gpu",
+      );
       const data = await res.json();
 
       setGpuList(data);

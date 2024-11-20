@@ -181,7 +181,9 @@ export default function Mice() {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/accessories/mice");
+      const res = await fetch(
+        import.meta.env.VITE_BACKEND_HOST + "/api/accessories/mice",
+      );
       const data = await res.json();
 
       setMiceList(data);

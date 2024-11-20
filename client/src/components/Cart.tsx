@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CartContext } from "../App";
 import { Close, MinusIcon, PlusIcon } from "./Icons";
 import { CartVisibleContext } from "../App";
@@ -118,7 +118,7 @@ export default function Cart() {
         onClick={() => setCartVisible(false)}
         className="backdrop-brightness-50"
       ></div>
-      <div className="grid w-[320px] grid-rows-[auto_1fr_auto] bg-white-1 sm:w-[25rem]">
+      <div className="grid h-screen w-[320px] grid-rows-[auto_1fr_auto] bg-white-1 sm:w-[25rem]">
         <div className="flex h-[82px] items-center justify-between border-b border-gray-300 p-4 shadow-md">
           <h1 className="text-lg font-medium">Your cart ({cartItems})</h1>
           <div
@@ -134,7 +134,7 @@ export default function Cart() {
             Your shopping cart is empty
           </div>
         ) : (
-          <div className="grid h-[673px] content-start gap-4 overflow-y-auto p-4">
+          <div className="grid content-start gap-4 overflow-y-auto p-4">
             {cart.map((item, index) => (
               <CartItem
                 key={index}
