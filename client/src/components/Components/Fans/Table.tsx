@@ -51,7 +51,7 @@ export default function Fans() {
             header: "Name",
             size: 400,
             cell: (props) => (
-              <p className="cursor-pointer hover:text-blue-500">
+              <p className="cursor-pointer hover:text-blue-300">
                 {props.getValue()}
               </p>
             ),
@@ -133,7 +133,7 @@ export default function Fans() {
             accessorKey: "name",
             header: "Name",
             cell: (props) => (
-              <p className="cursor-pointer hover:text-blue-500">
+              <p className="cursor-pointer hover:text-blue-300">
                 {props.getValue()}
               </p>
             ),

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { Navigate, Route, Routes } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { handleSetUser } from "./utils";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
@@ -87,6 +87,7 @@ export default function App() {
   const [cart, setCart] = useState<Array | null>([]);
   const [cartVisible, setCartVisible] = useState(false);
   const [useEffectHasRun, setUseEffectHasRun] = useState(false);
+  const div = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -118,9 +119,12 @@ export default function App() {
 
               <Header />
 
-              <div className="grid w-[--page-margin-mobile] justify-self-center sm:w-[--page-margin]">
+              <div
+                ref={div}
+                className="grid w-[--page-margin-mobile] justify-self-center sm:w-[--page-margin]"
+              >
                 <Routes>
-                  <Route index element={<Home />} />
+                  <Route index element={<Navigate to="/components/gpu" />} />
 
                   <Route path="build" element={<Build />} />
 
@@ -198,11 +202,19 @@ export default function App() {
                       />
                       <Route
                         path="/login"
-                        element={user ? <Navigate to="/" /> : <Login />}
+                        element={
+                          user ? <Navigate to="/components/gpu" /> : <Login />
+                        }
                       />
                       <Route
                         path="/register"
-                        element={user ? <Navigate to="/" /> : <Register />}
+                        element={
+                          user ? (
+                            <Navigate to="/components/gpu" />
+                          ) : (
+                            <Register />
+                          )
+                        }
                       />
                     </>
                   )}

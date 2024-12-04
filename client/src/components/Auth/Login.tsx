@@ -43,7 +43,7 @@ export default function Login() {
       } else if (res.ok) {
         try {
           await handleSetUser(setUser);
-          if (redirectToHome) navigate("/");
+          if (redirectToHome) navigate("/components/gpu");
           else navigate(-1);
         } catch (error) {
           console.error(error);

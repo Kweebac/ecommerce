@@ -30,9 +30,15 @@ function AddComponent({
   url: string;
   optional?: boolean;
 }) {
+  const { md } = useGetScreenWidth();
+
   return (
     <div className="grid min-w-[20rem] grid-flow-col items-center justify-start gap-4 sm:min-w-[24rem] sm:gap-6 md:min-w-[40rem]">
-      <div className="z-10 w-20 bg-[--background-color] text-xl">£0</div>
+      {md ? (
+        <div className="z-10 mr-6 w-24 bg-[--background-color] text-right text-xl"></div>
+      ) : (
+        <div className="z-10 w-20 bg-[--background-color] text-xl"></div>
+      )}
       {icon}
       <Link to={url}>
         <div className="grid grid-flow-col place-items-center gap-4">
@@ -81,9 +87,15 @@ function ComponentInfo({ icon, alt, component, children }) {
 
   return (
     <div className="grid grid-flow-col items-center justify-start gap-4 sm:gap-6">
-      <div className="z-10 w-20 bg-[--background-color] text-lg sm:text-xl">
-        £{price}
-      </div>
+      {md ? (
+        <div className="z-10 mr-6 w-24 bg-[--background-color] text-right text-lg sm:text-xl">
+          £{price}
+        </div>
+      ) : (
+        <div className="z-10 w-20 bg-[--background-color] text-lg sm:text-xl">
+          £{price}
+        </div>
+      )}
       {icon}
       <div className="flex items-center gap-4 rounded-xl bg-white-1 pr-4 hover:shadow-md">
         <Link to={`/components/${link}`}>
@@ -115,6 +127,7 @@ export default function Build() {
   const { user } = useContext(UserContext);
   const build = user?.build;
   let totalPrice = 0;
+  const { md } = useGetScreenWidth();
 
   if (build) {
     for (let key in build) {
@@ -395,8 +408,11 @@ export default function Build() {
           <div className="text-xl font-semibold sm:text-2xl">£{totalPrice}</div>
           <CheckoutButton />
         </div>
-
-        <div className="absolute left-3 mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2)] rounded-l-[25px] border border-r-0 border-black"></div>
+        {md ? (
+          <div className="absolute left-[7.5rem] mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2-96px)] rounded-l-[25px] border border-r-0 border-black"></div>
+        ) : (
+          <div className="absolute left-4 mt-[18px] h-[calc(100%-43px)] w-[calc(100%/2)] rounded-l-[25px] border border-r-0 border-black"></div>
+        )}
       </div>
     </main>
   );

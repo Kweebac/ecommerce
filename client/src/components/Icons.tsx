@@ -23,7 +23,11 @@ export function Logo({
   if (fullSize)
     return (
       <div className="flex items-center">
-        <img src={dark ? logoDark : logo} alt="PC logo" className="h-20 w-20" />
+        <img
+          src={dark ? logoDark : logo}
+          alt="PC logo"
+          className="h-20 w-20 p-2"
+        />
         <div>
           {dark ? (
             <>
@@ -53,25 +57,25 @@ export function Logo({
         <img
           src={dark ? logoDark : logo}
           alt="PC logo"
-          className="h-16 w-16 sm:h-20 sm:w-20"
+          className="h-16 w-16 p-2 sm:h-20 sm:w-20"
         />
         <div>
           {dark ? (
             <>
               <h1 className="text-sm font-bold text-green-2 sm:text-xl">
-                PC Levelling
+                {title === undefined ? "PC Levelling" : title}
               </h1>
               <p className="text-xs font-semibold text-green-2">
-                Level up your PC
+                {description === undefined ? "Level up your PC" : description}
               </p>
             </>
           ) : (
             <>
               <h1 className="text-sm font-bold text-green-3 sm:text-xl">
-                PC Levelling
+                {title === undefined ? "PC Levelling" : title}
               </h1>
               <p className="text-xs font-semibold text-green-3">
-                Level up your PC
+                {description === undefined ? "Level up your PC" : description}
               </p>
             </>
           )}

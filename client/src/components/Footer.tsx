@@ -3,8 +3,8 @@ function Newsletter() {
     <div className="w-[320px] sm:w-[443px]">
       <p className="mb-1 text-2xl font-semibold">Newsletter</p>
       <p>
-        Join our family here at PC. Get the latest, greatest, and totally not
-        annoying emails every single week!
+        Get the latest offers on products, the occasional in-depth article, and
+        a 10% discount on your next purchase!
       </p>
       <div className="mt-6 grid grid-cols-[auto_auto] justify-start gap-4 sm:grid-cols-[2fr_1fr]">
         <input

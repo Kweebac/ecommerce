@@ -15,16 +15,8 @@ input[type="radio"] {
   accent-color: #4b654b;
 }
 
-.item-info {
-  grid-template-columns:
-    xxxl
-    ?
-    xxxl
-    ? repeat(auto-fit, minmax(1fr, 1fr));
-}
-
 .card:hover > div:last-child > div:first-child {
-  @apply text-blue-500;
+  @apply text-blue-300;
 }
 
 @layer base {

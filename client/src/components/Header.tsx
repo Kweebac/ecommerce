@@ -98,16 +98,16 @@ export default function Header() {
           ref={div}
           className="grid w-[90%] grid-cols-[auto_1fr] items-center border-b border-b-gray-300 text-lg sm:w-4/5 xl:grid-cols-[1fr_auto_1fr]"
         >
-          <Link to="/" className="justify-self-start">
+          <div className="justify-self-start">
             <Logo />
-          </Link>
+          </div>
 
           {screen.xl && (
             <nav className="justify-self-center">
               <ul className="flex xl:gap-6 2xl:gap-8">
                 <Link to="/build">Build your own</Link>
                 <Link to="/prebuilt">Prebuilt</Link>
-                <Link to="/components">Components</Link>
+                <Link to="/components/gpu">Components</Link>
                 <Link to="/accessories">Accessories</Link>
               </ul>
             </nav>
@@ -145,7 +145,7 @@ function HeaderDropdown({ setDropdownVisible }) {
 
   return (
     <div className="absolute z-30 grid w-screen grid-cols-[auto_1fr]">
-      <aside className="relative grid h-screen w-[280px] grid-rows-[auto_1fr] overflow-scroll bg-green-3 p-6 text-green-2">
+      <aside className="relative grid h-screen w-[280px] grid-rows-[auto_1fr] overflow-y-auto bg-green-3 p-6 text-green-2">
         <div
           onClick={() => setDropdownVisible(false)}
           className="absolute right-3 top-3 w-max cursor-pointer rounded-full"
@@ -153,13 +153,9 @@ function HeaderDropdown({ setDropdownVisible }) {
           <Close color="#f4f0e5" />
         </div>
 
-        <Link
-          onClick={() => setDropdownVisible(false)}
-          to="/"
-          className="justify-self-start"
-        >
+        <div className="justify-self-start">
           <Logo dark={true} fullSize={true} />
-        </Link>
+        </div>
 
         <nav>
           <div className="grid h-full content-between">

@@ -5,6 +5,7 @@ import { CartContext, UserContext } from "../App";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PlainCartIcon } from "./Icons";
 import { changeName, getUrl, handleSetUser } from "../utils";
+import { cn } from "../../lib/utils";
 
 type ButtonProps = {
   itemInfo: object;
@@ -191,13 +192,16 @@ export function ButtonPC({ setError, error, itemInfo }: ButtonPCProps) {
   );
 }
 
-export function CustomButton(props) {
+export function CustomButton({ className, onClick, children }) {
   return (
     <button
-      {...props}
-      className="h-max w-max rounded-md bg-green-3 p-2 px-6 text-lg font-medium text-white-1 shadow-md"
+      className={cn(
+        "h-max w-max rounded-md bg-green-3 p-2 px-6 text-lg font-medium text-white-1 shadow-md",
+        className,
+      )}
+      onClick={onClick}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

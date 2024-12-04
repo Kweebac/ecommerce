@@ -56,7 +56,7 @@ export default function Keyboards() {
             header: "Name",
             size: 375,
             cell: (props) => (
-              <p className="cursor-pointer hover:text-blue-500">
+              <p className="cursor-pointer hover:text-blue-300">
                 {props.getValue()}
               </p>
             ),
@@ -125,7 +125,7 @@ export default function Keyboards() {
             accessorKey: "name",
             header: "Name",
             cell: (props) => (
-              <p className="cursor-pointer hover:text-blue-500">
+              <p className="cursor-pointer hover:text-blue-300">
                 {props.getValue()}
               </p>
             ),
